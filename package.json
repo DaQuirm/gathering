@@ -1,0 +1,32 @@
+{
+  "name": "gathering",
+  "version": "0.0.0",
+  "description": "A social event management platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DaQuirm/gathering"
+  },
+  "keywords": [
+    "social",
+    "event",
+    "meetup",
+    "organizing"
+  ],
+  "author": "",
+  "license": "LGPL",
+  "bugs": {
+    "url": "https://github.com/DaQuirm/gathering/issues"
+  },
+  "dependencies": {
+    "nconf": "~0.6.7",
+    "express": "~3.4.0",
+    "passport": "~0.1.17",
+    "mongoose": "~3.6.20",
+    "jade": "~0.35.0",
+    "passport-google": "~0.3.0"
+  }
+}
