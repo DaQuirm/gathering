@@ -13,7 +13,7 @@ db.on 'error', console.error.bind console, 'connection error:'
 (require './config/passport') passport
 
 # Models
-require './app/models/user.coffee'
+require './app/models/user'
 
 # Express application
 app = do express
