@@ -2,9 +2,11 @@
   "name": "gathering",
   "version": "0.0.0",
   "description": "A social event management platform",
-  "main": "index.js",
+  "main": "build/service.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prestart": "kill -9 $(lsof -i :3000 -t);grunt",
+    "start": "node build/service.js "
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,14 @@
     "passport": "~0.1.17",
     "mongoose": "~3.6.20",
     "jade": "~0.35.0",
-    "passport-google": "~0.3.0"
+    "passport-google": "~0.3.0",
+    "stylus": "~0.42.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-coffeelint": "0.0.8"
   }
 }
