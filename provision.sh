@@ -52,3 +52,8 @@ echo ".. Cleanup after making git"
 rm "git-$GIT_VERSION.tar.gz" >/dev/null
 rm -rf "git-$GIT_VERSION" >/dev/null
 echo "The git version installed: " & git --version
+
+echo ".. Installing mocha globally"
+npm install -g mocha
+echo ".. Installing coffeescript globally"
+npm install -g coffeescript
