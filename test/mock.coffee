@@ -1,23 +1,23 @@
 mongoose = require 'mongoose'
 models = require './../app/models/'
 
-ObjectID = require('mongoose').Types.ObjectId
+{ObjectId} = require('mongoose').Types
 
-authors = [new ObjectID, new ObjectID]
+authors = [new ObjectId, new ObjectId]
 
 talk =
-	theme: 'Talk theme'
+	topic: 'Talk topic'
 	duration: 600000
 	authors: authors
 
 updated_talk =
-	theme: 'Talk theme 2'
+	topic: 'Talk topic 2'
 	duration: 1200000
 	authors: authors
 
 invalid_talk =
 	talk:
-		theme: 'Talk theme'
+		topic: 'Talk topic'
 		duration: 600000
 		authors: [1,2,3]
 		trash: 'trash'
@@ -25,7 +25,7 @@ invalid_talk =
 
 exports.talk = talk
 exports.invalid_talk = invalid_talk
-exports.ObjectID = ObjectID
+exports.ObjectId = ObjectId
 exports.updated_talk = updated_talk
 
 exports.talks = (collection_length, callback) ->

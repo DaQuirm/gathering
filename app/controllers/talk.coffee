@@ -17,7 +17,7 @@ exports.read = (req, res) ->
 			else
 				res.send 404
 
-exports.getById = (req, res) ->
+exports.get_by_id = (req, res) ->
 	{id} = req.params
 	Talk.findById id, (err, item) ->
 		if err or not item

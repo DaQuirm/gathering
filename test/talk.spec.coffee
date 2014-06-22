@@ -23,9 +23,9 @@ describe 'Talk', ->
 				send: ->
 					spy.should.have.been.calledOnce
 					spy.should.have.been.calledWith 200
-					Talk.find().exec (err, t) ->
-						should.not.exist err;
-						should.exist t;
+					Talk.find().exec (err, talks) ->
+						should.not.exist err
+						should.exist talks
 						do done
 			spy = sinon.spy res, 'send'
 			Talks.create req, res
@@ -38,9 +38,9 @@ describe 'Talk', ->
 				send: ->
 					spy.should.have.been.calledOnce
 					spy.should.have.been.calledWith 500
-					Talk.find().exec (err, t) ->
-						should.not.exist err;
-						t.length.should.equal 0
+					Talk.find().exec (err, talks) ->
+						should.not.exist err
+						talks.length.should.equal 0
 						do done
 			spy = sinon.spy res, 'send'
 			Talks.create req, res
@@ -55,10 +55,10 @@ describe 'Talk', ->
 					send: ->
 						spy.should.have.been.calledOnce
 						spy.should.have.been.calledWith 200
-						Talk.find().exec (err, d) ->
-							should.not.exist err;
-							d.length.should.equal length
-							spy.args[0][1].length.should.equal d.length
+						Talk.find().exec (err, talks) ->
+							should.not.exist err
+							talks.length.should.equal length
+							spy.args[0][1].length.should.equal talks.length
 							do done
 				spy = sinon.spy res, 'send'
 				Talks.read req, res
@@ -73,7 +73,7 @@ describe 'Talk', ->
 			spy = sinon.spy res, 'send'
 			Talks.read req, res
 
-	describe '#getById', ->
+	describe '#get_by_id', ->
 		it 'gets talk by id', (done) ->
 			mock.talks 10, (talks) ->
 				id = talks[2]._id
@@ -88,10 +88,10 @@ describe 'Talk', ->
 							spy.args[0][1].should.exist
 							do done
 				spy = sinon.spy res, 'send'
-				Talks.getById req, res
+				Talks.get_by_id req, res
 
-		it 'sends 404 if talk not found', (done) ->
-			id = new mock.ObjectID
+		it 'sends 404 if talk is not found', (done) ->
+			id = new mock.ObjectId
 			req =
 				params:
 					id: id
@@ -101,12 +101,12 @@ describe 'Talk', ->
 					spy.should.have.been.calledWith 404
 					do done
 			spy = sinon.spy res, 'send'
-			Talks.getById req, res
+			Talks.get_by_id req, res
 
 	describe '#update', ->
 		it 'updates item', (done) ->
 			check_updated = (expected, got) ->
-				expected.theme.should.equal got.theme
+				expected.topic.should.equal got.topic
 				expected.duration.should.equal got.duration
 			mock.talks 10, (talks) ->
 				id = talks[2]._id
@@ -124,8 +124,8 @@ describe 'Talk', ->
 				spy = sinon.spy res, 'send'
 				Talks.update req, res
 
-		it 'sends 404 if talk to update not found', (done) ->
-			id = new mock.ObjectID
+		it 'sends 404 if talk to update is not found', (done) ->
+			id = new mock.ObjectId
 			req =
 				params:
 					id: id
@@ -154,8 +154,8 @@ describe 'Talk', ->
 				spy = sinon.spy res, 'send'
 				Talks.delete req, res
 
-		it 'sends 404 if talk to delete not found', (done) ->
-			id = new mock.ObjectID
+		it 'sends 404 if talk to delete is not found', (done) ->
+			id = new mock.ObjectId
 			req =
 				params:
 					id: id

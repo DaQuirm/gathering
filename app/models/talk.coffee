@@ -3,7 +3,7 @@ Schema = mongoose.Schema
 
 TalkSchema = new Schema
 	duration: Number
-	theme: String
+	topic: String
 	authors: [
 		type: Schema.Types.ObjectId
 		ref: 'User'
