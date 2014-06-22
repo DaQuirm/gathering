@@ -3,10 +3,10 @@ sinon_chai = require 'sinon-chai'
 chai = require 'chai'
 
 should = do chai.should
-chai.use(sinon_chai)
+chai.use sinon_chai
 
 Talks = require '../app/controllers/talk.coffee'
-Talk = require ('../app/models/talk.coffee')
+Talk = require '../app/models/talk.coffee'
 
 mock = require './mock.coffee'
 
@@ -31,7 +31,7 @@ describe 'Talk', ->
 			Talks.create req, res
 
 		it 'sends 500 in response if talk to save is invalid', (done) ->
-			talk = mock.crap.talk
+			talk = mock.invalid_talk.talk
 			req =
 				body: talk
 			res =
@@ -49,7 +49,7 @@ describe 'Talk', ->
 	describe '#read', ->
 		it 'gets all news', (done) ->
 			length = 10
-			mock.talks length, () ->
+			mock.talks length, ->
 				req = {}
 				res =
 					send: ->
@@ -110,11 +110,11 @@ describe 'Talk', ->
 				expected.duration.should.equal got.duration
 			mock.talks 10, (talks) ->
 				id = talks[2]._id
-				expected = mock.updatedTalk
+				expected = mock.updated_talk
 				req =
 					params:
 						id: id
-					body: mock.updatedTalk
+					body: mock.updated_talk
 				res =
 					send: ->
 						spy.should.have.been.calledOnce

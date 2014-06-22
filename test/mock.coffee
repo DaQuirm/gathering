@@ -10,37 +10,33 @@ talk =
 	duration: 600000
 	authors: authors
 
-updatedTalk =
+updated_talk =
 	theme: 'Talk theme 2'
 	duration: 1200000
 	authors: authors
 
-crap =
+invalid_talk =
 	talk:
 		theme: 'Talk theme'
 		duration: 600000
 		authors: [1,2,3]
-		crap: 'crap'
+		trash: 'trash'
 
 
 exports.talk = talk
-exports.crap = crap
+exports.invalid_talk = invalid_talk
 exports.ObjectID = ObjectID
-exports.updatedTalk = updatedTalk
+exports.updated_talk = updated_talk
 
-exports.talks = (collectionLength, callback) ->
-
+exports.talks = (collection_length, callback) ->
 	i = 0
 	saved = 0
-
 	talks = []
 
-	while i < collectionLength
-
+	while i < collection_length
 		i++
-
 		t = new models.Talk talk
 		t.save () ->
 			saved++
 			talks.push t
-			callback talks if saved is collectionLength
+			callback talks if saved is collection_length
