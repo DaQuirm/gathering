@@ -24,8 +24,9 @@ crap =
 
 
 exports.talk = talk
-
 exports.crap = crap
+exports.ObjectID = ObjectID
+exports.updatedTalk = updatedTalk
 
 exports.talks = (collectionLength, callback) ->
 
@@ -43,5 +44,3 @@ exports.talks = (collectionLength, callback) ->
 			saved++
 			talks.push t
 			callback talks if saved is collectionLength
-
-exports.ObjectID = ObjectID
