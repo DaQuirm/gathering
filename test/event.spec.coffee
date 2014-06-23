@@ -89,3 +89,33 @@ describe 'Event', ->
 					do done
 			spy = sinon.spy res, 'send'
 			Events.read req, res
+
+	describe '#get_by_id', ->
+		it 'gets event by id', (done) ->
+			mock.events 5, (events) ->
+				id = events[2]._id
+				req =
+					params:
+						id: id
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						spy.should.have.been.calledWith 200
+						Event.findById id, (err, event) ->
+							spy.args[0][1].should.exist
+							do done
+				spy = sinon.spy res, 'send'
+				Events.get_by_id req, res
+
+		it 'sends 404 if event is not found', (done) ->
+			id = new mock.ObjectId
+			req =
+				params:
+					id: id
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+			spy = sinon.spy res, 'send'
+			Events.get_by_id req, res
