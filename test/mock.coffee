@@ -22,11 +22,83 @@ invalid_talk =
 		authors: [1,2,3]
 		trash: 'trash'
 
+event =
+	title: 'Amazing EVENT'
+	start_date: (new Date).getTime()
+	venue: '10 Avenue B, New York, NY, United States'
+	slots: [
+		{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'break'
+			content: 60000
+		},{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'talk'
+			content: new ObjectId
+		}
+	]
+
+event_with_invalid_slot_type =
+	title: 'invalid EVENT'
+	start_date: (new Date).getTime()
+	venue: '10 Avenue B, New York, NY, United States'
+	slots: [
+		{
+			type: 'invalid' # <- invalid, nothing else interesting here
+			content: new ObjectId
+		},{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'break'
+			content: 60000
+		},{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'talk'
+			content: new ObjectId
+		}
+	]
+
+event_with_invalid_slot_content =
+	title: 'invalid EVENT'
+	start_date: (new Date).getTime()
+	venue: '10 Avenue B, New York, NY, United States'
+	slots: [
+		{
+			type: 'talk'
+			content: 'invalid content' # <- invalid, nothing else interesting here
+		},{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'break'
+			content: 60000
+		},{
+			type: 'talk'
+			content: new ObjectId
+		},{
+			type: 'talk'
+			content: new ObjectId
+		}
+	]
+
 
 exports.talk = talk
 exports.invalid_talk = invalid_talk
 exports.ObjectId = ObjectId
 exports.updated_talk = updated_talk
+exprots.event = event
+exports.event_with_invalid_slot_type = event_with_invalid_slot_type
+exports.event_with_invalid_slot_content = event_with_invalid_slot_content
 
 exports.talks = (collection_length, callback) ->
 	i = 0
@@ -36,7 +108,7 @@ exports.talks = (collection_length, callback) ->
 	while i < collection_length
 		i++
 		t = new models.Talk talk
-		t.save () ->
+		t.save ->
 			saved++
 			talks.push t
 			callback talks if saved is collection_length
