@@ -118,8 +118,8 @@ exports.events = (collection_length, callback) ->
 	saved = 0
 	events = []
 
-	exports.talks 16, (talks) ->
-		while i < 4
+	exports.talks collection_length * 4, (talks) ->
+		while i < collection_length
 			event =
 				title: "Amazing EVENT ##{i}"
 				start_date: (new Date).getTime() + i * 86400000
