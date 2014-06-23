@@ -96,7 +96,7 @@ exports.talk = talk
 exports.invalid_talk = invalid_talk
 exports.ObjectId = ObjectId
 exports.updated_talk = updated_talk
-exprots.event = event
+exports.event = event
 exports.event_with_invalid_slot_type = event_with_invalid_slot_type
 exports.event_with_invalid_slot_content = event_with_invalid_slot_content
 
