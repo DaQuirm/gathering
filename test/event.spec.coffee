@@ -57,3 +57,35 @@ describe 'Event', ->
 						do done
 			spy = sinon.spy res, 'send'
 			Events.create req, res
+
+	describe '#read', ->
+		it 'gets all events with populated talks', (done) ->
+			length = 4
+			mock.events length, (events) ->
+				req = {}
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						spy.should.have.been.calledWith 200
+						Event.find().exec (err, events) ->
+							should.not.exist err
+							events.length.should.equal length
+							spy.args[0][1].length.should.equal events.length
+							for event in spy.args[0][1]
+								for slot in event
+									if slot.type is 'talk'
+										slot.content.should.be.object
+										slot.content.topic.should.exist
+							do done
+				spy = sinon.spy res, 'send'
+				Events.read req, res
+
+		it 'sends 404 if events collection is empty', (done) ->
+			req = {}
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+			spy = sinon.spy res, 'send'
+			Events.read req, res
