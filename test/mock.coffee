@@ -108,7 +108,38 @@ exports.talks = (collection_length, callback) ->
 	while i < collection_length
 		i++
 		t = new models.Talk talk
+		talks.push t
 		t.save ->
 			saved++
-			talks.push t
 			callback talks if saved is collection_length
+
+exports.events = (collection_length, callback) ->
+	i = 0
+	saved = 0
+	events = []
+
+	exports.talks 16, (talks) ->
+		while i < 4
+			event =
+				title: "Amazing EVENT ##{i}"
+				start_date: (new Date).getTime() + i * 86400000
+				slots: []
+			j = 0
+			while j < 4
+				talk_id = talks[j]._id
+				if j is 2
+					event.slots.push
+						type: 'break'
+						content: 600000
+				else
+					event.slots.push
+						type: 'talk'
+						content: talk_id
+				j++
+			talks = talks.slice 4, talks.length
+			ev = new models.Event event
+			events.push ev
+			ev.save ->
+				saved++
+				callback events if saved is collection_length
+			i++
