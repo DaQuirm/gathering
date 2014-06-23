@@ -24,7 +24,7 @@ exports.read = (req, res) ->
 								if err
 									res.send 500
 								populated_talks_count++
-								if populated_event and populated_talks_count is talks_count
+								if populated_slot and populated_talks_count is talks_count
 									res.send 200, found
 			else
 				res.send 404
