@@ -28,3 +28,11 @@ exports.read = (req, res) ->
 									res.send 200, found
 			else
 				res.send 404
+
+exports.get_by_id = (req, res) ->
+	{id} = req.params
+	Event.findById id, (err, event) ->
+		if err or not event
+			res.send 404
+		else
+			res.send 200, event
