@@ -36,3 +36,24 @@ exports.get_by_id = (req, res) ->
 			res.send 404
 		else
 			res.send 200, event
+
+exports.update = (req, res) ->
+	{id} = req.params
+	updated = req.body
+	slots_updated = no
+	Event.findById id, (err, event) ->
+		if err
+			res.send 500
+		if not event
+			res.send 404
+		else
+			for property of updated
+				if property is 'slots'
+					slots_updated = yes
+				event[property] = updated[property]
+
+			event.markModified 'slots' if slots_updated
+			event.save (err) ->
+				if err 
+					res.send 500
+				res.send 200
