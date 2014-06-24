@@ -4,7 +4,7 @@ Slot = require './slot.coffee'
 
 EventSchema = new Schema
 	title: String
-	start_data: Date
+	start_date: Date
 	venue: String
 	slots: [Slot]
 
