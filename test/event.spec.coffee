@@ -165,3 +165,33 @@ describe 'Event', ->
 					do done
 			spy = sinon.spy res, 'send'
 			Events.update req, res
+
+	describe '#delete', ->
+		it 'deletes item', (done) ->
+			mock.events 10, (events) ->
+				id = events[2]._id
+				req =
+					params:
+						id: id
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						spy.should.have.been.calledWith 200
+						Event.findById id, (err, event) ->
+							should.not.exist event
+						do done
+				spy = sinon.spy res, 'send'
+				Events.delete req, res
+
+		it 'sends 404 if talk to delete is not found', (done) ->
+			id = new mock.ObjectId
+			req =
+				params:
+					id: id
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+			spy = sinon.spy res, 'send'
+			Events.delete req, res
