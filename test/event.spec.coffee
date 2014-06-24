@@ -119,3 +119,49 @@ describe 'Event', ->
 					do done
 			spy = sinon.spy res, 'send'
 			Events.get_by_id req, res
+
+	describe '#update', ->
+		check_updated = (expected, got) ->
+			i = 0
+			got.title.should.equal expected.title
+			got.start_date.getTime().should.equal expected.start_date
+			got.venue.should.equal expected.venue
+			for slot in got.slots
+				got.slots[i].type.should.equal slot.type
+				if got.slots[i].type is 'break'
+					got.slots[i].content.should.equal slot.content
+				else
+					got.slots[i].content.toString().should.equal slot.content.toString()
+				i++
+		
+		it 'updates event', (done) ->
+			mock.events 5, (events) ->
+				updated_event = mock.updated_event
+				req =
+					params:
+						id: events[2]._id
+					body: updated_event
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						spy.should.have.been.calledWith 200
+						Event.findById req.params.id, (err, event) ->
+							check_updated updated_event, event
+							do done
+				spy = sinon.spy res, 'send'
+				Events.update req, res
+
+		it 'sends 404 if event to update is not found', (done) ->
+			updated_event = mock.updated_event
+			id = new mock.ObjectId
+			req =
+				params:
+					id: id
+				body: updated_event
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+			spy = sinon.spy res, 'send'
+			Events.update req, res
