@@ -57,3 +57,14 @@ exports.update = (req, res) ->
 				if err 
 					res.send 500
 				res.send 200
+
+exports.delete = (req, res) ->
+	{id} = req.params
+	Event.findByIdAndRemove id, (err, event) ->
+		if err
+			res.send 500
+		else
+			if not event
+				res.send 404
+			else
+				res.send 200
