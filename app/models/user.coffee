@@ -1,8 +1,14 @@
 mongoose = require 'mongoose'
 
-user_schema = mongoose.Schema
-  first_name: String
-  last_name: String
-  email: String
+UserSchema = mongoose.Schema
+	first_name:
+		type: String
+		required: true
+	last_name:
+		type: String
+		required: true
+	email:
+		type: String
+		required: true
 
-mongoose.model 'User', user_schema
+module.exports = mongoose.model 'User', UserSchema
