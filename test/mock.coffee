@@ -118,6 +118,15 @@ updated_event =
 		}
 	]
 
+user =
+	first_name: 'Name'
+	last_name: 'LastName'
+	email: 'mail@example.com'
+
+invalid_user =
+	first_name: 'Name'
+	last_name: 'LastName'
+
 exports.talk = talk
 exports.invalid_talk = invalid_talk
 exports.ObjectId = ObjectId
@@ -126,6 +135,7 @@ exports.event = event
 exports.updated_event = updated_event
 exports.event_with_invalid_slot_type = event_with_invalid_slot_type
 exports.event_with_invalid_slot_content = event_with_invalid_slot_content
+exports.user = user
 
 exports.talks = (collection_length, callback) ->
 	i = 0
@@ -171,3 +181,16 @@ exports.events = (collection_length, callback) ->
 				saved++
 				callback events if saved is collection_length
 			i++
+
+exports.users = (collection_length, callback) ->
+	i = 0
+	saved = 0
+	users = []
+
+	while i < collection_length
+		i++
+		u = new models.User user
+		users.push u
+		u.save () ->
+			saved++
+			callback users if saved is collection_length
