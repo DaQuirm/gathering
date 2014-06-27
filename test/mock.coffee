@@ -127,6 +127,11 @@ invalid_user =
 	first_name: 'Name'
 	last_name: 'LastName'
 
+updated_user =
+	first_name: 'NameUpdated'
+	last_name: 'LastNameUpdated'
+	email: 'mail_updated@example.com'
+
 exports.talk = talk
 exports.invalid_talk = invalid_talk
 exports.ObjectId = ObjectId
@@ -136,6 +141,7 @@ exports.updated_event = updated_event
 exports.event_with_invalid_slot_type = event_with_invalid_slot_type
 exports.event_with_invalid_slot_content = event_with_invalid_slot_content
 exports.user = user
+exports.updated_user = updated_user
 
 exports.talks = (collection_length, callback) ->
 	i = 0
