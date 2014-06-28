@@ -1,2 +1,4 @@
 node_modules/
 public/lib
+public/build
+public/build-dev
