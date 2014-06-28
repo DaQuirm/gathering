@@ -17,8 +17,7 @@ exports.read = (req, res) ->
 			populated_talks_count = 0
 			if found.length
 				for event in found
-					for slot in event.slots
-						if slot.type is 'talk'
+					for slot in event.slots when slot.type is 'talk'
 							talks_count++
 							Talk.populate slot, path: 'content', (err, populated_slot) ->
 								if err
