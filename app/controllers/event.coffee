@@ -44,7 +44,7 @@ exports.update = (req, res) ->
 	Event.findById id, (err, event) ->
 		if err
 			res.send 500
-		if not event
+		else if not event
 			res.send 404
 		else
 			for property of updated
@@ -54,7 +54,7 @@ exports.update = (req, res) ->
 
 			event.markModified 'slots' if slots_updated
 			event.save (err) ->
-				if err 
+				if err
 					res.send 500
 				res.send 200
 

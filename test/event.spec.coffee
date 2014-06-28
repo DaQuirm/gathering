@@ -133,7 +133,7 @@ describe 'Event', ->
 				else
 					got.slots[i].content.toString().should.equal slot.content.toString()
 				i++
-		
+
 		it 'updates event', (done) ->
 			mock.events 5, (events) ->
 				updated_event = mock.updated_event
@@ -165,6 +165,22 @@ describe 'Event', ->
 					do done
 			spy = sinon.spy res, 'send'
 			Events.update req, res
+
+		it 'sends 500 if mongo sucks', (done) ->
+			stub = sinon.stub Event, 'findById', (id, callback) ->
+				error = new Error
+				callback error
+			req =
+				params:
+					id: new mock.ObjectId
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 500
+					do done
+			spy = sinon.spy res, 'send'
+			Events.update req, res
+			do stub.restore
 
 	describe '#delete', ->
 		it 'deletes item', (done) ->
