@@ -5,7 +5,7 @@ class EventViewModel extends Event
 	constructor: (options) ->
 		super options
 
-		@expanded = new nx.Property value:no
+		@expanded = new nx.Cell value:no
 
 EventsProto.viewmodels.EventViewModel = EventViewModel
 

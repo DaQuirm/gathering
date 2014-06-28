@@ -5,13 +5,13 @@ class Event extends nx.RestDocument
 
 		@data.value = options?.data or {}
 
-		@start_date = new nx.Property
+		@start_date = new nx.Cell
 		@data.bind @start_date, '<->', new nx.Mapping 'startDate':'_'
 
-		@title = new nx.Property
+		@title = new nx.Cell
 		@data.bind @title, '<->', new nx.Mapping 'title':'_'
 
-		@talks = new nx.Collection
-		@talks.bind @data, (data) -> data.talks 
+		@slots = new nx.Collection
+		@slots.bind @data, (data) -> data.slots
 
 EventsProto.models.Event = Event

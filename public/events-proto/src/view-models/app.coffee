@@ -1,10 +1,10 @@
-Event            = EventsProto.models.Event
-EventsCollection = EventsProto.models.EventsCollection
+Event           = EventsProto.models.Event
+EventCollection = EventsProto.models.EventCollection
 
 class AppViewModel
 
 	constructor: ->
-		@events = new EventsCollection
+		@events = new EventCollection
 		do @events.retrieve
 
 	render: (node) ->
