@@ -1,15 +1,18 @@
-class Talk extends nx.RestDocument
-	constructor: (options) ->
+Slot = EventsProto.models.Slot
+
+class Talk extends Slot
+	constructor: ->
 		super
-			url: '/talk/{_id}'
+
+		@type = Slot.types.TALK
 
 		@duration = new nx.Cell
-		@data.bind @duration, '<->', new nx.Mapping 'duration':'_'
+		@content.bind @duration, '<->', new nx.Mapping 'duration':'_'
 
 		@topic = new nx.Cell
-		@data.bind @topic, '<->', new nx.Mapping 'topic':'_'
+		@content.bind @topic, '<->', new nx.Mapping 'topic':'_'
 
 		@authors = new nx.Collection
-		@data.bind @authors, '<->', new nx.Mapping 'authors':'_'
+		@content.bind @authors, '<->', new nx.Mapping 'authors':'_'
 
 EventsProto.models.Talk = Talk

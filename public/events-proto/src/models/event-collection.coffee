@@ -13,6 +13,9 @@ class EventCollection extends nx.RestCollection
 		@expanded_item?.expanded.value = no
 		@expanded_item = item
 
+	show_create_form: ->
+		# @new_item.value = new Event
+
 	# create: ->
 	# 	super @new_item, (item) =>
 	# 		first = @todos.items[0]

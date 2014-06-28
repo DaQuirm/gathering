@@ -11,7 +11,30 @@ gulp.task 'clean-dev', ->
 		.pipe do clean
 
 gulp.task 'events-proto.coffee', ->
-	gulp.src './public/events-proto/src/**/*.coffee'
+	gulp.src [
+
+		# Application
+		'./public/events-proto/src/app.coffee'
+
+		# Models
+		'./public/events-proto/src/models/slot.coffee'
+		'./public/events-proto/src/models/break.coffee'
+		'./public/events-proto/src/models/talk.coffee'
+		'./public/events-proto/src/models/talk-collection.coffee'
+		'./public/events-proto/src/models/event.coffee'
+		'./public/events-proto/src/models/event-collection.coffee'
+
+		# ViewModels
+		'./public/events-proto/src/viewmodels/event-viewmodel.coffee'
+		'./public/events-proto/src/viewmodels/app-viewmodel.coffee'
+
+		# Views
+		'./public/events-proto/src/views/talk-view.coffee'
+		'./public/events-proto/src/views/slot-form-view.coffee'
+		'./public/events-proto/src/views/event-form-view.coffee'
+		'./public/events-proto/src/views/app-view.coffee'
+
+		]
 		.pipe do coffee
 		.on 'error', notify.onError 'Error: <%= error.message %>'
 		.pipe concat 'events-proto.js'
