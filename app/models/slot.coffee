@@ -13,7 +13,7 @@ SlotSchema.pre 'save', (next) ->
 			if @content not instanceof mongoose.Types.ObjectId
 				return next new Error "Invalid content for slot type '#{@type}'"
 		when 'break'
-			if typeof @content isnt 'number'
+			if typeof @content.duration isnt 'number'
 				return next new Error "Invalid content for slot type '#{@type}'"
 	do next
 

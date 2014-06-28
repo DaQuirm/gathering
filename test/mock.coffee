@@ -35,7 +35,8 @@ event =
 			content: new ObjectId
 		},{
 			type: 'break'
-			content: 60000
+			content:
+				duration: 600000
 		},{
 			type: 'talk'
 			content: new ObjectId
@@ -58,7 +59,8 @@ event_with_invalid_slot_type =
 			content: new ObjectId
 		},{
 			type: 'break'
-			content: 60000
+			content:
+				duration: 600000
 		},{
 			type: 'talk'
 			content: new ObjectId
@@ -81,7 +83,8 @@ event_with_invalid_slot_content =
 			content: new ObjectId
 		},{
 			type: 'break'
-			content: 60000
+			content:
+				duration: 600000
 		},{
 			type: 'talk'
 			content: new ObjectId
@@ -91,7 +94,7 @@ event_with_invalid_slot_content =
 		}
 	]
 
-updated_event = 
+updated_event =
 	title: 'Amazing EVENT updated'
 	start_date: (new Date).getTime() + 60000
 	venue: '10 Avenue C, New York, NY, United States'
@@ -104,7 +107,8 @@ updated_event =
 			content: new ObjectId
 		},{
 			type: 'break'
-			content: 70000
+			content:
+				duration: 600000
 		},{
 			type: 'talk'
 			content: new ObjectId
@@ -153,7 +157,8 @@ exports.events = (collection_length, callback) ->
 				if j is 2
 					event.slots.push
 						type: 'break'
-						content: 600000
+						content:
+							duration: 600000
 				else
 					event.slots.push
 						type: 'talk'
