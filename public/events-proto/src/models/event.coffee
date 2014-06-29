@@ -11,7 +11,10 @@ class Event extends nx.RestDocument
 		@title = new nx.Cell
 		@data.bind @title, '<->', new nx.Mapping 'title':'_'
 
+		@venue = new nx.Cell
+		@data.bind @venue, '<->', new nx.Mapping 'venue':'_'
+
 		@slots = new nx.Collection
-		@slots.bind @data, (data) -> data.slots
+		@slots.bind @data, '<->', (data) -> data.slots
 
 EventsProto.models.Event = Event

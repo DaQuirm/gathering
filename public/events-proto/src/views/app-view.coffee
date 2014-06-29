@@ -5,12 +5,14 @@ EventsProto.views.AppView = (app) ->
 	nxt.Element 'main',
 
 		nxt.Element 'div',
-			nxt.Binding app.events.new_item, (new_item) ->
+			nxt.Binding app.new_event, (new_item) ->
 				if not new_item
 					nxt.Element 'button',
 						nxt.Text '+ Create'
+						nxt.Event 'click', ->
+							do app.show_create_form
 				else
-					EventFormView app.events.new_item
+					EventFormView app.new_event.value
 
 		nxt.Element 'ul',
 			nxt.Collection app.events.items, ((event) ->

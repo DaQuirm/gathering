@@ -3,13 +3,13 @@ SlotFormView = EventsProto.views.SlotFormView
 EventsProto.views.EventFormView = (event) ->
 	nxt.Element 'div',
 		nxt.Element 'label',
-			nxt.Text 'Name'
+			nxt.Text 'Title'
 		nxt.Input cell:event.title
 		nxt.Element 'label',
-			nxt.Text 'Name'
+			nxt.Text 'Venue'
 		nxt.Input cell:event.venue
 		nxt.Element 'label',
-			nxt.Text 'Name'
+			nxt.Text 'Start Date'
 		nxt.Input cell:event.start_date
 
 		nxt.Element 'ul',
@@ -25,12 +25,12 @@ EventsProto.views.EventFormView = (event) ->
 								nxt.Text slot.duration.value
 
 		nxt.Element 'div',
-			nxt.Binding event.slots.new_item, (new_item) ->
-				if not new_item
+			nxt.Binding event.new_slot, (new_slot) ->
+				if not new_slot?
 					nxt.Element 'button',
 						nxt.Text '+ Add talk'
 				else
-					SlotFormView event.slots.new_item
+					SlotFormView event.slots.new_slot
 
 		nxt.Element 'button',
 			nxt.Text 'Add'

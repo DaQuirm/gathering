@@ -13,6 +13,9 @@ gulp.task 'clean-dev', ->
 gulp.task 'events-proto.coffee', ->
 	gulp.src [
 
+		# Nexus extensions
+		'./public/nexus-extensions/input.coffee'
+
 		# Application
 		'./public/events-proto/src/app.coffee'
 

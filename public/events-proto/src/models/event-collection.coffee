@@ -7,14 +7,10 @@ class EventCollection extends nx.RestCollection
 			item: EventViewModel
 
 		@expanded_item = null
-		@new_item = new nx.Cell value:null
 
 	expand: (item) ->
 		@expanded_item?.expanded.value = no
 		@expanded_item = item
-
-	show_create_form: ->
-		# @new_item.value = new Event
 
 	# create: ->
 	# 	super @new_item, (item) =>
