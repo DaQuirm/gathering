@@ -20,9 +20,9 @@ gulp.task 'events-proto.coffee', ->
 		'./public/events-proto/src/app.coffee'
 
 		# Models
-		'./public/events-proto/src/models/slot.coffee'
 		'./public/events-proto/src/models/break.coffee'
 		'./public/events-proto/src/models/talk.coffee'
+		'./public/events-proto/src/models/slot.coffee'
 		'./public/events-proto/src/models/talk-collection.coffee'
 		'./public/events-proto/src/models/event.coffee'
 		'./public/events-proto/src/models/event-collection.coffee'
@@ -33,6 +33,8 @@ gulp.task 'events-proto.coffee', ->
 
 		# Views
 		'./public/events-proto/src/views/talk-view.coffee'
+		'./public/events-proto/src/views/talk-form-view.coffee'
+		'./public/events-proto/src/views/break-form-view.coffee'
 		'./public/events-proto/src/views/slot-form-view.coffee'
 		'./public/events-proto/src/views/event-form-view.coffee'
 		'./public/events-proto/src/views/app-view.coffee'
