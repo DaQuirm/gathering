@@ -1,6 +1,5 @@
 path     = require 'path'
 express  = require 'express'
-passport = require 'passport'
 mongoose = require 'mongoose'
 
 mongoose.connect 'mongodb://localhost/gathering'
