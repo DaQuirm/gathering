@@ -11,6 +11,9 @@ class EventViewModel extends Event
 	show_slot_form: ->
 		@slot_form_visible.value = yes
 
+	save_slot: (slot) ->
+		@slots.append slot
+
 
 EventsProto.viewmodels.EventViewModel = EventViewModel
 
