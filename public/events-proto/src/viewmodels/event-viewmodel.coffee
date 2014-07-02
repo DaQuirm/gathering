@@ -1,12 +1,16 @@
-Event = EventsProto.models.Event
+{Slot,Event} = EventsProto.models
 
 class EventViewModel extends Event
 
 	constructor: (options) ->
 		super options
 
-		@expanded = new nx.Cell value:no
-		@new_slot = new nx.Cell value:null
+		@slot_draft = new Slot
+		@slot_form_visible = new nx.Cell value:no
+
+	show_slot_form: ->
+		@slot_form_visible.value = yes
+
 
 EventsProto.viewmodels.EventViewModel = EventViewModel
 

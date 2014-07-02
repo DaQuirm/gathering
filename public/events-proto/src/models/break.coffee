@@ -1,12 +1,6 @@
-Slot = EventsProto.models.Slot
+class Break 
 
-class Break extends Slot
 	constructor: ->
-		super
-
-		@type = Slot.types.BREAK
-
-		@duration = new nx.Cell
-		@content.bind @duration, '<->', new nx.Mapping 'duration':'_'
+		@duration = new nx.Cell value:0
 
 EventsProto.models.Break = Break

@@ -1,48 +1,23 @@
 Slot = EventsProto.models.Slot
+BreakForm = EventsProto.views.BreakForm
+TalkForm = EventsProto.views.TalkForm
 
-EventsProto.views.SlotFormView = (slot) ->
-
+EventsProto.views.SlotFormView = (draft) ->
 	nxt.Element 'div',
 		nxt.Element 'label',
 			nxt.Text 'type'
 		nxt.Element 'select',
-			nxt.Element 'option',
-				nxt.Text Slot.types.TALK
-			nxt.Element 'option',
-				nxt.Text Slot.types.BREAK
-			nxt.Event 'onchange', (evt) ->
-				slot.type.value = evt.target.value
-		nxt.Binding slot.type, (type) ->
-			switch type
-				when Slot.types.TALK
-					nxt.Element 'label',
-						nxt.Text 'Topic'
-					nxt.Input
-						cell:slot.content.topic
-					nxt.Element 'label',
-						nxt.Text 'Duration'
-					nxt.Input
-						cell:slot.content
-						content: [
-							nxt.Attr 'type', 'number'
-						]
-					nxt.Element 'label',
-						nxt.Text 'Authors'
-					nxt.Input
-						cell:slot.content.authors
-						converter: (authors) ->
-							do authors.toString
-						back_converter: (string) ->
-							string.split ','
-				when Slot.types.BREAK
-					nxt.Element 'label',
-						nxt.Text 'Duration'
-					nxt.Input
-						cell:slot.content
-						content: [
-							nxt.Attr 'type', 'number'
-						]
-
-		nxt.Element 'button',
-			nxt.Text 'Add'
-
+			nxt.Collection Slot.types, (type) ->
+				nxt.Element 'option',
+					nxt.Text type
+					nxt.Attr 'value', type
+			nxt.Event 'input', (ev) ->
+				draft.type.value = this.value
+		nxt.Binding draft.type, (type) ->
+			switch type 
+				when 'break'
+					draft.set_type 'break'
+					BreakForm draft.content
+				when 'talk'
+					draft.set_type 'talk'
+					TalkForm draft.content

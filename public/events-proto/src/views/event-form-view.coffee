@@ -1,36 +1,30 @@
 SlotFormView = EventsProto.views.SlotFormView
 
-EventsProto.views.EventFormView = (event) ->
+EventsProto.views.EventFormView = (draft) ->
+
 	nxt.Element 'div',
-		nxt.Element 'label',
-			nxt.Text 'Title'
-		nxt.Input cell:event.title
-		nxt.Element 'label',
-			nxt.Text 'Venue'
-		nxt.Input cell:event.venue
-		nxt.Element 'label',
-			nxt.Text 'Start Date'
-		nxt.Input cell:event.start_date
+		nxt.Element 'p',
+			nxt.Element 'label',
+				nxt.Text 'Event Title',
+			nxt.Input cell:draft.title
+		nxt.Element 'p',
+			nxt.Element 'label',
+				nxt.Text 'Venue',
+			nxt.Input cell:draft.venue
+		nxt.Element 'p',
+			nxt.Element 'label',
+				nxt.Text 'Start Date',
+			date = nxt.Element 'input',
+				(nxt.Attr 'type', 'date'),
+				nxt.Event 'change', (ev) ->
+					draft.start_date.value = new Date this.value
 
-		nxt.Element 'ul',
-			nxt.Collection event.slots, (slot) ->
-				nxt.Element 'li',
-					switch slot.type
-						when 'talk'
-							TalkView slot.content
-						when 'break'
-							nxt.Element 'span',
-								nxt.Text 'break'
-							nxt.Element 'span',
-								nxt.Text slot.duration.value
-
-		nxt.Element 'div',
-			nxt.Binding event.new_slot, (new_slot) ->
-				if not new_slot?
-					nxt.Element 'button',
-						nxt.Text '+ Add talk'
-				else
-					SlotFormView event.slots.new_slot
-
-		nxt.Element 'button',
-			nxt.Text 'Add'
+		nxt.Binding draft.slot_form_visible, (visible) ->
+			if visible
+				SlotFormView draft.slot_draft
+			else
+				nxt.Element 'button',
+						(
+							nxt.Event 'click', draft.show_slot_form.bind draft
+						),
+						nxt.Text 'Create Slot' 
