@@ -1,16 +1,10 @@
-EventViewModel = EventsProto.viewmodels.EventViewModel
+Event = EventsProto.models.Event
 
 class EventCollection extends nx.RestCollection
 	constructor: ->
 		super
 			url: '/events'
-			item: EventViewModel
-
-		@expanded_item = null
-
-	expand: (item) ->
-		@expanded_item?.expanded.value = no
-		@expanded_item = item
+			item: Event
 
 	# create: ->
 	# 	super @new_item, (item) =>

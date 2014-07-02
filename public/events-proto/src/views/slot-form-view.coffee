@@ -16,7 +16,7 @@ EventsProto.views.SlotFormView = (event) ->
 				nxt.Event 'input', (ev) ->
 					draft.type.value = this.value
 			nxt.Binding draft.type, (type) ->
-				switch type 
+				switch type
 					when 'break'
 						draft.set_type 'break'
 						BreakForm draft.content
@@ -27,3 +27,4 @@ EventsProto.views.SlotFormView = (event) ->
 			nxt.Text 'save slot'
 			nxt.Event 'click', (ev) ->
 				event.save_slot draft
+				do event.hide_slot_form

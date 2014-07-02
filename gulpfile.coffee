@@ -32,11 +32,12 @@ gulp.task 'events-proto.coffee', ->
 		'./public/events-proto/src/viewmodels/app-viewmodel.coffee'
 
 		# Views
-		'./public/events-proto/src/views/talk-view.coffee'
 		'./public/events-proto/src/views/talk-form-view.coffee'
 		'./public/events-proto/src/views/break-form-view.coffee'
 		'./public/events-proto/src/views/slot-form-view.coffee'
+		'./public/events-proto/src/views/slot-view.coffee'
 		'./public/events-proto/src/views/event-form-view.coffee'
+		'./public/events-proto/src/views/event-view.coffee'
 		'./public/events-proto/src/views/app-view.coffee'
 
 		]

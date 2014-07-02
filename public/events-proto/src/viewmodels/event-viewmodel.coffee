@@ -11,7 +11,11 @@ class EventViewModel extends Event
 	show_slot_form: ->
 		@slot_form_visible.value = yes
 
+	hide_slot_form: ->
+		@slot_form_visible.value = no
+
 	save_slot: (slot) ->
+		@slot_draft = new Slot
 		@slots.append slot
 
 
