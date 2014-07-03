@@ -1,21 +1,8 @@
-module.exports = (app, passport) ->
+express = require 'express'
 
-  # Pages
-  index = require '../app/controllers/index.coffee'
-  app.get '/', index.render
+module.exports = (app) ->
 
-  register = require '../app/controllers/register.coffee'
-  app.get '/register', register.render
+	app.use '/apps/', express.static "#{__dirname}/../public"
 
-  # Passport
-  app.get '/auth/google', passport.authenticate('google')
-  app.get '/auth/google/return', passport.authenticate('google', { successRedirect: '/register', failureRedirect: '/error' } )
-
-  # Users
-  users = require '../app/controllers/users.coffee'
-  app.post '/users', users.create
-  app.get '/users/:id', users.get
-
-  # Restricted access resource
-  restricted = require '../app/controllers/restricted.coffee'
-  app.get '/restricted', restricted.test
+	app.post '/events', (req, res) ->
+		console.log req.body
