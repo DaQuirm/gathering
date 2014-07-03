@@ -23,6 +23,7 @@
     "url": "https://github.com/DaQuirm/gathering/issues"
   },
   "dependencies": {
+    "body-parser": "^1.4.3",
     "chai": "^1.9.1",
     "coffee-script": "^1.7.1",
     "express": "^4.4.5",
