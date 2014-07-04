@@ -2,7 +2,7 @@
 
 EventsProto.views.EventFormView = (app) ->
 
-	draft = app.event_draft
+	draft = app.event_draft.value
 
 	nxt.Element 'div',
 		nxt.Element 'div',
@@ -25,8 +25,8 @@ EventsProto.views.EventFormView = (app) ->
 			nxt.Collection draft.slots, (slot) ->
 				Slot slot
 
-			nxt.Binding draft.slot_form_visible, (visible) ->
-				if visible
+			nxt.Binding draft.slot_draft, (slot_draft) ->
+				if slot_draft
 					SlotFormView draft
 				else
 					nxt.Element 'button',

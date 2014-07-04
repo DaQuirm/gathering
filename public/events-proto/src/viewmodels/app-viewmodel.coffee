@@ -7,20 +7,19 @@ class AppViewModel
 		@events = new EventCollection
 		do @events.retrieve
 
-		@event_form_visible = new nx.Cell value:no
-		@event_draft = new EventViewModel
+		@event_draft = new nx.Cell value:null
 
 	render: (node) ->
 		node.appendChild (EventsProto.views.AppView @).node
 
 	show_event_form: ->
-		@event_form_visible.value = true
+		@event_draft.value = new EventViewModel
 
 	hide_event_form: ->
-		@event_form_visible.value = false
+		@event_draft.value = null
 
 	save_event: (event) ->
-		@event_draft = new EventViewModel
+		@event_draft.value = new EventViewModel
 		@events.create event
 		@events.items.append event
 

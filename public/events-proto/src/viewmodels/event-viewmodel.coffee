@@ -5,17 +5,16 @@ class EventViewModel extends Event
 	constructor: (options) ->
 		super options
 
-		@slot_draft = new Slot
-		@slot_form_visible = new nx.Cell value:no
+		@slot_draft = new nx.Cell value:null
 
 	show_slot_form: ->
-		@slot_form_visible.value = yes
+		@slot_draft.value = new Slot
 
 	hide_slot_form: ->
-		@slot_form_visible.value = no
+		@slot_draft.value = null
 
 	save_slot: (slot) ->
-		@slot_draft = new Slot
+		@slot_draft.value = new Slot
 		@slots.append slot
 
 

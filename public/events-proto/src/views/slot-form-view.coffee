@@ -3,7 +3,7 @@ BreakForm = EventsProto.views.BreakForm
 TalkForm = EventsProto.views.TalkForm
 
 EventsProto.views.SlotFormView = (event) ->
-	draft = event.slot_draft
+	draft = event.slot_draft.value
 	nxt.Element 'div',
 		nxt.Element 'div',
 			nxt.Element 'label',

@@ -10,12 +10,13 @@ EventsProto.views.AppView = (app) ->
 				EventView event
 		nxt.Element 'div',
 			nxt.Class 'create', true
-			nxt.Binding app.event_form_visible, (visible) ->
-				if visible
+			nxt.Binding app.event_draft, (event_draft) ->
+				if event_draft
 					EventFormView app
 				else
 					nxt.Element 'button',
 						(
-							nxt.Event 'click', app.show_event_form.bind app
+							nxt.Event 'click', ->
+								do app.show_event_form
 						),
 						nxt.Text 'Create Event'
