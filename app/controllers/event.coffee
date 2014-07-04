@@ -3,11 +3,11 @@ Talk = require '../models/talk.coffee'
 async = require 'async'
 
 exports.create = (req, res) ->
-	(new Event req.body).save (err) ->
+	Event.create req.body, (err, created) ->
 		if err
 			res.send 500
 		else
-			res.send 200
+			res.send 201, created
 
 exports.read = (req, res) ->
 	Event.find().exec (err, found) ->
