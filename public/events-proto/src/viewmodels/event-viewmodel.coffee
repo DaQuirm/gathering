@@ -1,4 +1,4 @@
-{Slot,Event} = EventsProto.models
+{Talk,Event} = EventsProto.models
 
 class EventViewModel extends Event
 
@@ -8,14 +8,14 @@ class EventViewModel extends Event
 		@slot_draft = new nx.Cell value:null
 
 	show_slot_form: ->
-		@slot_draft.value = new Slot
+		@slot_draft.value = new Talk
 
 	hide_slot_form: ->
 		@slot_draft.value = null
 
 	save_slot: (slot) ->
-		@slot_draft.value = new Slot
 		@slots.append slot
+		@slot_draft.value = new Talk
 
 
 EventsProto.viewmodels.EventViewModel = EventViewModel

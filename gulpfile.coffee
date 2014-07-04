@@ -21,9 +21,9 @@ gulp.task 'events-proto.coffee', ->
 		'./public/events-proto/src/app.coffee'
 
 		# Models
+		'./public/events-proto/src/models/slot.coffee'
 		'./public/events-proto/src/models/break.coffee'
 		'./public/events-proto/src/models/talk.coffee'
-		'./public/events-proto/src/models/slot.coffee'
 		'./public/events-proto/src/models/talk-collection.coffee'
 		'./public/events-proto/src/models/event.coffee'
 		'./public/events-proto/src/models/event-collection.coffee'

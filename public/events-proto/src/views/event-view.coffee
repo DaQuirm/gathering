@@ -1,4 +1,4 @@
-SlotView = EventsProto.views.Slot
+SlotView = EventsProto.views.SlotView
 
 EventsProto.views.Event = (event) ->
 

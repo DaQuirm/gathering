@@ -1,4 +1,4 @@
-EventsProto.views.BreakForm = (slot_content) ->
+EventsProto.views.BreakFormView = (slot) ->
 
 	nxt.Element 'p',
 			nxt.Element 'label',
@@ -6,4 +6,4 @@ EventsProto.views.BreakForm = (slot_content) ->
 			nxt.Element 'input',
 				nxt.Attr 'type', 'number'
 				nxt.Event 'input', (ev) ->
-					slot_content.duration.value = this.value
+					slot.duration.value = @value

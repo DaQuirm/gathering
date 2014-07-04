@@ -1,6 +1,5 @@
 Slot = EventsProto.models.Slot
-BreakForm = EventsProto.views.BreakForm
-TalkForm = EventsProto.views.TalkForm
+{BreakFormView, TalkFormView} = EventsProto.views
 
 EventsProto.views.SlotFormView = (event) ->
 	draft = event.slot_draft.value
@@ -9,20 +8,19 @@ EventsProto.views.SlotFormView = (event) ->
 			nxt.Element 'label',
 				nxt.Text 'type'
 			nxt.Element 'select',
-				nxt.Collection Slot.types, (type) ->
+				(for type, value of Slot.types
 					nxt.Element 'option',
-						nxt.Text type
-						nxt.Attr 'value', type
+						nxt.Text value
+						nxt.Attr 'value', value
+				)...
 				nxt.Event 'input', (ev) ->
-					draft.type.value = this.value
+					draft.type.value = @value
 			nxt.Binding draft.type, (type) ->
 				switch type
-					when 'break'
-						draft.set_type 'break'
-						BreakForm draft.content
-					when 'talk'
-						draft.set_type 'talk'
-						TalkForm draft.content
+					when Slot.types.BREAK
+						BreakFormView draft
+					when Slot.types.TALK
+						TalkFormView draft
 		nxt.Element 'button',
 			nxt.Text 'save slot'
 			nxt.Event 'click', (ev) ->
