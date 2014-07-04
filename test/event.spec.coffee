@@ -211,3 +211,27 @@ describe 'Event', ->
 					do done
 			spy = sinon.spy res, 'send'
 			Events.delete req, res
+
+	describe '#parse', ->
+		it 'saves event talks and replace talks with id', (done) ->
+
+			clone = (obj) ->
+				if not obj? or typeof obj isnt 'object'
+					return obj
+				newInstance = new obj.constructor()
+				for key of obj
+					newInstance[key] = clone obj[key]
+				return newInstance
+
+			event = mock.event
+			talk = mock.talk
+			for slot in event.slots
+				if slot.type is 'talk'
+					slot.content = talk
+			req =
+				body: clone event
+			res = {}
+			next = ->
+				req.body.should.not.deep.equal event
+				do done
+			Events.parse req, res, next
