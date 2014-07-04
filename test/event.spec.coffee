@@ -22,10 +22,12 @@ describe 'Event', ->
 			res =
 				send: ->
 					spy.should.have.been.calledOnce
-					spy.should.have.been.calledWith 200
+					spy.should.have.been.calledWith 201
 					Event.find().exec (err, events) ->
 						should.not.exist err
 						should.exist events
+						events.length.should.equal 1
+						spy.args[0][1].should.exist
 						do done
 			spy = sinon.spy res, 'send'
 			Events.create req, res
