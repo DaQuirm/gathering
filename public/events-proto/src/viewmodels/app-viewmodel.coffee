@@ -20,7 +20,7 @@ class AppViewModel
 
 	save_event: (event) ->
 		@event_draft.value = new EventViewModel
-		@events.create event
-		@events.items.append event
+		@events.create event, (event) =>
+			@events.items.append event
 
 EventsProto.viewmodels.AppViewModel = AppViewModel

@@ -1,4 +1,4 @@
-EventsProto.views.Slot = (slot) ->
+EventsProto.views.SlotView = (slot) ->
 	switch slot.type.value
 		when 'break'
 			nxt.Html "

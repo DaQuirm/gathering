@@ -1,8 +1,6 @@
 {SlotFormView,Slot} = EventsProto.views
 
-EventsProto.views.EventFormView = (app) ->
-
-	draft = app.event_draft.value
+EventsProto.views.EventFormView = (app, draft) ->
 
 	nxt.Element 'div',
 		nxt.Element 'div',
@@ -23,7 +21,7 @@ EventsProto.views.EventFormView = (app) ->
 						draft.start_date.value = new Date this.value
 
 			nxt.Collection draft.slots, (slot) ->
-				Slot slot
+				SlotView slot
 
 			nxt.Binding draft.slot_draft, (slot_draft) ->
 				if slot_draft

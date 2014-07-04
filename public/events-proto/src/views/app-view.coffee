@@ -12,7 +12,7 @@ EventsProto.views.AppView = (app) ->
 			nxt.Class 'create', true
 			nxt.Binding app.event_draft, (event_draft) ->
 				if event_draft
-					EventFormView app
+					EventFormView app, event_draft
 				else
 					nxt.Element 'button',
 						(
