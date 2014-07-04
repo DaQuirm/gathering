@@ -15,6 +15,7 @@ gulp.task 'events-proto.coffee', ->
 
 		# Nexus extensions
 		'./public/nexus-extensions/input.coffee'
+		'./public/nexus-extensions/html-helper.coffee'
 
 		# Application
 		'./public/events-proto/src/app.coffee'
