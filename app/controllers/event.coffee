@@ -71,18 +71,13 @@ exports.delete = (req, res) ->
 
 exports.parse = (req, res, next) ->
 
-	q = async.queue ((slot, done) ->
+	q = async.queue (slot, done) ->
 		Talk.create slot.content, (err, saved) ->
 			slot.content = saved._id
 			do done
-		)
 
-	i = 0
-
-	for slot in req.body.slots
-		if slot.type is 'talk'
-				q.push req.body.slots[i], ->
-		i++
+	for slot in req.body.slots when slot.type is 'talk'
+		q.push slot, ->
 
 	q.drain = ->
 		do next
