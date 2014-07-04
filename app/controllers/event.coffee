@@ -1,5 +1,6 @@
 Event = require '../models/event.coffee'
 Talk = require '../models/talk.coffee'
+async = require 'async'
 
 exports.create = (req, res) ->
 	(new Event req.body).save (err) ->
@@ -67,3 +68,21 @@ exports.delete = (req, res) ->
 				res.send 404
 			else
 				res.send 200
+
+exports.parse = (req, res, next) ->
+
+	q = async.queue ((slot, done) ->
+		Talk.create slot.content, (err, saved) ->
+			slot.content = saved._id
+			do done
+		)
+
+	i = 0
+
+	for slot in req.body.slots
+		if slot.type is 'talk'
+				q.push req.body.slots[i], ->
+		i++
+
+	q.drain = ->
+		do next
