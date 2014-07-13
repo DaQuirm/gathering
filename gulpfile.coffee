@@ -11,14 +11,22 @@ gulp.task 'clean-dev', ->
 
 
 gulp.task 'newsletter.stylus', ->
-	gulp.src './public/layout/newsletter/stylus/*.styl'
+	gulp.src [
+			'public/layout/newsletter/stylesheets/reset.css'
+			'./public/layout/newsletter/stylesheets/*.styl'
+		]
 		.pipe do stylus
 		.on 'error', notify.onError 'Error: <%= error.message %>'
 		.pipe concat 'newsletter.css'
 		.pipe gulp.dest './public/build-dev/layout/newsletter'
 		return
 
-gulp.task 'stylus', ['newsletter.stylus']
+gulp.task 'newsletter.html', ->
+	gulp.src './public/layout/newsletter/*.html'
+		.pipe gulp.dest './public/build-dev/layout/newsletter'
+		return
 
-gulp.task 'watch', ['stylus'], ->
-	gulp.watch './public/layout/newsletter/stylus/*.styl', ['newsletter.stylus']
+
+gulp.task 'watch', ['newsletter.stylus', 'newsletter.html'], ->
+	gulp.watch './public/layout/newsletter/stylesheets/*.styl', ['newsletter.stylus']
+	gulp.watch './public/layout/newsletter/*.html', ['newsletter.html']
