@@ -12,7 +12,7 @@ gulp.task 'clean-dev', ->
 
 gulp.task 'newsletter.stylus', ->
 	gulp.src [
-			'public/layout/newsletter/stylesheets/reset.css'
+			'./public/layout/newsletter/stylesheets/reset.css'
 			'./public/layout/newsletter/stylesheets/*.styl'
 		]
 		.pipe do stylus
