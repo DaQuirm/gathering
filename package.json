@@ -4,7 +4,8 @@
   "description": "A social event management platform",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register -R spec"
+    "test": "mocha --compilers coffee:coffee-script/register -R spec",
+    "start": "coffee service.coffee"
   },
   "repository": {
     "type": "git",
@@ -23,23 +24,25 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "chai": "^1.9.1",
-    "express": "~3.4.0",
+    "body-parser": "^1.4.3",
+    "express": "^4.5.1",
     "jade": "~0.35.0",
     "mongoose": "~3.6.20",
     "nconf": "~0.6.7",
     "passport": "~0.1.17",
-    "passport-google": "~0.3.0",
-    "sinon": "^1.10.2",
-    "sinon-chai": "^2.5.0"
+    "passport-google": "~0.3.0"
   },
   "devDependencies": {
+    "chai": "^1.9.1",
     "coffee-script": "^1.7.1",
     "gulp": "^3.8.6",
     "gulp-clean": "^0.3.1",
+    "gulp-coffee": "^2.1.1",
     "gulp-concat": "^2.3.3",
     "gulp-notify": "^1.4.0",
     "gulp-rename": "^1.2.0",
-    "gulp-stylus": "^1.0.5"
+    "gulp-stylus": "^1.0.5",
+    "sinon": "^1.10.2",
+    "sinon-chai": "^2.5.0"
   }
 }

@@ -2,6 +2,7 @@
   "name": "gathering",
   "version": "0.0.0",
   "dependencies": {
-    "components-font-awesome": "~4.1.0"
+    "components-font-awesome": "~4.1.0",
+    "nexus": "~0.2.1"
   }
 }
