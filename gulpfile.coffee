@@ -12,36 +12,24 @@ gulp.task 'clean-dev', ->
 	gulp.src './public/build-dev'
 		.pipe do rimraf
 
-gulp.task 'main.stylus', ->
-	gulp.src [
-		'./public/common/global.styl'
-	]
-	.pipe stylus
-		use: nib()
-	.on 'error', notify.onError 'Error: <%= error.message %>'
-	.pipe concat 'main.css'
-	.pipe gulp.dest './public/build-dev/common/'
-	return
 
-gulp.task 'newsletter.stylus', ->
-	gulp.src './public/layout/newsletter/stylus/*.styl'
+gulp.task 'newsletter-layout.stylus', ->
+	gulp.src [
+			'./public/layout/newsletter/stylesheets/reset.css'
+			'./public/layout/newsletter/stylesheets/*.styl'
+		]
 		.pipe do stylus
 		.on 'error', notify.onError 'Error: <%= error.message %>'
 		.pipe concat 'newsletter.css'
 		.pipe gulp.dest './public/build-dev/layout/newsletter'
 		return
 
-# Grouping tasks
+gulp.task 'copy', ->
+	gulp.src './public/layout/newsletter/*.html'
+		.pipe gulp.dest './public/build-dev/layout/newsletter'
+		return
 
-tasks = 
-	main: [
-		'main.stylus'
-	]
 
-all_tasks = []
-all_tasks = all_tasks.concat.apply all_tasks, [
-	tasks.main
-]
-
-gulp.task 'watch', all_tasks, ->
-	gulp.watch './public/common/**/*', tasks.main
+gulp.task 'watch', ['newsletter-layout.stylus', 'copy'], ->
+	gulp.watch './public/layout/newsletter/stylesheets/*.styl', ['newsletter-layout.stylus']
+	gulp.watch './public/layout/newsletter/*.html', ['copy']
