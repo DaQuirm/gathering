@@ -5,7 +5,7 @@ border(side='')
 		border 1px solid #ccc
 
 div
-		font-family Ubuntu
+		font-family Ubuntu, Segoe UI, sans-serif
 
 .block-left
 	border(right)
@@ -111,9 +111,12 @@ div
 		box-sizing border-box
 		background transparent
 		border()
+
+	input, textarea
 		&:focus
 			background white
 			outline 0
+		
 
 	button
 		cursor pointer
