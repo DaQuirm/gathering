@@ -131,6 +131,30 @@ updated_user =
 	last_name: 'LastNameUpdated'
 	email: 'mail_updated@example.com'
 
+newsletter =
+	date: (new Date).getTime()
+	articles: []
+
+updated_newsletter =
+	date: (new Date).getTime() + 600000
+	articles: []
+
+newsletter.articles.push(new ObjectId) while newsletter.articles.length isnt 4
+updated_newsletter.articles.push(new ObjectId) while updated_newsletter.articles.length isnt 4
+
+newsletter_article =
+	title: 'Nexus rocks!'
+	description: 'No, really'
+	link: 'http://nexusmvvm.io'
+	tags: ['OMGFramework']
+
+updated_newsletter_article =
+	title: 'Nexus rocks! Part2'
+	description: 'I\'m not kiddin'
+	link: 'http://nexusmvvm.io'
+	tags: ['NeedMoreNXT']
+
+
 exports.talk = talk
 exports.invalid_talk = invalid_talk
 exports.ObjectId = ObjectId
@@ -141,6 +165,10 @@ exports.event_with_invalid_slot_type = event_with_invalid_slot_type
 exports.event_with_invalid_slot_content = event_with_invalid_slot_content
 exports.user = user
 exports.updated_user = updated_user
+exports.newsletter = newsletter
+exports.updated_newsletter = updated_newsletter
+exports.newsletter_article = newsletter_article
+exports.updated_newsletter_article = updated_newsletter_article
 
 exports.talks = (collection_length, callback) ->
 	i = 0
@@ -199,3 +227,29 @@ exports.users = (collection_length, callback) ->
 		u.save () ->
 			saved++
 			callback users if saved is collection_length
+
+exports.newsletter_articles = (collection_length, callback) ->
+	newsletter_articles = []
+	for i in [1..collection_length]
+		newsletter_articles.push newsletter_article
+	models.NewsletterArticle.create newsletter_articles, (err) ->
+		callback Array.prototype.splice.call(arguments, 1, arguments.length)
+
+
+exports.newsletters = (collection_length, callback) ->
+	i = 0
+	saved = 0
+	newsletter_collection = []
+
+	exports.newsletter_articles collection_length * 4, (newsletter_articles) ->
+
+		for i in [0..collection_length]
+			newsletter_to_save =
+				date: (new Date).getTime()
+				articles: []
+			for j in [0..3]
+				newsletter_to_save.articles.push newsletter_articles[j]._id
+			newsletter_collection.push newsletter_to_save
+
+		models.Newsletter.create newsletter_collection, (err) ->
+			callback Array.prototype.splice.call(arguments, 1, arguments.length)
