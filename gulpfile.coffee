@@ -23,6 +23,13 @@ gulp.task 'main.stylus', ->
 	.pipe gulp.dest './public/build-dev/common/'
 	return
 
+gulp.task 'newsletter.stylus', ->
+	gulp.src './public/layout/newsletter/stylus/*.styl'
+		.pipe do stylus
+		.on 'error', notify.onError 'Error: <%= error.message %>'
+		.pipe concat 'newsletter.css'
+		.pipe gulp.dest './public/build-dev/layout/newsletter'
+		return
 
 # Grouping tasks
 
