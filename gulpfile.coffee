@@ -10,7 +10,7 @@ gulp.task 'clean-dev', ->
 		.pipe do clean
 
 
-gulp.task 'newsletter.stylus', ->
+gulp.task 'newsletter-layout.stylus', ->
 	gulp.src [
 			'./public/layout/newsletter/stylesheets/reset.css'
 			'./public/layout/newsletter/stylesheets/*.styl'
@@ -21,12 +21,12 @@ gulp.task 'newsletter.stylus', ->
 		.pipe gulp.dest './public/build-dev/layout/newsletter'
 		return
 
-gulp.task 'newsletter.html', ->
+gulp.task 'copy', ->
 	gulp.src './public/layout/newsletter/*.html'
 		.pipe gulp.dest './public/build-dev/layout/newsletter'
 		return
 
 
-gulp.task 'watch', ['newsletter.stylus', 'newsletter.html'], ->
-	gulp.watch './public/layout/newsletter/stylesheets/*.styl', ['newsletter.stylus']
-	gulp.watch './public/layout/newsletter/*.html', ['newsletter.html']
+gulp.task 'watch', ['newsletter-layout.stylus', 'copy'], ->
+	gulp.watch './public/layout/newsletter/stylesheets/*.styl', ['newsletter-layout.stylus']
+	gulp.watch './public/layout/newsletter/*.html', ['copy']
