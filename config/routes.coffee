@@ -4,6 +4,9 @@ auth     = require '../app/controllers/auth.coffee'
 
 module.exports = (app, passport) ->
 
+  # Pages
+  index = require '../app/controllers/index.coffee'
+  app.get '/', index.render
 
 	app.get '/apps/:app_name', (req, res, next) ->
 		req.session.app_name = req.params.app_name
