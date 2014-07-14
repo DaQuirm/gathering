@@ -68,6 +68,7 @@ body, input, textarea
 	padding 0 10px
 
 	li
+		position relative
 		padding 7px 10px
 		border-radius 2px
 		background hsl(200,50%,60%)
@@ -80,12 +81,21 @@ body, input, textarea
 		transition background .3s
 
 		&::after
+			position absolute
+			right 0
+			padding 5px 8px
+			height 100%
+			box-sizing border-box
+			top 0
+			background linear-gradient(to left, hsl(200,50%,40%) 20px, transparent)
+			text-align right
+			width 100%
+			font-size 16px
 			font-family 'FontAwesome'
 			//visibility hidden
 			content "\f057"
 			opacity 0
 			transition opacity .3s
-			margin-left 10px
 
 		&:hover
 			background hsl(200,50%,40%)
@@ -118,13 +128,13 @@ body, input, textarea
 		display block
 		margin 10px 0
 		box-sizing border-box
-		background transparent
+		background #fafafa
 		border()
 
 	input, textarea
 		&:focus
 			background white
-			outline 0
+			outline 2px solid hsl(200,50%,60%)
 		
 
 	button
