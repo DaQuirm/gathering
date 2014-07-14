@@ -10,10 +10,12 @@
 }
 
 border(side='')
-	if side isnt ''
-		border-{side} 1px solid #ccc
-	else
+	if side is ''
 		border 1px solid #ccc
+	else if side is 0
+		border 0
+	else
+		border-{side} 1px solid #ccc
 
 body, input, textarea
 		font-family Ubuntu, Segoe UI, sans-serif
@@ -40,13 +42,14 @@ body, input, textarea
 	> li
 		border(bottom)
 		position relative
-		padding 10px 20px
+		padding 15px 20px
 
 		&:hover .button-close
 			opacity 1
 
 		.title
 			display inline-block
+			margin-bottom 5px
 			color hsl(0,0%,40%)
 			text-decoration none
 			font-size 20px
@@ -62,7 +65,7 @@ body, input, textarea
 .tags
 	clear both
 	overflow hidden
-	margin 0 -15px
+	margin 15px -15px 0
 	//background #eee
 	//padding 10px 15px
 	padding 0 10px
@@ -118,26 +121,37 @@ body, input, textarea
 	background #eee
 	border(bottom)
 
+	label
+		font-size 12px
+		color #999
+		margin 20px 0 10px
+		display block
+
 	input, textarea, button
 		width 100%
 		max-width 100%
 		min-width 100%
-		padding 5px 10px
-		color #666
+		padding 8px 0
 		font-size 16px
 		display block
-		margin 10px 0
 		box-sizing border-box
-		background #fafafa
-		border()
 
 	input, textarea
+		margin 0
+		border 0
+		border(bottom)
+		color #333
+		background transparent
+
 		&:focus
-			background white
-			outline 2px solid hsl(200,50%,60%)
+			border-bottom 2px solid hsl(200,50%,60%)
+			outline 0
+			padding-bottom 7px
 		
 
 	button
+		border()
+		margin 15px 0 20px
 		cursor pointer
 		color white
 		background hsl(150,40%,50%)
