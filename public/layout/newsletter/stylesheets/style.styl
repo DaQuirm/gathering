@@ -9,7 +9,7 @@
   font-style: normal;
 }
 
-border(side='')
+border-style(side='')
 	if side is ''
 		border 1px solid #ccc
 	else if side is 0
@@ -21,7 +21,7 @@ body, input, textarea
 		font-family Roboto, Ubuntu, Segoe UI, sans-serif
 
 .block-left
-	border(right)
+	border-style(right)
 	overflow hidden
 
 .edit-menu
@@ -38,6 +38,7 @@ body, input, textarea
 		padding 10px
 		transition .2s
 		float right
+		position relative
 
 		&::before
 			width 20px
@@ -45,6 +46,17 @@ body, input, textarea
 			display block
 			text-align center
 			font-family 'FontAwesome'
+		&::after
+			content ''
+			position absolute
+			top 100%
+			left 0
+			display block
+			border-left 20px solid transparent
+			border-right 20px solid transparent
+			border-bottom 0 solid transparent
+			border-top: 10px solid transparent
+			transition .2s
 
 	.remove
 		color hsl(0,50%,60%)
@@ -53,9 +65,13 @@ body, input, textarea
 			content "\f00d"
 		&:hover
 			background hsla(0,50%,60%,.2)
+			&::after
+				border-top-color hsla(0,50%,60%,.2)
 		&:active
 			background hsla(0,50%,60%,.5)
 			color white
+			&::after
+				border-top-color hsla(0,50%,60%,.5)
 
 	.approve
 		color hsl(150,50%,50%)
@@ -64,9 +80,13 @@ body, input, textarea
 			content "\f164"
 		&:hover
 			background hsla(150,50%,60%,.2)
+			&::after
+				border-top-color hsla(150,50%,60%,.2)
 		&:active
 			background hsla(150,50%,60%,.5)
 			color white
+			&::after
+				border-top-color hsla(150,50%,60%,.5)
 
 	.disapprove
 		color hsl(0,50%,60%)
@@ -75,9 +95,13 @@ body, input, textarea
 			content "\f165"
 		&:hover
 			background hsla(0,50%,60%,.2)
+			&::after
+				border-top-color hsla(0,50%,60%,.2)
 		&:active
 			background hsla(0,50%,60%,.5)
 			color white
+			&::after
+				border-top-color hsla(0,50%,60%,.5)
 
 	.edit
 		color hsl(50,0%,60%)
@@ -86,14 +110,18 @@ body, input, textarea
 			content "\f040"
 		&:hover
 			background hsla(50,0%,60%,.2)
+			&::after
+				border-top-color hsla(50,0%,60%,.2)
 		&:active
 			background hsla(50,0%,60%,.5)
+			&::after
+				border-top-color hsla(50,0%,60%,.5)
 			color white
 		
 
 .news-list
 	> li
-		border(bottom)
+		border-style(bottom)
 		position relative
 		padding 15px 20px
 
@@ -157,7 +185,7 @@ body, input, textarea
 	padding 0 20px
 	box-sizing border-box
 	background #eee
-	border(bottom)
+	border-style(bottom)
 
 	label
 		font-size 12px
@@ -177,7 +205,7 @@ body, input, textarea
 	input, textarea
 		margin 0
 		border 0
-		border(bottom)
+		border-style(bottom)
 		color #333
 		background transparent
 
@@ -188,7 +216,7 @@ body, input, textarea
 		
 
 	button
-		border()
+		border none
 		margin 20px 0
 		cursor pointer
 		color white
