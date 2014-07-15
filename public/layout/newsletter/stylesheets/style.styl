@@ -17,6 +17,21 @@ border-style(side='')
 	else
 		border-{side} 1px solid #ccc
 
+edit-button(content, h=50, s=0%, l=60%)
+	color hsl(h,s,l)
+	&::before
+		content content
+	&:hover
+		background hsla(h,s,l,.2)
+		&::after
+			border-top-color hsla(h,s,l,.2)
+	&:active
+		background hsla(h,s,l,.5)
+		&::after
+			border-top-color hsla(h,s,l,.5)
+		color white
+
+
 body, input, textarea
 		font-family Roboto, Ubuntu, Segoe UI, sans-serif
 
@@ -59,64 +74,13 @@ body, input, textarea
 			transition .2s
 
 	.remove
-		color hsl(0,50%,60%)
-
-		&::before
-			content "\f00d"
-		&:hover
-			background hsla(0,50%,60%,.2)
-			&::after
-				border-top-color hsla(0,50%,60%,.2)
-		&:active
-			background hsla(0,50%,60%,.5)
-			color white
-			&::after
-				border-top-color hsla(0,50%,60%,.5)
-
+		edit-button("\f00d", 0, 50%, 60%)
 	.approve
-		color hsl(150,50%,50%)
-
-		&::before
-			content "\f164"
-		&:hover
-			background hsla(150,50%,60%,.2)
-			&::after
-				border-top-color hsla(150,50%,60%,.2)
-		&:active
-			background hsla(150,50%,60%,.5)
-			color white
-			&::after
-				border-top-color hsla(150,50%,60%,.5)
-
+		edit-button("\f164", 150, 50%, 50%)
 	.disapprove
-		color hsl(0,50%,60%)
-
-		&::before
-			content "\f165"
-		&:hover
-			background hsla(0,50%,60%,.2)
-			&::after
-				border-top-color hsla(0,50%,60%,.2)
-		&:active
-			background hsla(0,50%,60%,.5)
-			color white
-			&::after
-				border-top-color hsla(0,50%,60%,.5)
-
+		edit-button("\f165", 0, 50%, 60%)
 	.edit
-		color hsl(50,0%,60%)
-
-		&::before
-			content "\f040"
-		&:hover
-			background hsla(50,0%,60%,.2)
-			&::after
-				border-top-color hsla(50,0%,60%,.2)
-		&:active
-			background hsla(50,0%,60%,.5)
-			&::after
-				border-top-color hsla(50,0%,60%,.5)
-			color white
+		edit-button("\f040")
 		
 
 .news-list
