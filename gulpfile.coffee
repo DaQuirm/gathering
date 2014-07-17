@@ -4,6 +4,7 @@ concat = require 'gulp-concat'
 rename = require 'gulp-rename'
 stylus = require 'gulp-stylus'
 notify = require 'gulp-notify'
+nib = require 'nib'
 
 gulp.task 'clean-dev', ->
 	gulp.src './public/build-dev'
@@ -12,10 +13,10 @@ gulp.task 'clean-dev', ->
 
 gulp.task 'newsletter-layout.stylus', ->
 	gulp.src [
-			'./public/layout/newsletter/stylesheets/reset.css'
 			'./public/layout/newsletter/stylesheets/*.styl'
 		]
-		.pipe do stylus
+		.pipe stylus
+			use: nib()
 		.on 'error', notify.onError 'Error: <%= error.message %>'
 		.pipe concat 'newsletter.css'
 		.pipe gulp.dest './public/build-dev/layout/newsletter'

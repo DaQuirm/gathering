@@ -1,3 +1,6 @@
+@import 'nib'
+global-reset()
+
 @font-face {
   font-family: 'FontAwesome';
   src: url('../../../lib/components-font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
@@ -40,11 +43,9 @@ body, input, textarea
 	overflow hidden
 
 .edit-menu
+	absolute top right
 	opacity 0
 	transition .3s
-	position absolute
-	top 0
-	right 0
 
 	> li
 		display block
@@ -63,9 +64,7 @@ body, input, textarea
 			font-family 'FontAwesome'
 		&::after
 			content ''
-			position absolute
-			top 100%
-			left 0
+			absolute top 100%	left
 			display block
 			border-left 20px solid transparent
 			border-right 20px solid transparent
@@ -180,7 +179,7 @@ body, input, textarea
 		
 
 	button
-		border none
+		border-style()
 		margin 20px 0
 		cursor pointer
 		color white
@@ -197,4 +196,3 @@ body, input, textarea
 
 		&:active
 			background hsl(150,40%,40%)
-			
