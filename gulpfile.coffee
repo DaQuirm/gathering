@@ -31,6 +31,14 @@ gulp.task 'copy', ->
 
 gulp.task 'admin-newsletter.coffee', ->
 	gulp.src [
+		'./public/common/global.styl'
+	]
+	.pipe stylus
+		use: nib()
+	.on 'error', notify.onError 'Error: <%= error.message %>'
+	.pipe concat 'main.css'
+	.pipe gulp.dest './public/build-dev/common/'
+	return
 
 		# Nexus extensions
 		'./public/nexus-extensions/input.coffee'
