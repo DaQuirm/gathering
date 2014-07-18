@@ -5,7 +5,6 @@
 	border-style(right)
 	overflow hidden
 
-
 .block-right
 	box-sizing border-box
 	float right
@@ -77,86 +76,3 @@
 		.description
 			font-scale 0
 			margin 10px 0 15px
-
-.tags
-	clear both
-	overflow hidden
-	margin -5px -15px
-	padding 0 10px
-
-	li
-		position relative
-		padding 7px 10px
-		border-radius 2px
-		background hsla(200,50%,50%,.15)
-		color hsl(200,50%,55%)
-		float left
-		margin 5px
-		font-scale -1
-		cursor pointer
-		overflow hidden
-		transition .2s
-
-		&:hover
-			background hsl(200,50%,50%)
-			color white
-
-		&:active
-			background hsl(0,50%,60%)
-			color white
-		
-
-
-.form
-	width 100%
-	overflow hidden
-	padding 15px 20px
-	box-sizing border-box
-	background #eee
-	border-style(bottom)
-
-	label
-		font-scale -1
-		color #999
-		margin-bottom 20px
-		display block
-
-	input, textarea, button
-		width 100%
-		max-width 100%
-		min-width 100%
-		padding 8px 0
-		display block
-		box-sizing border-box
-
-	input, textarea
-		margin 0
-		border 0
-		border-style(bottom)
-		color #333
-		background transparent
-
-		&:focus
-			border-bottom 2px solid hsl(200,50%,60%)
-			outline 0
-			padding-bottom 7px
-		
-
-	button
-		border-style(all)
-		margin-top 20px
-		cursor pointer
-		color white
-		background hsl(150,40%,50%)
-		border-color hsl(150,40%,45%)
-		border-radius 2px
-		transition background .3s
-		
-		&:focus
-			outline none
-
-		&:hover
-			background hsl(150,40%,45%)
-
-		&:active
-			background hsl(150,40%,40%)

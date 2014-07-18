@@ -36,9 +36,12 @@ inverse-on-action(color)
 action-button(content, color = secondary-type-color)
 	inverse-on-action(color)
 	&:hover
+		background hsla(h, s, l, .2)
 		&::after
 			border-top-color alpha(color, .2)
 	&:active
+		background hsla(h, s, l, .5)
+		color white
 		&::after
 			border-top-color alpha(color, .5)
 
