@@ -6,10 +6,11 @@ stylus = require 'gulp-stylus'
 notify = require 'gulp-notify'
 nib = require 'nib'
 
+# Main tasks
+
 gulp.task 'clean-dev', ->
 	gulp.src './public/build-dev'
 		.pipe do clean
-
 
 gulp.task 'main.stylus', ->
 	gulp.src [
@@ -22,6 +23,8 @@ gulp.task 'main.stylus', ->
 	.pipe gulp.dest './public/build-dev/common/'
 	return
 
+
+# Article stash tasks
 
 gulp.task 'article_stash.stylus', ->
 	gulp.src [
@@ -40,11 +43,24 @@ gulp.task 'article_stash.html', ->
 		return
 
 
-tasks = [
-	'main.stylus'
-	'article_stash.stylus'
-	'article_stash.html'
+# Grouping tasks
+
+tasks = 
+	main: [
+		'main.stylus'
+	]
+
+	article_stash: [
+		'article_stash.stylus'
+		'article_stash.html'
+	]
+
+all_tasks = []
+all_tasks = all_tasks.concat.apply all_tasks, [
+	tasks.main
+	tasks.article_stash
 ]
 
-gulp.task 'watch', tasks, ->
-	gulp.watch './public/**/*', tasks
+gulp.task 'watch', all_tasks, ->
+	gulp.watch './public/common/**/*', tasks.main
+	gulp.watch './public/layout/article_stash/**/*', tasks.article_stash
