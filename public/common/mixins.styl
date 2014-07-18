@@ -26,7 +26,9 @@ edit-button(content, h = 50, s = 0%, l = 60%)
 			border-top-color hsla(h, s, l, .5)
 
 
-scales = {
+// Type scaling - http://modularscale.com/
+
+type_scales = {
 	m2: 1.067,
 	M2: 1.125,
 	m3: 1.200,
@@ -34,8 +36,8 @@ scales = {
 	P4: 1.333,
 	TT: 1.414,
 	P5: 1.500,
-	golden: 1.618 
+	golden: 1.618
 }
 
-font-scale(factor, size = 1, unit = "rem", ratio = "M3")
-	font-size unit(size * scales[ratio] ** factor, unit)
+font-scale(factor, size = 1, unit = rem, ratio = 'M3')
+	font-size unit(size * type_scales[ratio] ** factor, unit)

@@ -2,14 +2,14 @@
 @import 'mixins'
 
 @font-face {
-  font-family: 'FontAwesome';
-  src: url('../../lib/components-font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
-  src: url('../../lib/components-font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
-       url('../../lib/components-font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
-       url('../../lib/components-font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
-       url('../../lib/components-font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'FontAwesome';
+	src: url('../../lib/components-font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
+	src: url('../../lib/components-font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+			 url('../../lib/components-font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+			 url('../../lib/components-font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+			 url('../../lib/components-font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 global-reset()
@@ -17,3 +17,88 @@ global-reset()
 body, input, textarea, button
 		font-family Roboto, Ubuntu, Segoe UI, sans-serif
 		font-scale 0
+
+
+.form
+	width 100%
+	overflow hidden
+	padding 15px 20px
+	box-sizing border-box
+	background #eee
+	border-style(bottom)
+
+label
+	font-scale -1
+	color #999
+	margin-bottom 20px
+	display block
+
+input, textarea, button
+	width 100%
+	max-width 100%
+	min-width 100%
+	padding 8px 0
+	display block
+	box-sizing border-box
+
+input, textarea
+	margin 0
+	border 0
+	border-style(bottom)
+	color #333
+	background transparent
+
+	&:focus
+		border-bottom 2px solid hsl(200,50%,60%)
+		outline 0
+		padding-bottom 7px
+
+textarea
+	resize vertical
+
+button
+	border-style(all)
+	margin-top 20px
+	cursor pointer
+	color white
+	background hsl(150,40%,50%)
+	border-color hsl(150,40%,45%)
+	border-radius 2px
+	transition background .3s
+	
+	&:focus
+		outline none
+
+	&:hover
+		background hsl(150,40%,45%)
+
+	&:active
+		background hsl(150,40%,40%)
+
+
+.tags
+	clear both
+	overflow hidden
+	margin -5px -15px
+	padding 0 10px
+
+	li
+		position relative
+		padding 7px 10px
+		border-radius 2px
+		background hsla(200,50%,50%,.15)
+		color hsl(200,50%,55%)
+		float left
+		margin 5px
+		font-scale -1
+		cursor pointer
+		overflow hidden
+		transition .2s
+
+		&:hover
+			background hsl(200,50%,50%)
+			color white
+
+		&:active
+			background hsl(0,50%,60%)
+			color white
