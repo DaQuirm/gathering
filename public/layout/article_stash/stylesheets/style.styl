@@ -1,15 +1,20 @@
 @import 'nib'
 @import '../../../common/mixins'
 
+body
+	display flex
+	@media screen and (max-width 800px)
+		flex-direction column
+
 .block-left
 	border-style(right)
-	overflow hidden
+	flex-grow 1
+	@media screen and (max-width 800px)
+		border 0
 
 .block-right
-	box-sizing border-box
-	float right
-	width 600px
-	max-width 100%
+	flex-grow 1
+	
 
 
 .edit-menu
@@ -65,7 +70,7 @@
 			display inline-block
 			margin-bottom 5px
 			margin-right 120px
-			color hsl(0,0%,40%)
+			color #333
 			text-decoration none
 			font-scale 1
 			font-weight bold
