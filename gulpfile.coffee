@@ -26,20 +26,20 @@ gulp.task 'main.stylus', ->
 
 # Article stash tasks
 
-gulp.task 'article_stash.stylus', ->
+gulp.task 'article-stash.stylus', ->
 	gulp.src [
-			'./public/layout/article_stash/stylesheets/*.styl'
+			'./public/layout/article-stash/stylesheets/*.styl'
 		]
 		.pipe stylus
 			use: nib()
 		.on 'error', notify.onError 'Error: <%= error.message %>'
 		.pipe concat 'style.css'
-		.pipe gulp.dest './public/build-dev/layout/article_stash'
+		.pipe gulp.dest './public/build-dev/layout/article-stash'
 		return
 
-gulp.task 'article_stash.html', ->
-	gulp.src './public/layout/article_stash/*.html'
-		.pipe gulp.dest './public/build-dev/layout/article_stash'
+gulp.task 'article-stash.html', ->
+	gulp.src './public/layout/article-stash/*.html'
+		.pipe gulp.dest './public/build-dev/layout/article-stash'
 		return
 
 
@@ -51,8 +51,8 @@ tasks =
 	]
 
 	article_stash: [
-		'article_stash.stylus'
-		'article_stash.html'
+		'article-stash.stylus'
+		'article-stash.html'
 	]
 
 all_tasks = []
@@ -63,4 +63,4 @@ all_tasks = all_tasks.concat.apply all_tasks, [
 
 gulp.task 'watch', all_tasks, ->
 	gulp.watch './public/common/**/*', tasks.main
-	gulp.watch './public/layout/article_stash/**/*', tasks.article_stash
+	gulp.watch './public/layout/article-stash/**/*', tasks.article_stash
