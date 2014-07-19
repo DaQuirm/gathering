@@ -3,12 +3,12 @@ mongoose = require 'mongoose'
 UserSchema = mongoose.Schema
 	first_name:
 		type: String
-		required: true
+		required: yes
 	last_name:
 		type: String
-		required: true
+		required: yes
 	email:
 		type: String
-		required: true
+		required: yes
 
 module.exports = mongoose.model 'User', UserSchema
