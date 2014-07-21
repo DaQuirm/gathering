@@ -1,4 +1,7 @@
-border-edge(sides = all, color = #ccc)
+gray(lightness)
+	hsl(0, 0%, lightness)
+
+border-edge(sides = all, color = gray(80%))
 	if all in sides
 		border 1px solid color
 		return
