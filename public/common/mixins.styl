@@ -41,5 +41,7 @@ type_scales = {
 	golden: 1.618
 }
 
-font-scale(factor, size = 1, unit = rem, ratio = 'M3')
+font-scale(factor, original-font-size = 1rem, ratio = 'M3')
+	unit = unit(original-font-size)
+	size = remove-unit(original-font-size)
 	font-size unit(size * type_scales[ratio] ** factor, unit)
