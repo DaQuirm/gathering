@@ -1,4 +1,4 @@
-border-style(sides = all)
+border-edge(sides = all, color = #ccc)
 	if all in sides
 		border 1px solid #ccc
 	if left in sides
@@ -11,7 +11,7 @@ border-style(sides = all)
 		border-bottom 1px solid #ccc
 
 
-edit-button(content, h = 50, s = 0%, l = 60%)
+action-button(content, h = 50, s = 0%, l = 60%)
 	color hsl(h, s, l)
 	&::before
 		content content
