@@ -1,30 +1,32 @@
-border-style(sides = all)
+gray(lightness)
+	hsl(0, 0%, lightness)
+
+border-edge(sides = all, color = gray(80%))
 	if all in sides
-		border 1px solid #ccc
+		border 1px solid color
+		return
 	if left in sides
-		border-left 1px solid #ccc
+		border-left 1px solid color
 	if right in sides
-		border-right 1px solid #ccc
+		border-right 1px solid color
 	if top in sides
-		border-top 1px solid #ccc
+		border-top 1px solid color
 	if bottom in sides
-		border-bottom 1px solid #ccc
+		border-bottom 1px solid color
 
-
-edit-button(content, h = 50, s = 0%, l = 60%)
-	color hsl(h, s, l)
+action-button(content, color = gray(60%))
+	color color
 	&::before
 		content content
 	&:hover
-		background hsla(h, s, l, .2)
+		background alpha(color, .2)
 		&::after
-			border-top-color hsla(h, s, l, .2)
+			border-top-color alpha(color, .2)
 	&:active
-		background hsla(h, s, l, .5)
+		background alpha(color, .5)
 		color white
 		&::after
-			border-top-color hsla(h, s, l, .5)
-
+			border-top-color alpha(color, .5)
 
 // Type scaling - http://modularscale.com/
 
@@ -39,5 +41,7 @@ type_scales = {
 	golden: 1.618
 }
 
-font-scale(factor, size = 1, unit = rem, ratio = 'M3')
+font-scale(factor, original-font-size = 1rem, ratio = 'M3')
+	unit = unit(original-font-size)
+	size = remove-unit(original-font-size)
 	font-size unit(size * type_scales[ratio] ** factor, unit)
