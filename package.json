@@ -38,8 +38,8 @@
     "gulp-notify": "^1.4.0",
     "gulp-rename": "^1.2.0",
     "gulp-rimraf": "^0.1.0",
-    "stylus": "^0.47.2",
+    "gulp-stylus": "^1.0.5",
     "nib": "^1.0.3",
-    "gulp-stylus": "^1.0.5"
+    "stylus": "^0.47.2"
   }
 }
