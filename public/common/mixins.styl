@@ -1,14 +1,15 @@
 border-edge(sides = all, color = #ccc)
 	if all in sides
-		border 1px solid #ccc
+		border 1px solid color
+		return
 	if left in sides
-		border-left 1px solid #ccc
+		border-left 1px solid color
 	if right in sides
-		border-right 1px solid #ccc
+		border-right 1px solid color
 	if top in sides
-		border-top 1px solid #ccc
+		border-top 1px solid color
 	if bottom in sides
-		border-bottom 1px solid #ccc
+		border-bottom 1px solid color
 
 
 action-button(content, h = 50, s = 0%, l = 60%)
