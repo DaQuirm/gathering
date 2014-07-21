@@ -14,23 +14,19 @@ border-edge(sides = all, color = gray(80%))
 	if bottom in sides
 		border-bottom 1px solid color
 
-
-action-button(content, h = 50, s = 0%, l = 60%)
-	color hsl(h, s, l)
+action-button(content, color = gray(60%))
+	color color
 	&::before
 		content content
 	&:hover
-		background hsla(h, s, l, .2)
+		background alpha(color, .2)
 		&::after
-			border-top-color hsla(h, s, l, .2)
+			border-top-color alpha(color, .2)
 	&:active
-		background hsla(h, s, l, .5)
+		background alpha(color, .5)
 		color white
 		&::after
-			border-top-color hsla(h, s, l, .5)
-
-gray(percents)
-	hsl(0, 0%, percents)
+			border-top-color alpha(color, .5)
 
 // Type scaling - http://modularscale.com/
 
