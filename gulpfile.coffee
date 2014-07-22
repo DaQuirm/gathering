@@ -1,5 +1,5 @@
 gulp 	 = require 'gulp'
-clean  = require 'gulp-clean'
+rimraf  = require 'gulp-rimraf'
 concat = require 'gulp-concat'
 rename = require 'gulp-rename'
 stylus = require 'gulp-stylus'
@@ -10,7 +10,7 @@ nib = require 'nib'
 
 gulp.task 'clean-dev', ->
 	gulp.src './public/build-dev'
-		.pipe do clean
+		.pipe do rimraf
 
 gulp.task 'main.stylus', ->
 	gulp.src [
