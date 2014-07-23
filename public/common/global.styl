@@ -18,41 +18,38 @@
 global-reset()
 
 body, input, textarea, button
-		font-family Roboto, Ubuntu, Segoe UI, sans-serif
-		font-scale 0
+	font-family Roboto, Ubuntu, Segoe UI, sans-serif
+	font-scale(0)
 
 body
-		color gray(20%)
+	color primary-type-color
 
 // Forms and inputs
 
 .form
 	width 100%
 	overflow hidden
-	padding 15px 20px
+	padding type-scale(1)
 	box-sizing border-box
-	background gray(93%)
-	border-edge(bottom)
+	background form-bckg
 
 label
-	font-scale -1
-	color #999
-	margin-bottom 20px
+	font-scale(-1)
+	color secondary-type-color
+	margin-bottom type-scale(1)
 	display block
 
-input, textarea, button
+input, textarea
 	width 100%
 	max-width 100%
 	min-width 100%
 	padding 8px 0
 	display block
 	box-sizing border-box
-
-input, textarea
 	margin 0
 	border 0
 	border-edge(bottom)
-	color gray(20%)
+	color primary-type-color
 	background transparent
 	transition border-color .3s
 
@@ -62,47 +59,33 @@ input, textarea
 		padding-bottom 7px
 
 input:invalid
-	border-color terrible-red
+	border-bottom 2px solid hsl(hue(terrible-red), 70%, 60%)
+	padding-bottom 7px
 
 textarea
 	resize vertical
 
 button
-	border-edge(all)
-	margin-top 20px
-	cursor pointer
-	color white
-	background pure-grass
-	border-color darken(pure-grass, 5%)
-	border-radius 2px
-	transition background .3s
-	
-	&:focus
-		outline none
-
-	&:hover
-		background darken(pure-grass, 5%)
-
-	&:active
-		background darken(pure-grass, 10%)
+	margin-top type-scale(1)
+	width 100%
+	button()
 
 // Other
 
 .tags
-	clear both
-	overflow hidden
-	margin -5px -15px
-	padding 0 10px
+	display flex
+	flex-wrap wrap
+	padding 0
+	margin -5px
 
 	li
 		background alpha(evening-sky, .15)
 		position relative
-		padding 7px 10px
+		padding 7px type-scale(-2)
 		border-radius 2px
 		color evening-sky
-		float left
 		margin 5px
-		font-scale -1
+		font-scale(-1)
 		cursor pointer
 		overflow hidden
 		transition color .2s, background .2s
