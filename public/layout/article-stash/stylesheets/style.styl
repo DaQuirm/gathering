@@ -15,8 +15,9 @@ body
 
 .block-right
 	flex-grow 1
-	
 
+.form
+	border-edge(bottom)
 
 .edit-menu
 	absolute top right
@@ -26,24 +27,28 @@ body
 	> li
 		display block
 		cursor pointer
-		font-scale 1
+		font-scale(1)
+		width type-scale(1)
+		height type-scale(1)
 		padding 10px
 		transition .2s
 		float right
 		position relative
 
 		&::before
-			width 20px
-			height 20px
+			width type-scale(1)
+			height type-scale(1)
+			position absolute
+			margin auto
 			display block
 			text-align center
 			font-family 'FontAwesome'
 		&::after
 			content ''
-			absolute top 100%	left
+			absolute top 100% left
 			display block
-			border-left 20px solid transparent
-			border-right 20px solid transparent
+			border-left type-scale(1) solid transparent
+			border-right type-scale(1) solid transparent
 			border-bottom 0 solid transparent
 			border-top: 10px solid transparent
 			transition .2s
@@ -62,7 +67,7 @@ body
 	> li
 		border-edge(bottom)
 		position relative
-		padding 15px 20px
+		padding type-scale(1)
 
 		&:hover .edit-menu
 			opacity 1
@@ -71,14 +76,14 @@ body
 			display inline-block
 			margin-bottom 5px
 			margin-right 120px
-			color gray(20%)
+			color primary-type-color
 			text-decoration none
-			font-scale 1
-			font-weight bold
+			font-scale(0)
 
 			&:hover
 				text-decoration underline
 
 		.description
-			font-scale 0
-			margin 10px 0 15px
+			font-scale(-1)
+			color secondary-type-color
+			margin 10px 0 type-scale(0)
