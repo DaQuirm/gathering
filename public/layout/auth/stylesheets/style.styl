@@ -10,22 +10,21 @@ body
 	height 100vh
 
 .modal
-	max-width 600px
+	max-width 400px
 	width 100%
 	box-shadow 0px 2px 5px alpha(black, .2)
 
 .header
 	display flex
-	background gray(93%)
 	background evening-sky
 	color white
-	padding 15px 20px
+	padding type-scale(1) type-scale(1)
 	text-transform uppercase
 
 	// li
 	// 	user-select none
 	// 	font-scale 0
-	// 	padding 15px 20px
+	// 	padding type-scale(1) type-scale(1)
 	// 	text-transform uppercase
 	// 	box-sizing border-box
 	// 	cursor pointer
@@ -45,7 +44,7 @@ body
 // .title
 // 	border-edge(bottom)
 // 	padding 10px 0
-// 	margin 15px 0
+// 	margin type-scale(1) 0
 // 	color evening-sky
 
 	.buttons-list
@@ -59,22 +58,29 @@ body
 .action-menu
 	display flex
 	justify-content center
-	margin-bottom 15px
-	padding-bottom 15px
+	margin-bottom type-scale(1)
+	padding-bottom type-scale(1)
 	border-edge(bottom, , , dashed)
 
 	> li
-		font-family FontAwesome
-		font-scale(1)
-		border-radius 100%
+		position relative
+		min-width type-scale(1)
+		min-height type-scale(1)
 		padding 10px
-		width 40px
-		height 40px
-		box-sizing border-box
+		border-radius 100%
 		text-align center
 		cursor pointer
 		transition color .2s, background .2s
 		margin 0 10px
+
+		&::before
+			font-family FontAwesome
+			font-scale(1)
+			min-width type-scale(1)
+			min-height type-scale(1)
+			position absolute
+			margin auto
+			display block
 
 	.github
 		action-button("\f113")
