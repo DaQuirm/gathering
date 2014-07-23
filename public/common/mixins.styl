@@ -1,5 +1,3 @@
-@import 'mixins'
-
 gray(lightness)
 	hsl(0, 0%, lightness)
 
@@ -27,6 +25,8 @@ border-edge(sides = all, color = edge-color, size = 1px, style = solid)
 
 inverse-on-action(color)
 	color color
+	&::before
+		content content
 	&:hover
 		background alpha(color, .2)
 	&:active
