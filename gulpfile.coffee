@@ -62,5 +62,5 @@ all_tasks = all_tasks.concat.apply all_tasks, [
 ]
 
 gulp.task 'watch', all_tasks, ->
-	gulp.watch './public/common/**/*', tasks.main
+	gulp.watch './public/common/**/*', [tasks.main, tasks.article_stash]
 	gulp.watch './public/layout/article-stash/**/*', tasks.article_stash
