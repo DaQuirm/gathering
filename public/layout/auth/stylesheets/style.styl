@@ -1,4 +1,5 @@
 @import 'nib'
+@import '../../../common/variables'
 @import '../../../common/mixins'
 
 body
@@ -8,9 +9,81 @@ body
 	align-content center
 	height 100vh
 
-.form
-	border-style(all)
+.modal
 	max-width 600px
+	width 100%
+	box-shadow 0px 2px 5px alpha(black, .2)
 
-input:invalid
-	border-color red
+.header
+	display flex
+	background gray(93%)
+	background evening-sky
+	color white
+	padding 15px 20px
+	text-transform uppercase
+
+	// li
+	// 	user-select none
+	// 	font-scale 0
+	// 	padding 15px 20px
+	// 	text-transform uppercase
+	// 	box-sizing border-box
+	// 	cursor pointer
+	// 	color alpha(white, .6)
+
+	// 	&.active
+	// 		border-edge(bottom, lighten(evening-sky, 60%), 4px)
+	// 		padding-bottom 11px
+
+	// 	&:hover, &.active
+	// 		color white
+
+.form
+	//border 0
+	//border-edge('!top')
+
+// .title
+// 	border-edge(bottom)
+// 	padding 10px 0
+// 	margin 15px 0
+// 	color evening-sky
+
+	.buttons-list
+		display flex
+		justify-content flex-end
+		li:last-child
+			button(evening-sky)
+		li
+			button-sec()
+
+.action-menu
+	display flex
+	justify-content center
+	margin-bottom 15px
+	padding-bottom 15px
+	border-edge(bottom, , , dashed)
+
+	> li
+		font-family FontAwesome
+		font-scale(1)
+		border-radius 100%
+		padding 10px
+		width 40px
+		height 40px
+		box-sizing border-box
+		text-align center
+		cursor pointer
+		transition color .2s, background .2s
+		margin 0 10px
+
+	.github
+		action-button("\f113")
+
+	.google
+		action-button("\f1a0")
+
+	.facebook
+		action-button("\f09a")
+
+	.twitter
+		action-button("\f099")
