@@ -19,7 +19,7 @@ body
 .form
 	border-edge(bottom)
 
-.edit-menu
+.action-menu
 	absolute top right
 	opacity 0
 	transition .3s
@@ -61,7 +61,7 @@ body
 		action-button("\f165", terrible-red)
 	.edit
 		action-button("\f040")
-		
+
 
 .articles-list
 	> li
@@ -69,12 +69,11 @@ body
 		position relative
 		padding type-scale(1)
 
-		&:hover .edit-menu
+		&:hover .action-menu
 			opacity 1
 
 		.title
 			display inline-block
-			margin-bottom 5px
 			margin-right 120px
 			color primary-type-color
 			text-decoration none
@@ -85,5 +84,6 @@ body
 
 		.description
 			font-scale(-1)
+			line-height type-scale(0)
 			color secondary-type-color
-			margin 10px 0 type-scale(0)
+			margin type-scale(1) 0
