@@ -1,7 +1,9 @@
+@import 'mixins'
+
 gray(lightness)
 	hsl(0, 0%, lightness)
 
-border-edge(sides = all, color = gray(80%), size = 1px, style = solid)
+border-edge(sides = all, color = edge-color, size = 1px, style = solid)
 	if sides is '!bottom'
 		sides = left right top
 	if sides is '!top'
@@ -23,7 +25,7 @@ border-edge(sides = all, color = gray(80%), size = 1px, style = solid)
 	if bottom in sides
 		border-bottom size style color
 
-action-button(content, color = gray(60%))
+action-button(content, color = secondary-type-color)
 	color color
 	&::before
 		content content
@@ -38,54 +40,55 @@ action-button(content, color = gray(60%))
 			border-top-color alpha(color, .5)
 
 button(color = pure-grass)
-		border-edge(all, darken(color, 5%))
-		cursor pointer
-		background color
-		border-radius 2px
-		transition background .3s
-		text-transform uppercase
-		padding 8px 15px
-		display block
-		box-sizing border-box
+	border-edge(all, darken(color, 5%))
+	cursor pointer
+	background color
+	border-radius 2px
+	transition background .3s
+	text-transform uppercase
+	padding 8px type-scale(0)
+	display block
+	box-sizing border-box
 
-		if contrast(color).ratio > 2.4
-			color white
-		else
-			color darken(color, 50%)
-		
-		&:focus
-			outline none
-			// background lighten(color, 10%)
+	if contrast(color).ratio > 2
+		color white
+	else
+		color darken(color, 50%)
+	
+	&:focus
+		outline none
+		// background lighten(color, 10%)
 
-		&:hover
-			background lighten(color, 10%)
-			text-decoration none
+	&:hover
+		background lighten(color, 10%)
+		text-decoration none
 
-		&:active
-			background darken(color, 10%)
+	&:active
+		background darken(color, 10%)
 
 button-sec()
-		border 0
-		cursor pointer
+	border 0
+	cursor pointer
+	background transparent
+	border-radius 2px
+	text-transform uppercase
+	padding 8px type-scale(0)
+	display block
+	box-sizing border-box
+	transition background .3s
+
+	color secondary-type-color
+	
+	&:focus
+		outline none
+		// background lighten(color, 10%)
+
+	&:hover
 		background transparent
-		border-radius 2px
-		text-transform uppercase
-		padding 8px 15px
-		display block
-		box-sizing border-box
+		text-decoration underline
 
-		color gray(60%)
-		
-		&:focus
-			outline none
-			// background lighten(color, 10%)
-
-		&:hover
-			background transparent
-			text-decoration underline
-
-		&:active
-			background transparent
+	&:active
+		background alpha(black, .1)
 
 // Type scaling - http://modularscale.com/
 
@@ -100,7 +103,11 @@ type_scales = {
 	golden: 1.618
 }
 
-font-scale(factor, original-font-size = 1rem, ratio = 'M3')
+type-scale(factor, original-font-size = 1rem, ratio = 'M3')
 	unit = unit(original-font-size)
 	size = remove-unit(original-font-size)
-	font-size unit(size * type_scales[ratio] ** factor, unit)
+	mult = type_scales[ratio] ** factor
+	return unit(size * mult, unit)
+
+font-scale(factor, original-font-size = 1rem, ratio = 'M3')
+	font-size type-scale(factor, original-font-size, ratio)

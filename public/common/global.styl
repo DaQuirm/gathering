@@ -18,25 +18,25 @@
 global-reset()
 
 body, input, textarea, button
-		font-family Roboto, Ubuntu, Segoe UI, sans-serif
-		font-scale 0
+	font-family Roboto, Ubuntu, Segoe UI, sans-serif
+	font-scale(0)
 
 body
-		color gray(20%)
+	color primary-type-color
 
 // Forms and inputs
 
 .form
 	width 100%
 	overflow hidden
-	padding 15px 20px
+	padding type-scale(1)
 	box-sizing border-box
-	background gray(93%)
+	background form-bckg
 
 label
-	font-scale -1
-	color #999
-	margin-bottom 20px
+	font-scale(-1)
+	color secondary-type-color
+	margin-bottom type-scale(1)
 	display block
 
 input, textarea
@@ -46,12 +46,10 @@ input, textarea
 	padding 8px 0
 	display block
 	box-sizing border-box
-
-input, textarea
 	margin 0
 	border 0
 	border-edge(bottom)
-	color gray(20%)
+	color primary-type-color
 	background transparent
 	transition border-color .3s
 
@@ -61,14 +59,14 @@ input, textarea
 		padding-bottom 7px
 
 input:invalid
-	border-bottom 2px solid saturation(lighten(terrible-red, 20%), 60%)
+	border-bottom 2px solid hsl(hue(terrible-red), 70%, 60%)
 	padding-bottom 7px
 
 textarea
 	resize vertical
 
 button
-	margin-top 20px
+	margin-top type-scale(1)
 	width 100%
 	button()
 
@@ -77,18 +75,18 @@ button
 .tags
 	clear both
 	overflow hidden
-	margin -5px -15px
-	padding 0 10px
+	margin -5px -type-scale(1)
+	padding 0 type-scale(-2)
 
 	li
 		background alpha(evening-sky, .15)
 		position relative
-		padding 7px 10px
+		padding 7px type-scale(-2)
 		border-radius 2px
 		color evening-sky
 		float left
 		margin 5px
-		font-scale -1
+		font-scale(-1)
 		cursor pointer
 		overflow hidden
 		transition color .2s, background .2s
