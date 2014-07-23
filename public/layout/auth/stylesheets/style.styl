@@ -50,6 +50,8 @@ body
 	.buttons-list
 		display flex
 		justify-content flex-end
+		flex-wrap wrap
+
 		li:last-child
 			button(evening-sky)
 		li
@@ -58,26 +60,27 @@ body
 .action-menu
 	display flex
 	justify-content center
+	flex-wrap wrap
+	margin -1*type-scale(1)
 	margin-bottom type-scale(1)
-	padding-bottom type-scale(1)
 	border-edge(bottom, , , dashed)
 
 	> li
 		position relative
-		min-width type-scale(1)
-		min-height type-scale(1)
+		width type-scale(1)
+		height type-scale(1)
 		padding 10px
 		border-radius 100%
 		text-align center
 		cursor pointer
 		transition color .2s, background .2s
-		margin 0 10px
+		margin type-scale(0)
 
 		&::before
 			font-family FontAwesome
 			font-scale(1)
-			min-width type-scale(1)
-			min-height type-scale(1)
+			width type-scale(1)
+			height type-scale(1)
 			position absolute
 			margin auto
 			display block
