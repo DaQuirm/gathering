@@ -32,7 +32,6 @@ body
 	padding 15px 20px
 	box-sizing border-box
 	background gray(93%)
-	border-edge(bottom)
 
 label
 	font-scale -1
@@ -40,7 +39,7 @@ label
 	margin-bottom 20px
 	display block
 
-input, textarea, button
+input, textarea
 	width 100%
 	max-width 100%
 	min-width 100%
@@ -62,29 +61,16 @@ input, textarea
 		padding-bottom 7px
 
 input:invalid
-	border-color terrible-red
+	border-bottom 2px solid saturation(lighten(terrible-red, 20%), 60%)
+	padding-bottom 7px
 
 textarea
 	resize vertical
 
 button
-	border-edge(all)
 	margin-top 20px
-	cursor pointer
-	color white
-	background pure-grass
-	border-color darken(pure-grass, 5%)
-	border-radius 2px
-	transition background .3s
-	
-	&:focus
-		outline none
-
-	&:hover
-		background darken(pure-grass, 5%)
-
-	&:active
-		background darken(pure-grass, 10%)
+	width 100%
+	button()
 
 // Other
 

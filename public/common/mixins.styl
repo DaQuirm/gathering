@@ -1,18 +1,27 @@
 gray(lightness)
 	hsl(0, 0%, lightness)
 
-border-edge(sides = all, color = gray(80%))
+border-edge(sides = all, color = gray(80%), size = 1px, style = solid)
+	if sides is '!bottom'
+		sides = left right top
+	if sides is '!top'
+		sides = left right bottom
+	if sides is '!right'
+		sides = left bottom top
+	if sides is '!left'
+		sides = bottom right top
+
 	if all in sides
-		border 1px solid color
+		border size style color
 		return
 	if left in sides
-		border-left 1px solid color
+		border-left size style color
 	if right in sides
-		border-right 1px solid color
+		border-right size style color
 	if top in sides
-		border-top 1px solid color
+		border-top size style color
 	if bottom in sides
-		border-bottom 1px solid color
+		border-bottom size style color
 
 action-button(content, color = gray(60%))
 	color color
@@ -27,6 +36,56 @@ action-button(content, color = gray(60%))
 		color white
 		&::after
 			border-top-color alpha(color, .5)
+
+button(color = pure-grass)
+		border-edge(all, darken(color, 5%))
+		cursor pointer
+		background color
+		border-radius 2px
+		transition background .3s
+		text-transform uppercase
+		padding 8px 15px
+		display block
+		box-sizing border-box
+
+		if contrast(color).ratio > 2.4
+			color white
+		else
+			color darken(color, 50%)
+		
+		&:focus
+			outline none
+			// background lighten(color, 10%)
+
+		&:hover
+			background lighten(color, 10%)
+			text-decoration none
+
+		&:active
+			background darken(color, 10%)
+
+button-sec()
+		border 0
+		cursor pointer
+		background transparent
+		border-radius 2px
+		text-transform uppercase
+		padding 8px 15px
+		display block
+		box-sizing border-box
+
+		color gray(60%)
+		
+		&:focus
+			outline none
+			// background lighten(color, 10%)
+
+		&:hover
+			background transparent
+			text-decoration underline
+
+		&:active
+			background transparent
 
 // Type scaling - http://modularscale.com/
 
