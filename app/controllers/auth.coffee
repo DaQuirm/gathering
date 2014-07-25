@@ -8,10 +8,14 @@ User         = require '../models/user.coffee'
 oauth_login = (strategy_name) ->
 	(req, res, next) ->
 		passport.authenticate(strategy_name, (err, user, info) ->
-			return next err if err
-			return res.send error:'Invalid login or password' unless user
+			if err
+				req.session.auth_error = err
+				return res.redirect "/apps/#{req.session.app_name}"
+			unless user
+				req.session.auth_error = message:'user not found'
+				return res.redirect "/apps/#{req.session.app_name}"
 			req.logIn user, (err) ->
-				return next err if err
+				req.session.auth_error = err if err
 				res.redirect "/apps/#{req.session.app_name}"
 		) req, res, next
 
@@ -19,10 +23,11 @@ oauth_login = (strategy_name) ->
 login_action =
 	local: (req, res, next) ->
 		passport.authenticate('local', (err, user, info) ->
-			return next err if err
-			return res.send error:'Invalid login or password' unless user
+			if err
+				res.json error:err
+			return res.json error:'Invalid login or password' unless user
 			req.logIn user, (err) ->
-				return next err if err
+				res.json error:err if err
 				res.json
 					user: do user.publicify
 					error: null
