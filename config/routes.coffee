@@ -1,21 +1,29 @@
+passport = require 'passport'
+express  = require 'express'
+auth     = require '../app/controllers/auth.coffee'
+
 module.exports = (app, passport) ->
 
-  # Pages
-  index = require '../app/controllers/index.coffee'
-  app.get '/', index.render
 
-  register = require '../app/controllers/register.coffee'
-  app.get '/register', register.render
+	app.use '/apps/', express.static "#{__dirname}/../public"
 
-  # Passport
-  app.get '/auth/google', passport.authenticate('google')
-  app.get '/auth/google/return', passport.authenticate('google', { successRedirect: '/register', failureRedirect: '/error' } )
+	app.post '/auth/local', auth.login 'local'
 
-  # Users
-  users = require '../app/controllers/users.coffee'
-  app.post '/users', users.create
-  app.get '/users/:id', users.get
+	app.get '/auth/github', passport.authenticate 'github'
+	app.get '/auth/github/callback', auth.login 'github'
 
-  # Restricted access resource
-  restricted = require '../app/controllers/restricted.coffee'
-  app.get '/restricted', restricted.test
+	app.get '/auth/google', passport.authenticate 'google', scope: ['profile', 'email']
+	app.get '/auth/google/callback', auth.login 'google'
+
+	app.get '/auth/facebook', passport.authenticate 'facebook'
+	app.get '/auth/facebook/callback', auth.login 'facebook', scope: 'email'
+
+	app.get '/auth/twitter', passport.authenticate 'twitter'
+	app.get '/auth/twitter/callback', auth.login 'twitter'
+
+	app.get '/user', (req, res) ->
+		res.send req.user
+
+	app.get '/logout', (req, res) ->
+		do req.logout
+		res.redirect '/apps/auth-proto'
