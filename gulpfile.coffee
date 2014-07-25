@@ -23,18 +23,39 @@ gulp.task 'main.stylus', ->
 	.pipe gulp.dest './public/build-dev/common/'
 	return
 
+# User preferences tasks
 
+gulp.task 'prefs.stylus', ->
+	gulp.src [
+		'./public/layout/prefs/stylesheets/*.styl'
+	]
+	.pipe stylus
+		use: nib()
+	.on 'error', notify.onError 'Error: <%= error.message %>'
+	.pipe concat 'style.css'
+	.pipe gulp.dest './public/build-dev/layout/prefs/'
+	return
+
+gulp.task 'prefs.html', ->
+	gulp.src './public/layout/prefs/*.html'
+	.pipe gulp.dest './public/build-dev/layout/prefs/'
 # Grouping tasks
 
-tasks = 
+tasks =
 	main: [
 		'main.stylus'
+	]
+	prefs: [
+		'prefs.stylus'
+		'prefs.html'
 	]
 
 all_tasks = []
 all_tasks = all_tasks.concat.apply all_tasks, [
 	tasks.main
+	tasks.prefs
 ]
 
 gulp.task 'watch', all_tasks, ->
-	gulp.watch './public/common/**/*', tasks.main
+	gulp.watch './public/common/**/*', tasks.main.concat tasks.prefs
+	gulp.watch './public/layout/prefs/**/*', tasks.prefs
