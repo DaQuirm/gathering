@@ -1,25 +1,25 @@
 mongoose = require 'mongoose'
-User = require 'user'
 
 providers = [
 	'facebook'
 	'google'
 	'twitter'
+	'github'
 ]
 
 AccountSchema = new mongoose.Schema
 	emails:
 		type: [String]
-		required: no
 	provider:
 		type: String
 		enum: providers
 		required: yes
-	id:
+	provider_id:
 		type: String
 		required: yes
 	user:
-		type: User
+		type: mongoose.Schema.Types.ObjectId
+		ref: 'User'
 		required: yes
 
 
