@@ -30,6 +30,7 @@ body
 	width 100%
 	overflow hidden
 	padding type-scale(1)
+	padding-bottom 0
 	box-sizing border-box
 	background form-bckg
 
@@ -45,7 +46,7 @@ body
 		display flex
 		justify-content flex-end
 		flex-wrap wrap
-		margin-top type-scale(1)
+		margin-bottom type-scale(1)
 
 		li:last-child
 			button-sec(evening-sky)
@@ -102,7 +103,7 @@ button
 	display flex
 	flex-wrap wrap
 	padding 0
-	margin -5px
+	margin 0 (-(type-scale(1)/2)) (type-scale(1)/2) 0
 
 	li
 		background alpha(evening-sky, .15)
@@ -110,7 +111,7 @@ button
 		padding 7px type-scale(-2)
 		border-radius 2px
 		color evening-sky
-		margin 5px
+		margin 0 (type-scale(1)/2) (type-scale(1)/2) 0
 		font-scale(-1)
 		cursor pointer
 		overflow hidden
@@ -154,11 +155,11 @@ button
 // HOLY SHIT!!! IS THAT CHECKBOX??
 
 label
-	&:hover
-		.checkbox
-			label
-				&::after
-					opacity 1
+	// &:hover
+	// 	.checkbox
+	// 		label
+	// 			&::after
+	// 				opacity 1
 	&.one-line
 		font-scale(0)
 		line-height type-scale(1)
@@ -192,18 +193,19 @@ label
 	user-select none
 	position relative
 
-	&:hover
-		label
-			&::after
-				opacity 1
+	// &:hover
+	// 	label
+	// 		&::after
+	// 			opacity 1
 
 	&:active
 		input
 			& + label
-				background alpha(gray(0%), .1)
-				transition background .1s
+				border-width 1.25rem
+				border-color alpha(gray(0%), .1)
+				transition border-color .1s, border-width .2s
 			&:checked + label
-				background alpha(pure-grass, .3)
+				border-color alpha(pure-grass, .3)
 
 	input
 		visibility hidden
@@ -218,6 +220,9 @@ label
 				background pure-grass
 				border-color pure-grass
 			&::after
+				width .3rem
+				height .6rem
+				transform rotate(45deg) translate(1.3rem, -0.2rem)
 				border-color white
 				opacity 1
 
@@ -225,8 +230,13 @@ label
 		cursor pointer
 		width 2.5rem
 		height 2.5rem
-		transition background .3s
+		transition border-color .3s ease-in, border-width .3s
 		border-radius 100%
+		border-width 0
+		border-style solid
+		border-color transparent
+		box-sizing border-box
+
 		margin 0
 
 		&::after
@@ -234,11 +244,11 @@ label
 			content ''
 			display block
 			opacity 0
-			width:.3rem
-			height .6rem
-			absolute top .8rem right 1.05rem
-			transition border-color .3s, opacity .2s
-			transform rotate(45deg)
+			width 1rem
+			height 1rem
+			absolute top 0 left 0
+			transition .3s
+			transform translate(.75rem, .75rem)
 
 		&::before
 			width type-scale(0)
@@ -248,4 +258,4 @@ label
 			border-radius 2px
 			absolute top 0 bottom 0 left 0 right 0
 			margin auto
-			transition background .3s, border-color .3s
+			transition background .3s ease-in, border-color .3s ease-in
