@@ -5,6 +5,10 @@ auth     = require '../app/controllers/auth.coffee'
 module.exports = (app, passport) ->
 
 
+	app.get '/apps/:app_name', (req, res, next) ->
+		req.session.app_name = req.params.app_name
+		do next
+
 	app.use '/apps/', express.static "#{__dirname}/../public"
 
 	app.post '/auth/local', auth.login 'local'
@@ -26,4 +30,4 @@ module.exports = (app, passport) ->
 
 	app.get '/logout', (req, res) ->
 		do req.logout
-		res.redirect '/apps/auth-proto'
+		res.redirect "/apps/#{req.session.app_name}"

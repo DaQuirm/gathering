@@ -12,7 +12,7 @@ oauth_login = (strategy_name) ->
 			return res.send error:'Invalid login or password' unless user
 			req.logIn user, (err) ->
 				return next err if err
-				res.redirect '/apps/auth-proto'
+				res.redirect "/apps/#{req.session.app_name}"
 		) req, res, next
 
 
