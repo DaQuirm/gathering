@@ -1,5 +1,6 @@
 @import 'nib'
 @import 'mixins'
+@import 'variables'
 
 // Global rules
 
@@ -21,7 +22,7 @@ body, input, textarea, button
 		font-scale 0
 
 body
-		color #333
+		color gray(20%)
 
 // Forms and inputs
 
@@ -30,8 +31,8 @@ body
 	overflow hidden
 	padding 15px 20px
 	box-sizing border-box
-	background #eee
-	border-style(bottom)
+	background gray(93%)
+	border-edge(bottom)
 
 label
 	font-scale -1
@@ -50,25 +51,29 @@ input, textarea, button
 input, textarea
 	margin 0
 	border 0
-	border-style(bottom)
-	color #333
+	border-edge(bottom)
+	color gray(20%)
 	background transparent
+	transition border-color .3s
 
 	&:focus
-		border-bottom 2px solid hsl(200,50%,60%)
+		border-bottom 2px solid evening-sky
 		outline 0
 		padding-bottom 7px
+
+input:invalid
+	border-color terrible-red
 
 textarea
 	resize vertical
 
 button
-	border-style(all)
+	border-edge(all)
 	margin-top 20px
 	cursor pointer
 	color white
-	background hsl(150,40%,50%)
-	border-color hsl(150,40%,45%)
+	background pure-grass
+	border-color darken(pure-grass, 5%)
 	border-radius 2px
 	transition background .3s
 	
@@ -76,10 +81,10 @@ button
 		outline none
 
 	&:hover
-		background hsl(150,40%,45%)
+		background darken(pure-grass, 5%)
 
 	&:active
-		background hsl(150,40%,40%)
+		bakground darken(pure-grass, 10%)
 
 // Other
 
@@ -90,22 +95,22 @@ button
 	padding 0 10px
 
 	li
+		background alpha(evening-sky, .15)
 		position relative
 		padding 7px 10px
 		border-radius 2px
-		background hsla(200,50%,50%,.15)
-		color hsl(200,50%,55%)
+		color evening-sky
 		float left
 		margin 5px
 		font-scale -1
 		cursor pointer
 		overflow hidden
-		transition .2s
+		transition color .2s, background .2s
 
 		&:hover
-			background hsl(200,50%,50%)
+			background evening-sky
 			color white
 
 		&:active
-			background hsl(0,50%,60%)
+			background terrible-red
 			color white
