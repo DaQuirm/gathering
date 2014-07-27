@@ -1,0 +1,146 @@
+{
+	"name": "Talk",
+	"basePath": "http://api.gathering.com",
+	"publicPath": "/",
+	"headers": {
+		"Content-Type": "application/json"
+	},
+	"resources": {
+		"Talk": {
+			"methods": {
+				"create": {
+					"name": "Create",
+					"description": "Create new talk",
+					"httpMethod": "POST",
+					"path": "create",
+				    "parameters": {
+		                "topic": {
+		                    "title": "topic",
+		                    "required": true,
+		                    "type": "string",
+		                    "description": "Topic of talk",
+		                    "location": "path"
+		                },
+		                "duration": {
+		                    "title": "duration",
+		                    "required": true,
+		                    "type": "integer",
+		                    "description": "Talk duration.",
+		                    "location": "path"
+		                },
+						"authors": {
+				            "type": "array",
+		                    "description": "Authors of talk.",
+				            "required": true,
+				            "items": {
+				            	"title": "author",
+				                "required": true,
+				            	"type": "object",
+					            "properties": {
+					                "first_name": {
+					                    "type": "string",
+				                		"required": true,
+					                    "description": "First name of author"
+					                },
+					                "last_name": {
+					                    "type": "string",
+				                		"required": true,
+					                    "description": "Last name of author"
+					                },
+					                "email": {
+					                    "type": "string",
+					                    "description": "Email of author"
+					                }
+					            }
+				            }
+				        }
+		            }
+				},
+				"update": {
+					"name": "Update",
+					"description": "Update talk",
+					"httpMethod": "PUT",
+					"path": "update",
+				    "parameters": {			
+				        "topic": {
+		                    "title": "topic",
+		                    "required": true,
+		                    "type": "string",
+		                    "description": "Topic of talk",
+		                    "location": "path"
+		                },
+		                "duration": {
+		                    "title": "duration",
+		                    "required": true,
+		                    "type": "integer",
+		                    "description": "Talk duration.",
+		                    "location": "path"
+		                },
+		                "authors": {
+				            "type": "array",
+		                    "description": "Authors of talk.",
+				            "required": true,
+				            "items": {
+				            	"title": "author",
+				                "required": true,
+				            	"type": "object",
+					            "properties": {
+					                "first_name": {
+					                    "type": "string",
+				                		"required": true,
+					                    "description": "First name of author"
+					                },
+					                "last_name": {
+					                    "type": "string",
+				                		"required": true,
+					                    "description": "Last name of author"
+					                },
+					                "email": {
+					                    "type": "string",
+					                    "description": "Email of author"
+					                }
+					            }
+				            }
+				        }
+					}
+				},
+				"read": {
+					"name": "Read",
+					"description": "Get talks",
+					"httpMethod": "GET",
+					"path": "read"
+				},
+				"get_by_id": {
+					"name": "Get by id",
+					"description": "Get talk by id",
+					"httpMethod": "GET",
+					"path": "get_by_id",
+				    "parameters": {
+				        "id": { 
+				        	"title": "id",
+				            "required": true,
+				            "type":"integer",
+				            "description":"Talk id",
+				            "location": "path"
+				        }
+					}
+				},
+				"delete": {
+					"name": "Delete",
+					"description": "Delete talk",
+					"httpMethod": "DELETE",
+					"path": "delete",
+				    "parameters": {
+				        "id": { 
+				        	"title": "id",
+				            "required": true,
+				            "type": "integer",
+				            "description":"Talk id",
+				            "location": "path"
+				        }
+					}
+				}
+			}
+		}
+	}
+}
