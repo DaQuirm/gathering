@@ -5,7 +5,7 @@ chai = require 'chai'
 should = do chai.should
 chai.use sinon_chai
 
-BaseCRUD = require '../../app/lib/crud.coffee'
+BaseCRUD = require '../../app/lib/base-crud.coffee'
 Talk = require '../../app/models/talk.coffee'
 
 CRUDCtrl = new BaseCRUD Talk
