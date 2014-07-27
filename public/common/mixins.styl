@@ -53,6 +53,7 @@ button(color = evening-sky)
 	padding 8px type-scale(0)
 	display block
 	box-sizing border-box
+	margin-bottom type-scale(1)
 	text-shadow 0 1px 2px alpha(black, .2)
 
 	if contrast(color).ratio > 2
@@ -83,8 +84,11 @@ button-sec(set-color = secondary-type-color)
 	box-sizing border-box
 	transition background .2s, color .2s
 	text-shadow none
-
+	margin-bottom type-scale(1)
 	inverse-on-action(set-color)
+
+	&:hover
+		text-decoration none
 
 // Type scaling - http://modularscale.com/
 
