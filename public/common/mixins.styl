@@ -1,32 +1,94 @@
+@import 'mixins'
+
 gray(lightness)
 	hsl(0, 0%, lightness)
 
-border-edge(sides = all, color = gray(80%))
+border-edge(sides = all, color = edge-color, size = 1px, style = solid)
+	if sides is '!bottom'
+		sides = left right top
+	if sides is '!top'
+		sides = left right bottom
+	if sides is '!right'
+		sides = left bottom top
+	if sides is '!left'
+		sides = bottom right top
+
 	if all in sides
-		border 1px solid color
+		border size style color
 		return
 	if left in sides
-		border-left 1px solid color
+		border-left size style color
 	if right in sides
-		border-right 1px solid color
+		border-right size style color
 	if top in sides
-		border-top 1px solid color
+		border-top size style color
 	if bottom in sides
-		border-bottom 1px solid color
+		border-bottom size style color
 
-action-button(content, color = gray(60%))
+inverse-on-action(color)
 	color color
-	&::before
-		content content
 	&:hover
 		background alpha(color, .2)
-		&::after
-			border-top-color alpha(color, .2)
 	&:active
 		background alpha(color, .5)
 		color white
+
+action-button(content, color = secondary-type-color)
+	inverse-on-action(color)
+	&:hover
+		&::after
+			border-top-color alpha(color, .2)
+	&:active
 		&::after
 			border-top-color alpha(color, .5)
+
+button(color = evening-sky)
+	user-select none
+	border-edge(all, darken(color, 5%))
+	cursor pointer
+	background color
+	border-radius 2px
+	transition background .2s
+	text-transform uppercase
+	padding 8px type-scale(0)
+	display block
+	box-sizing border-box
+	margin-bottom type-scale(1)
+	text-shadow 0 1px 2px alpha(black, .2)
+
+	if contrast(color).ratio > 2
+		color white
+	else
+		color darken(color, 50%)
+
+	&:focus
+		outline none
+		// background lighten(color, 10%)
+
+	&:hover
+		background lighten(color, 10%)
+		text-decoration none
+
+	&:active
+		background darken(color, 10%)
+
+button-sec(set-color = secondary-type-color)
+	user-select none
+	border 0
+	cursor pointer
+	background transparent
+	border-radius 2px
+	text-transform uppercase
+	padding 8px type-scale(0)
+	display block
+	box-sizing border-box
+	transition background .2s, color .2s
+	text-shadow none
+	margin-bottom type-scale(1)
+	inverse-on-action(set-color)
+
+	&:hover
+		text-decoration none
 
 // Type scaling - http://modularscale.com/
 
@@ -41,7 +103,11 @@ type_scales = {
 	golden: 1.618
 }
 
-font-scale(factor, original-font-size = 1rem, ratio = 'M3')
+type-scale(factor, original-font-size = 1rem, ratio = 'M3')
 	unit = unit(original-font-size)
 	size = remove-unit(original-font-size)
-	font-size unit(size * type_scales[ratio] ** factor, unit)
+	mult = type_scales[ratio] ** factor
+	return unit(size * mult, unit)
+
+font-scale(factor, original-font-size = 1rem, ratio = 'M3')
+	font-size type-scale(factor, original-font-size, ratio)
