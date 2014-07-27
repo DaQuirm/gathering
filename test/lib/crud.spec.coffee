@@ -112,3 +112,33 @@ describe 'CRUD', ->
 
 				CRUDCtrl.update id, invalid
 					.then success, failure
+
+	describe '#delete', ->
+
+		it 'returns promise and resolves it with deleted document', (done) ->
+
+			mock.talks 10, (mocked) ->
+				
+				id = mocked[2]._id
+
+				success = (deleted) ->
+					deleted.should.exist
+					do done
+
+				failure = ->
+
+				CRUDCtrl.delete id
+					.then success, failure
+
+		it 'returns promise and resolves it with \'null\' if document to delete is not found', (done) ->
+
+			id = new mock.ObjectId
+
+			success = (deleted) ->
+				should.not.exist deleted
+				do done
+
+			failure = ->
+
+			CRUDCtrl.delete id
+				.then success, failure
