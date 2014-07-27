@@ -1,0 +1,112 @@
+{
+	"name": "Event",
+	"basePath": "http://api.gathering.com",
+	"publicPath": "/",
+	"headers": {
+		"Content-Type": "application/json"
+	},
+	"resources": {
+		"Event": {
+			"methods": {
+				"create": {
+					"name": "Create",
+					"description": "Create event",
+					"httpMethod": "POST",
+					"path": "create",
+				    "parameters": {			
+				        "title": {
+				        	"title": "title",
+				            "required": true,
+				            "type": "string",
+				            "description": "title",
+				            "location": "path"
+				        },
+				        "start_date": {
+				        	"title": "start date",
+				            "required": true,
+				            "type": "string",
+				            "description": "Start date",
+				            "location": "path"
+				        },
+				        "venue": {
+				        	"title": "venue",
+				            "required": true,
+				            "type": "string",
+				            "description": "Venue",
+				            "location": "path"
+				        }
+					}
+				},
+				"update": {
+					"name": "Update",
+					"description": "Update event",
+					"httpMethod": "PUT",
+					"path": "update",
+				    "parameters": {
+				        "id": { 
+				        	"title": "id",
+				            "required": true,
+				            "type":"string",
+				            "description":"Event id",
+				            "location": "path"
+				        },				
+				        "title": {
+				        	"title": "title",
+				            "type": "string",
+				            "description": "title",
+				            "location": "body"
+				        },
+				        "start_date": {
+				        	"title": "start date",
+				            "type": "string",
+				            "description": "Start date",
+				            "location": "body"
+				        },
+				        "venue": {
+				        	"title": "venue",
+				            "type": "string",
+				            "description": "Venue",
+				            "location": "body"
+				        }
+					}
+				},
+				"read": {
+					"name": "Read",
+					"description": "Read event",
+					"httpMethod": "GET",
+					"path": "read"
+				},
+				"get_by_id": {
+					"name": "Get by id",
+					"description": "Get event by id",
+					"httpMethod": "GET",
+					"path": "get_by_id",
+				    "parameters": {
+				        "id": { 
+				        	"title": "id",
+				            "required": true,
+				            "type":"integer",
+				            "description":"Event id",
+				            "location": "path"
+				        }
+					}
+				},
+				"delete": {
+					"name": "Delete",
+					"description": "Delete event",
+					"httpMethod": "DELETE",
+					"path": "delete",
+				    "parameters": {
+				        "id": { 
+				        	"title": "id",
+				            "required": true,
+				            "type":"integer",
+				            "description":"Event id",
+				            "location": "path"
+				        }
+					}
+				}
+			}
+		}
+	}
+}

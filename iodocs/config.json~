@@ -1,0 +1,12 @@
+{
+    "title" : "I/O Docs - http://github.com/mashery/iodocs",
+    "address": "0.0.0.0",
+    "port" : 5000,
+    "apiConfigDir" : "../api/",
+    "debug" : false,
+    "sessionSecret" : "12345",
+    "basicAuth" : {
+        "username" : "",
+        "password" : ""
+    }
+}
