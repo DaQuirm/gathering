@@ -16,3 +16,7 @@ module.exports = class BaseCRUDCtrl
 	update: (id, document) ->
 		@Model.findByIdAndUpdate id, document
 			.exec()
+
+	delete: (id) ->
+		@Model.findByIdAndRemove id
+			.exec()
