@@ -12,3 +12,7 @@ module.exports = class BaseCRUDCtrl
 	get_by_id: (id) ->
 		@Model.findById id
 			.exec()
+
+	update: (id, document) ->
+		@Model.findByIdAndUpdate id, document
+			.exec()
