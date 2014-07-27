@@ -29,9 +29,10 @@
     "jade": "0.32.0",
     "node-json-minify": ">= 0.1.x",
     "oauth": "0.9.10",
-    "redis": "0.8.3",
     "querystring": "0.1.0",
+    "redis": "0.8.3",
     "supervisor": ">= 0.5.x",
+    "uglify-js": "^2.4.15",
     "yargs": ">= 1.2.1"
   },
   "devDependencies": {},
