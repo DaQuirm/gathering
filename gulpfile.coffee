@@ -45,7 +45,7 @@ gulp.task 'auth.html', ->
 
 # Grouping tasks
 
-tasks = 
+tasks =
 	main: [
 		'main.stylus'
 	]
@@ -64,4 +64,3 @@ gulp.task 'watch', all_tasks, ->
 	gulp.watch './public/common/**/*', [tasks.main, tasks.auth]
 	gulp.watch './public/layout/auth/*.html', ['auth.html']
 	gulp.watch './public/layout/auth/stylesheets/*.styl', ['auth.stylus']
-
