@@ -23,9 +23,51 @@ body
 
 .header.tabs
 	padding 0
+	user-select none
 
 	ul
 		display flex
+		overflow-x hidden
 
 	li
 		padding type-scale(1)
+		flex-shrink 0
+		opacity .7
+		cursor pointer
+
+		&.active
+			cursor default
+			opacity 1
+			position relative
+
+			&::after
+				content ''
+				bottom 0
+				left 0
+				border-edge(bottom, hsl(hue(pure-grass), 100%, 80%), 4px)
+				position absolute
+				width: 100%
+
+	.tabs-next,
+	.tabs-prev
+		cursor pointer
+		//min-width 3rem
+		flex-shrink 0
+		padding type-scale(1)
+		box-sizing border-box
+		text-align center
+		font-family FontAwesome
+
+	.tabs-next
+		&::before
+			content "\f054"
+
+	.tabs-prev
+		&::before
+			content "\f053"
+
+	.tabs-next,
+	.tabs-prev,
+	li
+		&:hover
+			background alpha(gray(100%), .1)
