@@ -17,7 +17,7 @@ do require '../db.coffee'
 describe 'CRUD', ->
 	describe '#create', ->
 
-		it 'returns promise and resolve it with created document', (done) ->
+		it 'returns promise and resolves it with created document', (done) ->
 
 			talk = mock.talk
 
@@ -30,7 +30,7 @@ describe 'CRUD', ->
 			CRUDCtrl.create talk
 				.then success, failure
 
-		it '''returns promise and reject \
+		it '''returns promise and rejects \
 					it with err if document to create is invalid''', (done) ->
 
 			talk = mock.invalid_talk
@@ -46,7 +46,7 @@ describe 'CRUD', ->
 
 	describe '#read', ->
 
-		it 'returns promise and resolve it with whole collection', (done) ->
+		it 'returns promise and resolves it with whole collection', (done) ->
 
 			mock.talks 10, (mocked) ->
 
@@ -61,7 +61,7 @@ describe 'CRUD', ->
 
 	describe '#get_by_id', ->
 
-		it 'returns promise and resolve it with found document', (done) ->
+		it 'returns promise and resolves it with found document', (done) ->
 
 			mock.talks 10, (mocked) ->
 
@@ -74,4 +74,41 @@ describe 'CRUD', ->
 				id = mocked[2]._id
 
 				CRUDCtrl.get_by_id id
+					.then success, failure
+
+	describe '#update', ->
+
+		it 'returns promise and resolves it with updated document', (done) ->
+
+			mock.talks 10, (mocked) ->
+
+				updated_talk = mock.updated_talk
+				id = mocked[2]._id
+
+				success = (updated) ->
+					updated.duration.should.equal updated_talk.duration
+					updated.topic.should.equal updated_talk.topic
+					do done
+
+				failure = (err)->
+					console.log err
+					do done
+
+				CRUDCtrl.update id, updated_talk
+					.then success, failure
+
+		it 'returns promise and rejects it if updates are invalid', (done) ->
+
+			mock.talks 10, (mocked) ->
+
+				invalid = mock.invalid_talk
+				id = mocked[2]._id
+
+				success = ->
+
+				failure = (err) ->
+					err.should.exist
+					do done
+
+				CRUDCtrl.update id, invalid
 					.then success, failure
