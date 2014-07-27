@@ -5,3 +5,10 @@ module.exports = class BaseCRUDCtrl
 
 	create: (document) ->
 		@Model.create document
+
+	read: ->
+		@Model.find().exec()
+
+	get_by_id: (id) ->
+		@Model.findById id
+			.exec()
