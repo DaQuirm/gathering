@@ -21,11 +21,11 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 			.then success(res), failure(res)
 
 	read: (req, res) ->
-		success = (content) ->
+		found = (content) ->
 			if content and content.length > 0
 				res.send 200, content
 			else
 				res.send 204
 
 		super()
-			.then success, failure(res)
+			.then found, failure(res)
