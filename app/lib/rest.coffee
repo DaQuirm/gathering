@@ -19,3 +19,13 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 	create: (req, res) ->
 		super req.body
 			.then success(res), failure(res)
+
+	read: (req, res) ->
+		success = (content) ->
+			if content && content.length > 0
+				res.send 200, content
+			else
+				res.send 204
+
+		super()
+			.then success, failure(res)
