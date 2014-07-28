@@ -109,3 +109,40 @@ describe 'RestCtrl', ->
 
 			spy = sinon.spy res, 'send'
 			rest.get_by_id req, res
+
+	describe '#update', ->
+		it 'sends [200, updated]', (done) ->
+			mock.talks 10, (mocked) ->
+				id = mocked._id
+				update = mock.updated_talk
+				req =
+					params:
+						id: id
+					body: update
+
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						spy.should.have.been.calledWith 200
+						spy.args[0][1].should.exist
+						do done
+
+				spy = sinon.spy res, 'send'
+				rest.update req, res
+
+		it 'sends 404 if document to update is not found', (done) ->
+			id = new mock.ObjectId
+			update = mock.updated_talk
+			req =
+				params:
+					id: id
+				body: update
+
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+
+			spy = sinon.spy res, 'send'
+			rest.update req, res
