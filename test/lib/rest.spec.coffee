@@ -146,3 +146,38 @@ describe 'RestCtrl', ->
 
 			spy = sinon.spy res, 'send'
 			rest.update req, res
+
+	describe '#delete', ->
+		it 'sends [200, deleted]', (done) ->
+			mock.talks 10, (mocked) ->
+				id = mocked[2]._id
+				req =
+					params:
+						id: id
+				res =
+					send: ->
+						Talk.findById(id).exec()
+							.then (found) ->
+								spy.should.have.been.calledOnce
+								spy.should.have.been.calledWith 200
+								spy.args[0][1].should.exist
+								should.not.exist found
+								do done
+
+				spy = sinon.spy res, 'send'
+				rest.delete req, res
+
+		it 'sends 404 if document to delete not found', (done) ->
+			id = new mock.ObjectId
+			req =
+				params:
+					id: id
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+
+			spy = sinon.spy res, 'send'
+			rest.delete req, res
+
