@@ -78,3 +78,34 @@ describe 'RestCtrl', ->
 
 			spy = sinon.spy res, 'send'
 			rest.read req, res
+
+	describe '#get_by_id', ->
+		it 'sends [200, found]', (done) ->
+			mock.talks 10, (mocked) ->
+				id = mocked[2]._id
+				req =
+					params:
+						id: id
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						spy.should.have.been.calledWith 200
+						spy.args[0][1].should.exist
+						do done
+
+				spy = sinon.spy res, 'send'
+				rest.get_by_id req, res
+
+		it 'sends 404 if document not found', (done) ->
+			id = new mock.ObjectId
+			req =
+				params:
+					id: id
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 404
+					do done
+
+			spy = sinon.spy res, 'send'
+			rest.get_by_id req, res
