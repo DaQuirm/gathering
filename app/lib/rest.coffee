@@ -37,3 +37,7 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 	update: (req, res) ->
 		super req.params.id, req.body
 			.then success(res), failure(res)
+
+	delete: (req, res) ->
+		super req.params.id
+			.then success(res), failure(res)
