@@ -33,3 +33,7 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 	get_by_id: (req, res) ->
 		super req.params.id
 			.then success(res), failure(res)
+
+	update: (req, res) ->
+		super req.params.id, req.body
+			.then success(res), failure(res)
