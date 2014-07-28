@@ -48,3 +48,33 @@ describe 'RestCtrl', ->
 
 			spy = sinon.spy res, 'send'
 			rest.create req, res
+
+	describe '#read', ->
+
+		it 'sends [200, collection]', (done) ->
+
+			mock.talks 10, (mocked) ->
+				req = {}
+				res =
+					send: ->
+						spy.should.have.been.calledOnce
+						Talk.find().exec()
+							.then (found) ->
+								found.should.exist
+								spy.should.have.been.calledWith 200
+								spy.args[0][1].length.should.equal mocked.length
+								do done
+
+				spy = sinon.spy res, 'send'
+				rest.read req, res
+
+		it 'sends 204 if collection is empty', (done) ->
+			req = {}
+			res =
+				send: ->
+					spy.should.have.been.calledOnce
+					spy.should.have.been.calledWith 204
+					do done
+
+			spy = sinon.spy res, 'send'
+			rest.read req, res
