@@ -22,7 +22,7 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 
 	read: (req, res) ->
 		success = (content) ->
-			if content && content.length > 0
+			if content and content.length > 0
 				res.send 200, content
 			else
 				res.send 204
