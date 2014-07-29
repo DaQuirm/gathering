@@ -1,5 +1,5 @@
-rand = (is_integer, from, to) ->
-	random = do Math.random
+rand = (is_integer, from, to, seed) ->
+	random = seed || do Math.random
 	from = if from is undefined then 0 else from;
 	to = if to is undefined then 1 else to;
 
@@ -45,8 +45,12 @@ paral = (x, y, w, h, color) ->
 
 
 
-fillRandom = ->
+fillRandom = (seed) ->
 	ctx = this.getContext '2d'
+
+	uniqGen = new Chance seed
+
+	#console.log do uniqGen.random
 
 	cell_w = 10
 	cell_h = 20
@@ -63,12 +67,12 @@ fillRandom = ->
 	table = ([] for i in [0...cols])
 
 
-	deg = rand yes, 0, 359
+	deg = rand yes, 0, 359, do uniqGen.random
 
 	for i in [0...steps]
 		x = i % cols
 		y = Math.floor i/cols
-		colorNumber = rand yes, 0, colors - 1
+		colorNumber = rand yes, 0, colors - 1, do uniqGen.random
 		table[x][y] = table[cols-x-1][rows-y-1] = "hsl(#{(120*colorNumber+deg)%360}, #{17+colorNumber*100/colors}%, #{20+colorNumber*100/colors}%)"
 
 	for x in [0...cols]
@@ -77,18 +81,34 @@ fillRandom = ->
 			paral.call ctx, (x-1)*cell_w, (y-1)*cell_h, cell_w, cell_h, color
 
 
-
+idid = 0
 
 createUserpic = ->
 	canvas = document.createElement 'canvas'
+	div = document.createElement 'div'
+	inner = document.createElement 'div'
 	canvas.width = 100
 	canvas.height = 100
 	ctx = canvas.getContext '2d'
-	fillRandom.call canvas
 
-	canvas.addEventListener 'mouseover', fillRandom.bind canvas
+	mockFill = ->
+		# id = do Date.now
+		id = idid++
+		# id = rand yes, 0, 100
+		fillRandom.call canvas, id
+		inner.innerHTML = id
 
-	document.body.appendChild canvas
+	do mockFill
+
+	# canvas.addEventListener 'mouseover', ->
+	# 	do mockFill
+
+	div.appendChild canvas
+	div.appendChild inner
+	document.body.appendChild div
 
 window.onload = ->
+	start = do Date.now
 	do createUserpic for i in [0...100]
+	time = do Date.now - start
+	console.log time, time / 100

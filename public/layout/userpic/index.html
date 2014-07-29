@@ -3,16 +3,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title contenteditable>Userpic</title>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/chance/0.5.6/chance.js"></script>
 	<script type="text/javascript" src="src/script.js"></script>
 	<style contenteditable type="text/css">
 /*		head, head * {
 			display: block;
 			font-family: sans-serif;
 		}*/
+		body {
+			margin: 0;
+			background: #222;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+		}
+
+		div {
+			position: relative;
+		}
+
+		div > div {
+			font-family: sans-serif;
+			text-align: center;
+			color: hsl(0, 100%, 100%);
+			background: hsl(0, 0%, 20%);
+			border-radius: 2rem;
+			width: 2.5rem;
+			line-height: 2.5rem;
+			height: 2.5rem;
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
 		canvas {
-			border-radius: 100%;
+			border-radius: 100px;
 			display: block;
-			float: left;
 			margin: 20px;
 		}
 	</style>
