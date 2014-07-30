@@ -22,7 +22,7 @@ describe 'CRUD', ->
 			talk = mock.talk
 
 			success = (content) ->
-				content.should.exist
+				should.exist content
 				do done
 
 			failure = ->
@@ -90,9 +90,7 @@ describe 'CRUD', ->
 					updated.topic.should.equal updated_talk.topic
 					do done
 
-				failure = (err)->
-					console.log err
-					do done
+				failure = ->
 
 				CRUDCtrl.update id, updated_talk
 					.then success, failure
@@ -118,7 +116,7 @@ describe 'CRUD', ->
 		it 'returns promise and resolves it with deleted document', (done) ->
 
 			mock.talks 10, (mocked) ->
-				
+
 				id = mocked[2]._id
 
 				success = (deleted) ->
