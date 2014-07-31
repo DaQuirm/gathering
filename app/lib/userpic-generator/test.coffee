@@ -5,15 +5,23 @@ app = do express
 
 
 app.get '/', (req, res) ->
-	{id, colors, w, h, cols, rows, ease} = req.query
+	{id, colors, w, h, cols, rows, hue_step, ease} = req.query
 	id ?= new Chance().natural()
-	[id, colors, w, h, cols, rows] = ((if arg isnt undefined then parseInt arg else arg) for arg in [id, colors, w, h, cols, rows])
+	[id, colors, w, h, cols, rows, hue_step] = ((if arg isnt undefined then parseInt arg else arg) for arg in [id, colors, w, h, cols, rows, hue_step])
 
-	console.log id, colors, w, h, cols, rows, ease
+	console.log """
 
-	canvas = userpic id, colors, w, h, cols, rows, ease
+		User id: #{id}
+		Colors amount: #{colors}
+		Width: #{w}
+		Height: #{h}
+		Colums: #{cols}
+		Rows: #{rows}
+		Hue step: #{hue_step}
+		Ease function: #{ease}"
+	"""
+	canvas = userpic id, colors, w, h, cols, rows, hue_step, ease
 
-	console.log "get userpic for #{id} user in #{colors ? 3} colors"
 	res.send "<img style=\"border-radius: 100%\" src=\"#{do canvas.toDataURL}\" />"
 
 
