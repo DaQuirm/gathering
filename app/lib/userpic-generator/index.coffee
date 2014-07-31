@@ -1,5 +1,5 @@
 Canvas = require 'canvas'
-tiny_color = require 'tinycolor2'
+tinycolor = require 'tinycolor2'
 Chance = require 'chance'
 
 easeFunctions =
@@ -16,27 +16,27 @@ easeFunctions =
 		return c*t*t*t*t + b
 
 
-paral = (x, y, w, h, color) ->
+paral = (ctx, x, y, w, h, color) ->
 	x -= w/4
 	y -= h/4
-	@lineWidth = 1
-	@fillStyle = @strokeStyle = color
-	do @beginPath
-	@moveTo x + w, y
-	@lineTo x + w*3/2, y + h/2
-	@lineTo x + w/2, y + h*3/2
-	@lineTo x, y + h
-	do @closePath
-	do @fill
-	do @stroke
-	#@strokeStyle = 'black'
-	#@strokeRect x, y, w, h
+	ctx.lineWidth = 1
+	ctx.fillStyle = ctx.strokeStyle = color
+	do ctx.beginPath
+	ctx.moveTo x + w, y
+	ctx.lineTo x + w*3/2, y + h/2
+	ctx.lineTo x + w/2, y + h*3/2
+	ctx.lineTo x, y + h
+	do ctx.closePath
+	do ctx.fill
+	do ctx.stroke
+	# ctx.strokeStyle = 'black'
+	# ctx.strokeRect x, y, w, h
 
 
-fillRandom = (seed, colors_number, cols, rows, easing) ->
+fillRandom = (ctx, seed, colors_number, cols, rows, hue_step, easing) ->
 
-	cell_w = @canvas.width / cols
-	cell_h = @canvas.height / rows
+	cell_w = ctx.canvas.width / cols
+	cell_h = ctx.canvas.height / rows
 
 	cols += 2 # add horizontal borders
 	rows += 2 # add vertical borders
@@ -46,7 +46,7 @@ fillRandom = (seed, colors_number, cols, rows, easing) ->
 
 	steps = Math.ceil rows*cols/2
 
-	@clearRect 0, 0, @canvas.width, @canvas.height
+	ctx.clearRect 0, 0, ctx.canvas.width, ctx.canvas.height
 
 
 	table = ([] for i in [0...cols])
@@ -57,8 +57,6 @@ fillRandom = (seed, colors_number, cols, rows, easing) ->
 		max: 359
 
 
-
-
 	for i in [0...steps]
 		x = i % cols
 		y = Math.floor i/cols
@@ -66,10 +64,10 @@ fillRandom = (seed, colors_number, cols, rows, easing) ->
 			min: 0
 			max: colors_number - 1
 
-		gen_color = tiny_color
-			h: (120*color_num+deg)%360
+		gen_color = tinycolor
+			h: (hue_step * color_num + deg) % 360
 			s: easeFunctions[easing] color_num, 20, 60, colors_number - 1
-			l: easeFunctions[easing] color_num, 20, 60, colors_number - 1
+			l: easeFunctions[easing] color_num, 20, 65, colors_number - 1
 
 		table[x][y] = table[cols-x-1][rows-y-1] = do gen_color.toHexString
 
@@ -77,14 +75,18 @@ fillRandom = (seed, colors_number, cols, rows, easing) ->
 		for y in [0...rows]
 			color = table[x][y]
 			# console.log color
-			paral.call @, (x-1)*cell_w, (y-1)*cell_h, cell_w, cell_h, color
+			paral ctx, (x-1)*cell_w, (y-1)*cell_h, cell_w, cell_h, color
 
 
 
-createUserpic = (seed, colors_number = 3, w = 100, h = w, cols = 10, rows = cols/2|0, easing = 'linear') ->
+createUserpic = (seed, colors_number = 3, w = 100, h = w, cols = 10, rows = cols/2|0, hue_step = 120, easing = 'linear') ->
+	console.time 'Userpic generation'
 	canvas = new Canvas w, h
+	canvas.width = w
+	canvas.height = h
 	ctx = canvas.getContext '2d'
-	fillRandom.call ctx, seed, colors_number, cols, rows, easing
+	fillRandom ctx, seed, colors_number, cols, rows, hue_step, easing
+	console.timeEnd 'Userpic generation'
 	return canvas
 
 module.exports = createUserpic
