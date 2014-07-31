@@ -2,6 +2,19 @@ Canvas = require 'canvas'
 tiny_color = require 'tinycolor2'
 Chance = require 'chance'
 
+easeFunctions =
+	linear: (t, b, c, d) ->
+		return c*t/d + b;
+
+	easeOutQuart: (t, b, c, d) ->
+		t /= d
+		t--
+		return -c * (t*t*t*t - 1) + b
+
+	easeInQuart: (t, b, c, d) ->
+		t /= d
+		return c*t*t*t*t + b
+
 
 paral = (x, y, w, h, color) ->
 	x -= w/4
@@ -20,7 +33,7 @@ paral = (x, y, w, h, color) ->
 	#@strokeRect x, y, w, h
 
 
-fillRandom = (seed, colors_number, cols, rows) ->
+fillRandom = (seed, colors_number, cols, rows, easing) ->
 
 	cell_w = @canvas.width / cols
 	cell_h = @canvas.height / rows
@@ -49,19 +62,14 @@ fillRandom = (seed, colors_number, cols, rows) ->
 	for i in [0...steps]
 		x = i % cols
 		y = Math.floor i/cols
-		color_num = uniqGen.natural
+		color_num = if colors_number is 1 then 1 else uniqGen.natural
 			min: 0
 			max: colors_number - 1
 
-		# gen_color = tiny_color
-		# 	h: (120*color_num+deg)%360
-		# 	s: Math.floor(17+color_num*100/colors_number)
-		# 	l: Math.floor(20+color_num*100/colors_number)
-
 		gen_color = tiny_color
-			h: (30*color_num+deg)%360
-			s: 20 + 60 / (colors_number - 1) * color_num
-			l: 20 + 60 / (colors_number - 1) * color_num
+			h: (120*color_num+deg)%360
+			s: easeFunctions[easing] color_num, 20, 60, colors_number - 1
+			l: easeFunctions[easing] color_num, 20, 60, colors_number - 1
 
 		table[x][y] = table[cols-x-1][rows-y-1] = do gen_color.toHexString
 
@@ -73,11 +81,10 @@ fillRandom = (seed, colors_number, cols, rows) ->
 
 
 
-createUserpic = (seed, colors_number = 3, w = 100, h = w, cols = 10, rows = cols/2|0) ->
-	seed ?= new Chance().natural()
-	canvas = new Canvas parseInt(w), parseInt(h)
+createUserpic = (seed, colors_number = 3, w = 100, h = w, cols = 10, rows = cols/2|0, easing = 'linear') ->
+	canvas = new Canvas w, h
 	ctx = canvas.getContext '2d'
-	fillRandom.call ctx, seed, colors_number, parseInt(cols), parseInt(rows)
+	fillRandom.call ctx, seed, colors_number, cols, rows, easing
 	return canvas
 
 module.exports = createUserpic
