@@ -2,6 +2,7 @@ mongoose = require 'mongoose'
 Schema = mongoose.Schema
 User = require './user.coffee'
 passport = require 'passport'
+bcrypt = require 'bcrypt-nodejs'
 
 LocalAccountSchema = new mongoose.Schema
 	email:
@@ -15,9 +16,9 @@ LocalAccountSchema = new mongoose.Schema
 		ref: 'User'
 		required: yes
 
+
 match_password = (password) ->
-	return no if @password isnt password
-	yes
+	bcrypt.compareSync password, @password
 
 LocalAccountSchema.method
 	match_password: match_password
