@@ -16,6 +16,17 @@ LocalAccountSchema = new mongoose.Schema
 		ref: 'User'
 		required: yes
 
+LocalAccountSchema.pre 'save', (done) ->
+	unless @isNew
+		do done
+	else
+		salt = do bcrypt.genSaltSync
+		bcrypt.hash @password, salt, null, (err, hash) =>
+			if hash
+				@password = hash
+				do done
+			else
+				done err
 
 match_password = (password) ->
 	bcrypt.compareSync password, @password
