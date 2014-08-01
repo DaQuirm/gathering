@@ -29,4 +29,15 @@ describe 'LocalAccount', ->
 				account = new LocalAccount local_account_data
 				match = account.match_password password
 				match.should.equal yes
+				local_account_data.password = 'password'
 				do done
+
+	describe 'pre save', ->
+
+		it 'hashes password before save', (done) ->
+
+			LocalAccount.create local_account_data
+				.then (account) ->
+					match = account.match_password local_account_data.password
+					match.should.equal yes
+					do done
