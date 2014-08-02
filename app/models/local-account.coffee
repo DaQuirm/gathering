@@ -20,18 +20,15 @@ LocalAccountSchema.pre 'save', (done) ->
 	unless @isNew
 		do done
 	else
-		salt = do bcrypt.genSaltSync
-		hash = bcrypt.hashSync @password, salt
-		if hash
-			@password = hash
-			do done
-		else
-			done err
+		bcrypt.hash @password, 8, (err, hash) =>
+			if err?
+				done err
+			else
+				@password = hash
+				do done
 
-match_password = (password) ->
-	bcrypt.compareSync password, @password
-
-LocalAccountSchema.method
-	match_password: match_password
+LocalAccountSchema.methods =
+	match_password: (password, done) ->
+		bcrypt.compare password, @password, done
 
 module.exports = mongoose.model 'LocalAccount', LocalAccountSchema

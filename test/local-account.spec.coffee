@@ -12,32 +12,33 @@ mock = require './mock.coffee'
 
 do require './db.coffee'
 
-local_account_data =
-	email: 'email@email.com'
-	password: 'password'
-	user: new mock.ObjectId
-
 describe 'LocalAccount', ->
+
+	local_account_data = null
+
+	beforeEach ->
+		local_account_data =
+			email: 'email@email.com'
+			password: 'password'
+			user: new mock.ObjectId
 
 	describe 'match_password', ->
 
 		it 'matches password with hash', (done) ->
 			salt = do bcrypt.genSaltSync
-			password = local_account_data.password
-			hash = bcrypt.hashSync password, salt
-			local_account_data.password = hash
-			account = new LocalAccount local_account_data
-			match = account.match_password password
-			match.should.equal yes
-			local_account_data.password = 'password'
-			do done
+			{password} = local_account_data
+			bcrypt.hash password, 8, (err, hash) ->
+				local_account_data.password = hash
+				account = new LocalAccount local_account_data
+				account.match_password password, (err, match) ->
+					match.should.equal yes
+					do done
 
 	describe 'pre save', ->
 
 		it 'hashes password before save', (done) ->
 
-			LocalAccount.create local_account_data
-				.then (account) ->
-					match = account.match_password local_account_data.password
+			LocalAccount.create local_account_data, (err, account) ->
+				account.match_password local_account_data.password, (err, match) ->
 					match.should.equal yes
 					do done
