@@ -1,7 +1,7 @@
 sinon = require 'sinon'
 sinon_chai = require 'sinon-chai'
 chai = require 'chai'
-bcrypt = require 'bcrypt-nodejs'
+bcrypt = require 'bcrypt'
 
 should = do chai.should
 chai.use sinon_chai
@@ -24,13 +24,13 @@ describe 'LocalAccount', ->
 		it 'matches password with hash', (done) ->
 			salt = do bcrypt.genSaltSync
 			password = local_account_data.password
-			bcrypt.hash password, salt, null, (err, hash) ->
-				local_account_data.password = hash
-				account = new LocalAccount local_account_data
-				match = account.match_password password
-				match.should.equal yes
-				local_account_data.password = 'password'
-				do done
+			hash = bcrypt.hashSync password, salt
+			local_account_data.password = hash
+			account = new LocalAccount local_account_data
+			match = account.match_password password
+			match.should.equal yes
+			local_account_data.password = 'password'
+			do done
 
 	describe 'pre save', ->
 

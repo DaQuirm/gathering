@@ -2,7 +2,7 @@ mongoose = require 'mongoose'
 Schema = mongoose.Schema
 User = require './user.coffee'
 passport = require 'passport'
-bcrypt = require 'bcrypt-nodejs'
+bcrypt = require 'bcrypt'
 
 LocalAccountSchema = new mongoose.Schema
 	email:
@@ -21,12 +21,12 @@ LocalAccountSchema.pre 'save', (done) ->
 		do done
 	else
 		salt = do bcrypt.genSaltSync
-		bcrypt.hash @password, salt, null, (err, hash) =>
-			if hash
-				@password = hash
-				do done
-			else
-				done err
+		hash = bcrypt.hashSync @password, salt
+		if hash
+			@password = hash
+			do done
+		else
+			done err
 
 match_password = (password) ->
 	bcrypt.compareSync password, @password
