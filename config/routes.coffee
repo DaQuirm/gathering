@@ -1,5 +1,6 @@
 passport = require 'passport'
 express  = require 'express'
+Articles = require '../app/controllers/article.coffee'
 auth     = require '../app/controllers/auth.coffee'
 
 module.exports = (app, passport) ->
@@ -31,3 +32,6 @@ module.exports = (app, passport) ->
 	app.get '/logout', (req, res) ->
 		do req.logout
 		res.redirect "/apps/#{req.session.app_name}"
+
+	app.get '/api/articles', Articles.read.bind Articles
+	app.post '/api/articles', Articles.create.bind Articles
