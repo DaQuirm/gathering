@@ -16,11 +16,10 @@ updated_talk =
 	authors: authors
 
 invalid_talk =
-	talk:
-		topic: 'Talk topic'
-		duration: 600000
-		authors: [1,2,3]
-		trash: 'trash'
+	topic: 'Talk topic'
+	duration: 600000
+	authors: [1,2,3]
+	trash: 'trash'
 
 event =
 	title: 'Amazing EVENT'

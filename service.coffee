@@ -1,13 +1,22 @@
-express  = require 'express'
-mongoose = require 'mongoose'
+# Dependencies
+path           = require 'path'
+express        = require 'express'
+passport       = require 'passport'
+mongoose       = require 'mongoose'
 
+# MongoDB connection
 mongoose.connect 'mongodb://localhost/gathering'
 db = mongoose.connection
 db.on 'error', console.error.bind console, 'connection error:'
 
+# Express application
 app = do express
+require('./config/express') app, passport
+require('./config/routes') app, passport
 
-require('./config/express.coffee') app
-require('./config/routes.coffee') app
+# Passport
+(require './config/passport') passport
 
 app.listen 3000
+
+exports = module.exports = app
