@@ -24,6 +24,25 @@ gulp.task 'main.stylus', ->
 	return
 
 
+# Article stash tasks
+
+gulp.task 'article-stash.stylus', ->
+	gulp.src [
+			'./public/layout/article-stash/stylesheets/*.styl'
+		]
+		.pipe stylus
+			use: nib()
+		.on 'error', notify.onError 'Error: <%= error.message %>'
+		.pipe concat 'style.css'
+		.pipe gulp.dest './public/build-dev/layout/article-stash'
+		return
+
+gulp.task 'article-stash.html', ->
+	gulp.src './public/layout/article-stash/*.html'
+		.pipe gulp.dest './public/build-dev/layout/article-stash'
+		return
+
+
 # Grouping tasks
 
 tasks = 
@@ -31,10 +50,17 @@ tasks =
 		'main.stylus'
 	]
 
+	article_stash: [
+		'article-stash.stylus'
+		'article-stash.html'
+	]
+
 all_tasks = []
 all_tasks = all_tasks.concat.apply all_tasks, [
 	tasks.main
+	tasks.article_stash
 ]
 
 gulp.task 'watch', all_tasks, ->
-	gulp.watch './public/common/**/*', tasks.main
+	gulp.watch './public/common/**/*', tasks.main.concat(tasks.article_stash)
+	gulp.watch './public/layout/article-stash/**/*', tasks.article_stash
