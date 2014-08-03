@@ -1,0 +1,11 @@
+{
+	"event": {
+        "name": "event"
+    }, 
+    "talk": {
+        "name": "talk"
+    },    
+    "egnyte": {
+        "name": "Example: Egnyte API"
+    }
+}
