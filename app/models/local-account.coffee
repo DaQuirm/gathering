@@ -2,6 +2,7 @@ mongoose = require 'mongoose'
 Schema = mongoose.Schema
 User = require './user.coffee'
 passport = require 'passport'
+bcrypt = require 'bcrypt'
 
 LocalAccountSchema = new mongoose.Schema
 	email:
@@ -15,11 +16,19 @@ LocalAccountSchema = new mongoose.Schema
 		ref: 'User'
 		required: yes
 
-match_password = (password) ->
-	return no if @password isnt password
-	yes
+LocalAccountSchema.pre 'save', (done) ->
+	unless @isNew
+		do done
+	else
+		bcrypt.hash @password, 8, (err, hash) =>
+			if err?
+				done err
+			else
+				@password = hash
+				do done
 
-LocalAccountSchema.method
-	match_password: match_password
+LocalAccountSchema.methods =
+	match_password: (password, done) ->
+		bcrypt.compare password, @password, done
 
 module.exports = mongoose.model 'LocalAccount', LocalAccountSchema
