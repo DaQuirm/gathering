@@ -9,6 +9,7 @@ class ArticlesViewModel
 		@new_article = new Article
 
 	save: (article) ->
+		@new_article = new Article
 		[first] = @articles.items.items
 		if first
 			@articles.items.insertBefore first, article
