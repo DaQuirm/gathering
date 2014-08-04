@@ -18,41 +18,63 @@
 global-reset()
 
 body, input, textarea, button
-		font-family Roboto, Ubuntu, Segoe UI, sans-serif
-		font-scale 0
+	font-family Roboto, Ubuntu, Segoe UI, sans-serif
+	font-scale(0)
 
 body
-		color gray(20%)
+	color primary-type-color
 
 // Forms and inputs
 
 .form
 	width 100%
 	overflow hidden
-	padding 15px 20px
+	padding type-scale(1)
+	padding-bottom 0
 	box-sizing border-box
-	background gray(93%)
-	border-edge(bottom)
+	background form-bckg
+
+	.header
+		margin 0 (-(type-scale(1)))
+		background lighten(edge-color, 50%)
+		text-transform none
+		border-edge(top, , , dashed)
+		color secondary-type-color
+
+
+	.buttons-list
+		display flex
+		justify-content flex-end
+		flex-wrap wrap
+
+		li:last-child
+			button-sec(evening-sky)
+		li
+			button-sec()
 
 label
-	font-scale -1
-	color #999
-	margin-bottom 20px
+	cursor pointer
+	font-scale(-1)
+	color secondary-type-color
+	margin-bottom type-scale(1)
 	display block
 
-input, textarea, button
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='url'],
+textarea
 	width 100%
 	max-width 100%
 	min-width 100%
 	padding 8px 0
 	display block
 	box-sizing border-box
-
-input, textarea
 	margin 0
 	border 0
 	border-edge(bottom)
-	color gray(20%)
+	color primary-type-color
 	background transparent
 	transition border-color .3s
 
@@ -61,48 +83,34 @@ input, textarea
 		outline 0
 		padding-bottom 7px
 
-input:invalid
-	border-color terrible-red
+	&:invalid
+		border-bottom 2px solid hsl(hue(terrible-red), 70%, 60%)
+		padding-bottom 7px
+
 
 textarea
 	resize vertical
 
 button
-	border-edge(all)
-	margin-top 20px
-	cursor pointer
-	color white
-	background pure-grass
-	border-color darken(pure-grass, 5%)
-	border-radius 2px
-	transition background .3s
-	
-	&:focus
-		outline none
-
-	&:hover
-		background darken(pure-grass, 5%)
-
-	&:active
-		bakground darken(pure-grass, 10%)
+	width 100%
+	button()
 
 // Other
 
 .tags
-	clear both
-	overflow hidden
-	margin -5px -15px
-	padding 0 10px
+	display flex
+	flex-wrap wrap
+	padding 0
+	margin 0 (-(type-scale(1)/2)) (type-scale(1)/2) 0
 
 	li
 		background alpha(evening-sky, .15)
 		position relative
-		padding 7px 10px
+		padding 7px type-scale(-2)
 		border-radius 2px
 		color evening-sky
-		float left
-		margin 5px
-		font-scale -1
+		margin 0 (type-scale(1)/2) (type-scale(1)/2) 0
+		font-scale(-1)
 		cursor pointer
 		overflow hidden
 		transition color .2s, background .2s
@@ -114,3 +122,189 @@ button
 		&:active
 			background terrible-red
 			color white
+
+.frame
+	max-width 400px
+	width 100%
+	border-radius 2px
+	overflow hidden
+	box-shadow 0px 2px 5px alpha(black, .2)
+
+.header
+	display flex
+	background lighten(secondary-type-color, 80%)
+	padding type-scale(1)
+	text-transform none
+	font-scale(0)
+	position relative
+	margin 0
+
+.header:first-child
+	display flex
+	background evening-sky
+	color white
+	padding type-scale(1)
+	text-transform uppercase
+	font-scale(0)
+	position relative
+
+
+
+// checkbox
+
+label
+	// &:hover
+	// 	.checkbox
+	// 		label
+	// 			&::after
+	// 				opacity 1
+	&.one-line
+		font-scale(0)
+		line-height type-scale(1)
+		color primary-type-color
+		position relative
+		margin 0
+		padding (type-scale(1)/2)
+		padding-left 2rem
+		top -(type-scale(1)/2)
+
+		.checkbox
+			left 0
+			margin-right .25rem
+
+	&.header
+		padding-right 3*type-scale(1)
+
+		.checkbox
+			right type-scale(1)
+
+	.checkbox
+		absolute top 0 bottom 0
+		margin auto -.75rem
+
+
+.checkbox
+	width 2.5rem
+	height 2.5rem
+	display inline-block
+	margin -.75rem
+	user-select none
+	position relative
+
+	// &:hover
+	// 	label
+	// 		&::after
+	// 			opacity 1
+
+	&:active
+		input
+			& + label
+				border-width 1.25rem
+				border-color alpha(gray(0%), .1)
+				transition border-color .1s, border-width .2s
+			&:checked + label
+				border-color alpha(pure-grass, .3)
+
+	input
+		visibility hidden
+		position absolute
+		margin 0
+		padding 0
+		width 100%
+		height 100%
+
+		&:checked + label
+			&::before
+				background pure-grass
+				border-color pure-grass
+			&::after
+				transform rotate(45deg) translate(1.3rem, -0.2rem)
+				border-color white
+				opacity 1
+
+	label
+		cursor pointer
+		width 2.5rem
+		height 2.5rem
+		transition border-color .3s ease-in, border-width .3s
+		border-radius 100%
+		border-width 0
+		border-style solid
+		border-color transparent
+		box-sizing border-box
+
+		margin 0
+
+		&::after
+			border-edge(right bottom, secondary-type-color, 2px)
+			content ''
+			display block
+			opacity 0
+			width .3rem
+			height .6rem
+			absolute top 0 left 0
+			transition transform .3s, border-color .3s, opacity .3s
+			transform translate(1.5rem, 1.1rem)
+
+		&::before
+			width type-scale(0)
+			height type-scale(0)
+			content ''
+			border-edge(all, secondary-type-color, 2px)
+			border-radius 2px
+			absolute top 0 bottom 0 left 0 right 0
+			margin auto
+			transition background .3s ease-in, border-color .3s ease-in
+
+// checkbox
+
+.header.tabs
+	padding 0
+	user-select none
+
+	ul
+		display flex
+		overflow-x hidden
+
+	li
+		padding type-scale(1)
+		flex-shrink 0
+		opacity .7
+		cursor pointer
+
+		&.active
+			cursor default
+			opacity 1
+			position relative
+
+			&::after
+				content ''
+				bottom 0
+				left 0
+				border-edge(bottom, alpha(gray(100%), .5), 4px)
+				position absolute
+				width: 100%
+
+	.tabs-next,
+	.tabs-prev
+		cursor pointer
+		//min-width 3rem
+		flex-shrink 0
+		padding type-scale(1)
+		box-sizing border-box
+		text-align center
+		font-family FontAwesome
+
+	.tabs-next
+		&::before
+			content "\f054"
+
+	.tabs-prev
+		&::before
+			content "\f053"
+
+	.tabs-next,
+	.tabs-prev,
+	li
+		&:hover
+			background alpha(gray(100%), .1)
