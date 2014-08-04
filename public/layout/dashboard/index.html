@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Dashboard</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../../common/main.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script>
+		window.onload = function() {
+			tabs = document.getElementsByClassName('tabs')[0];
+			tabs.addEventListener('click', function(e){
+				console.log(e);
+				act = document.getElementsByClassName('active')[0];
+				act && act.classList.remove('active');
+				e.target.classList.add('active');
+				sections = document.querySelectorAll('.wrapper section');
+				for (var i = 0; i < sections.length; i++) {
+					sections[i].style.webkitTransform = 'translateX(-'+100*e.target.value+'%)';
+				};
+			});
+		};
+	</script>
+</head>
+<body>
+	<header class="header tabs">
+		<ul>
+			<li value="0">Lorem.</li>
+			<li value="1">Ducimus.</li>
+			<li value="2">Consectetur.</li>
+			<li value="3">Temporibus.</li>
+		</ul>
+	</header>
+	<main class="wrapper">
+		<section><div class="form"><button>Ok</button></div></section>
+		<section>Ipsam soluta minus praesentium eveniet modi molestias qui labore autem.</section>
+		<section>Fugit dolorem, vitae tenetur, ducimus aperiam iusto sed impedit itaque.</section>
+		<section>Facilis, explicabo cum iste tempore, nulla sunt qui vitae repudiandae!</section>
+	</main>
+</body>
+</html>
