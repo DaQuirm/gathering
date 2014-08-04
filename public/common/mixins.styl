@@ -25,30 +25,35 @@ border-edge(sides = all, color = edge-color, size = 1px, style = solid)
 	if bottom in sides
 		border-bottom size style color
 
-action-button(content, color = secondary-type-color)
+inverse-on-action(color)
 	color color
-	&::before
-		content content
 	&:hover
 		background alpha(color, .2)
-		&::after
-			border-top-color alpha(color, .2)
 	&:active
 		background alpha(color, .5)
 		color white
+
+action-button(content, color = secondary-type-color)
+	inverse-on-action(color)
+	&:hover
+		&::after
+			border-top-color alpha(color, .2)
+	&:active
 		&::after
 			border-top-color alpha(color, .5)
 
 button(color = evening-sky)
+	user-select none
 	border-edge(all, darken(color, 5%))
 	cursor pointer
 	background color
 	border-radius 2px
-	transition background .3s
+	transition background .2s
 	text-transform uppercase
 	padding 8px type-scale(0)
 	display block
 	box-sizing border-box
+	margin-bottom type-scale(1)
 	text-shadow 0 1px 2px alpha(black, .2)
 
 	if contrast(color).ratio > 2
@@ -67,7 +72,8 @@ button(color = evening-sky)
 	&:active
 		background darken(color, 10%)
 
-button-sec()
+button-sec(set-color = secondary-type-color)
+	user-select none
 	border 0
 	cursor pointer
 	background transparent
@@ -76,21 +82,13 @@ button-sec()
 	padding 8px type-scale(0)
 	display block
 	box-sizing border-box
-	transition background .3s
+	transition background .2s, color .2s
 	text-shadow none
-
-	color secondary-type-color
-
-	&:focus
-		outline none
-		// background lighten(color, 10%)
+	margin-bottom type-scale(1)
+	inverse-on-action(set-color)
 
 	&:hover
-		background transparent
-		text-decoration underline
-
-	&:active
-		background alpha(black, .1)
+		text-decoration none
 
 // Type scaling - http://modularscale.com/
 
