@@ -35,3 +35,4 @@ module.exports = (app, passport) ->
 
 	app.get '/api/articles', Articles.read.bind Articles
 	app.post '/api/articles', Articles.create.bind Articles
+	app.delete '/api/articles/:id', Articles.delete.bind Articles
