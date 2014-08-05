@@ -9,6 +9,7 @@ success = (res) ->
 
 failure = (res) ->
 	(err) ->
+		console.log err, 'err'
 		res.send 500
 
 module.exports = class RestCtrl extends BaseCRUDCtrl
@@ -25,7 +26,7 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 			if content and content.length > 0
 				res.send 200, content
 			else
-				res.send 204
+				res.send 404
 
 		super()
 			.then found, failure(res)
