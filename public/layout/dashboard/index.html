@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script>
 		window.onload = function() {
-			var tabs = document.getElementsByClassName('tabs')[1];
+			var tabs = document.getElementsByClassName('tabs')[0];
 			tabs.addEventListener('click', function(e){
 				console.log(e);
 				var act = document.getElementsByClassName('active')[0];
@@ -28,21 +28,25 @@
 				sidebar.classList.toggle('opened');
 				overlay.style.display = overlay.style.display ? '' : 'block';
 			});
-			overlay.addEventListener('click', function (e) {
+
+			function close (e) {
 				sidebar.classList.toggle('opened');
 				overlay.style.display = overlay.style.display ? '' : 'block';
-			});
+			}
+
+			overlay.addEventListener('click', close);
+			document.getElementsByClassName('back')[0].addEventListener('click', close);
 		};
 	</script>
 </head>
 <body>
-	<header class="header tabs">
+	<header class="header">
 		<div class="hamburger"></div>
 		<div>Gathering</div>
 	</header>
-	<header class="header tabs">
+	<header class="header">
 		<div class="tabs-prev"></div>
-		<ul>
+		<ul class="tabs">
 			<li value="0">Lorem.</li>
 			<li value="1">Ducimus.</li>
 			<li value="2">Consectetur.</li>
@@ -58,7 +62,13 @@
 	</main>
 	<div class="overlay"></div>
 	<div class="sidebar">
-		<div class="header">Username</div>
+		<div class="header">
+			<div class="back"></div>
+			<div>Username</div>
+		</div>
+		<div class="userpic">
+			<img src="data:image/png;base64,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" alt="">
+		</div>
 		<ul>
 			<li>Lorem ipsum.</li>
 			<li>Quisquam, excepturi.</li>

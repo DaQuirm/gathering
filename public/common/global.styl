@@ -17,6 +17,9 @@
 
 global-reset()
 
+html, body
+	height 100%
+
 body, input, textarea, button
 	font-family Roboto, Ubuntu, Segoe UI, sans-serif
 	font-scale(0)
@@ -24,12 +27,15 @@ body, input, textarea, button
 body
 	color primary-type-color
 	overflow-x hidden
+	display flex
+	flex-direction column
 
 
 
 .wrapper
 	display flex
 	overflow-x hidden
+	flex 1
 
 	> section
 		transition .3s
@@ -152,17 +158,6 @@ button
 	overflow hidden
 	box-shadow 0px 2px 5px alpha(black, .2)
 
-.header
-	display flex
-	padding type-scale(1)
-	background evening-sky
-	color white
-	text-transform uppercase
-	font-scale(0)
-	position relative
-	margin 0
-
-
 
 
 
@@ -274,14 +269,11 @@ label
 
 // checkbox
 
-.header.tabs
-	padding 0
-	user-select none
 
-	ul
-		display flex
-		overflow-x hidden
-		width 100%
+ul.tabs
+	display flex
+	overflow-x hidden
+	width 100%
 
 	li
 		padding type-scale(1)
@@ -310,6 +302,18 @@ label
 			&::after
 				border-bottom-width 4px
 
+		&:hover
+					background alpha(gray(100%), .1)
+
+.header
+	display flex
+	background evening-sky
+	color white
+	text-transform uppercase
+	font-scale(0)
+	position relative
+	margin 0
+
 	div
 		cursor pointer
 		flex-shrink 0
@@ -317,32 +321,40 @@ label
 		box-sizing border-box
 		text-align center
 
+	.tabs-next,
+	.tabs-prev,
+	.hamburger,
+	.back
+		font-family 'FontAwesome'
+		width 4rem
+
+		&:hover
+			background alpha(gray(100%), .1)
+
+
 	.tabs-next
-		font-family FontAwesome
 		&::before
 			content "\f054"
 
 	.tabs-prev
-		font-family FontAwesome
 		&::before
 			content "\f053"
 
 	.hamburger
-		font-family FontAwesome
 		&::before
 			content "\f0c9"
 
-	div,
-	li
-		&:hover
-			background alpha(gray(100%), .1)
+	.back
+		&::before
+			content "\f060"
+
 
 .sidebar
 	absolute top 0 right 100% bottom 0
 	background form-bckg
 	box-shadow 2px 0 2px alpha(black, .2)
 	transition transform .3s
-	width 200px
+	min-width 200px
 
 	&.opened
 		transform translateX(100%)
