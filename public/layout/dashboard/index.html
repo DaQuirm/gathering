@@ -9,28 +9,46 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script>
 		window.onload = function() {
-			tabs = document.getElementsByClassName('tabs')[0];
+			var tabs = document.getElementsByClassName('tabs')[1];
 			tabs.addEventListener('click', function(e){
 				console.log(e);
-				act = document.getElementsByClassName('active')[0];
-				act && act.classList.remove('active');
+				var act = document.getElementsByClassName('active')[0];
+				void (act && act.classList.remove('active'));
 				e.target.classList.add('active');
-				sections = document.querySelectorAll('.wrapper section');
+				var sections = document.querySelectorAll('.wrapper section');
 				for (var i = 0; i < sections.length; i++) {
 					sections[i].style.webkitTransform = 'translateX(-'+100*e.target.value+'%)';
-				};
+				}
+
+			});
+			var hamburger = document.getElementsByClassName('hamburger')[0];
+			var sidebar = document.getElementsByClassName('sidebar')[0];
+			var overlay = document.getElementsByClassName('overlay')[0];
+			hamburger.addEventListener('click', function (e) {
+				sidebar.classList.toggle('opened');
+				overlay.style.display = overlay.style.display ? '' : 'block';
+			});
+			overlay.addEventListener('click', function (e) {
+				sidebar.classList.toggle('opened');
+				overlay.style.display = overlay.style.display ? '' : 'block';
 			});
 		};
 	</script>
 </head>
 <body>
 	<header class="header tabs">
+		<div class="hamburger"></div>
+		<div>Gathering</div>
+	</header>
+	<header class="header tabs">
+		<div class="tabs-prev"></div>
 		<ul>
 			<li value="0">Lorem.</li>
 			<li value="1">Ducimus.</li>
 			<li value="2">Consectetur.</li>
 			<li value="3">Temporibus.</li>
 		</ul>
+		<div class="tabs-next"></div>
 	</header>
 	<main class="wrapper">
 		<section><div class="form"><button>Ok</button></div></section>
@@ -38,5 +56,15 @@
 		<section>Fugit dolorem, vitae tenetur, ducimus aperiam iusto sed impedit itaque.</section>
 		<section>Facilis, explicabo cum iste tempore, nulla sunt qui vitae repudiandae!</section>
 	</main>
+	<div class="overlay"></div>
+	<div class="sidebar">
+		<div class="header">Username</div>
+		<ul>
+			<li>Lorem ipsum.</li>
+			<li>Quisquam, excepturi.</li>
+			<li>Magni, molestiae!</li>
+			<li>Sapiente, sit.</li>
+		</ul>
+	</div>
 </body>
 </html>

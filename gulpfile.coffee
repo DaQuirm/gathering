@@ -62,4 +62,5 @@ all_tasks = all_tasks.concat.apply all_tasks, [
 
 gulp.task 'watch', all_tasks, ->
 	gulp.watch './public/common/**/*', tasks.main
-	gulp.watch './public/layout/dashboard/**/*', tasks.dashboard
+	gulp.watch './public/layout/dashboard/stylesheets/*', ['dashboard.styl']
+	gulp.watch './public/layout/dashboard/*', ['dashboard.html']

@@ -29,13 +29,14 @@ body
 
 .wrapper
 	display flex
+	overflow-x hidden
 
 	> section
 		transition .3s
 		box-sizing border-box
 		overflow-x hidden
 		border-edge(left)
-		flex-basis 400px
+		flex-basis 480px
 		flex-grow 1
 
 	@media screen and (max-width: 800px)
@@ -153,21 +154,15 @@ button
 
 .header
 	display flex
-	background lighten(secondary-type-color, 80%)
 	padding type-scale(1)
-	text-transform none
+	background evening-sky
+	color white
+	text-transform uppercase
 	font-scale(0)
 	position relative
 	margin 0
 
-.header:first-child
-	display flex
-	background evening-sky
-	color white
-	padding type-scale(1)
-	text-transform uppercase
-	font-scale(0)
-	position relative
+
 
 
 
@@ -286,6 +281,7 @@ label
 	ul
 		display flex
 		overflow-x hidden
+		width 100%
 
 	li
 		padding type-scale(1)
@@ -293,6 +289,12 @@ label
 		opacity .7
 		cursor pointer
 		position relative
+		box-sizing border-box
+		text-align center
+		@media screen and (max-width: 800px)
+			width (100%/3)
+		@media screen and (max-width: 480px)
+			width (100%/2)
 
 		&::after
 			content ''
@@ -308,26 +310,47 @@ label
 			&::after
 				border-bottom-width 4px
 
-	.tabs-next,
-	.tabs-prev
+	div
 		cursor pointer
-		//min-width 3rem
 		flex-shrink 0
 		padding type-scale(1)
 		box-sizing border-box
 		text-align center
-		font-family FontAwesome
 
 	.tabs-next
+		font-family FontAwesome
 		&::before
 			content "\f054"
 
 	.tabs-prev
+		font-family FontAwesome
 		&::before
 			content "\f053"
 
-	.tabs-next,
-	.tabs-prev,
+	.hamburger
+		font-family FontAwesome
+		&::before
+			content "\f0c9"
+
+	div,
 	li
 		&:hover
 			background alpha(gray(100%), .1)
+
+.sidebar
+	absolute top 0 right 100% bottom 0
+	background form-bckg
+	box-shadow 2px 0 2px alpha(black, .2)
+	transition transform .3s
+	width 200px
+
+	&.opened
+		transform translateX(100%)
+
+	li
+		padding type-scale(1)
+
+.overlay
+	background alpha(gray(0%), .5)
+	absolute top 0 left 0 right 0 bottom 0
+	display none
