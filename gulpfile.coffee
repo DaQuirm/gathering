@@ -58,6 +58,7 @@ gulp.task 'article_stash.coffee', ->
 		'./public/article-stash/src/viewmodels/app-viewmodel.coffee'
 
 		# Views
+		'./public/article-stash/src/views/digest-view.coffee'
 		'./public/article-stash/src/views/articles-view.coffee'
 		'./public/article-stash/src/views/app-view.coffee'
 
