@@ -9,7 +9,6 @@ success = (res) ->
 
 failure = (res) ->
 	(err) ->
-		console.log err, 'err'
 		res.send 500
 
 module.exports = class RestCtrl extends BaseCRUDCtrl
