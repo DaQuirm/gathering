@@ -46,6 +46,9 @@ gulp.task 'article-stash.html', ->
 gulp.task 'article_stash.coffee', ->
 	gulp.src [
 
+		# Nexus extensions
+		'./public/nexus-extensions/input.coffee'
+
 		# Application
 		'./public/article-stash/src/app.coffee'
 
@@ -54,6 +57,7 @@ gulp.task 'article_stash.coffee', ->
 		'./public/article-stash/src/models/article-collection.coffee'
 
 		# ViewModels
+		'./public/article-stash/src/viewmodels/article-draft.coffee'
 		'./public/article-stash/src/viewmodels/articles-viewmodel.coffee'
 		'./public/article-stash/src/viewmodels/app-viewmodel.coffee'
 
@@ -98,3 +102,4 @@ gulp.task 'watch', all_tasks, ->
 	gulp.watch './public/common/**/*', tasks.main.concat(tasks.article_stash)
 	gulp.watch './public/layout/article-stash/**/*', tasks.article_stash
 	gulp.watch './public/article-stash/**/*', spa.article_stash
+	gulp.watch './public/nexus-extensions/**/*', spa.article_stash
