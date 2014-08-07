@@ -4,27 +4,26 @@ ArticleStash.views.Articles = (context) ->
 		nxt.Class 'block-left', true
 		nxt.Element 'div',
 			nxt.Class 'form', true
-				nxt.Element 'input',
-					nxt.Attr 'placeholder', 'link'
-					nxt.Event 'input', (ev) ->
-						context.new_article.link.value = @value
-				nxt.Element 'input',
-					nxt.Attr 'placeholder', 'title'
-					nxt.Event 'input', (ev) ->
-						context.new_article.title.value = @value
-				nxt.Element 'textarea',
-					nxt.Attr 'placeholder', 'description'
-					nxt.Event 'input', (ev) ->
-						context.new_article.description.value = @value
-				nxt.Element 'Input',
-					nxt.Attr 'placeholder', 'tags (use \',\' for multiple)'
-					nxt.Event 'blur', (ev) ->
-						tags = @value.replace(/\s*,\s*/g,',').split ','
-						context.new_article.tags.items = tags
+				nxt.Input
+					cell: context.new_article.link
+					content: [nxt.Attr 'placeholder', 'link']
+				nxt.Input
+					cell: context.new_article.title
+					content: [nxt.Attr 'placeholder', 'title']
+				nxt.Input
+					cell: context.new_article.description
+					content: [nxt.Attr 'placeholder', 'description']
+				nxt.Input
+					cell: context.new_article.tags
+					content: [nxt.Attr 'placeholder', 'tags']
+					converter: (tags) ->
+						tags.join ', ' if tags
+					back_converter: (string) ->
+						string.split(/,\s*/)
 				nxt.Element 'Button',
 					nxt.Text 'Create'
 					nxt.Event 'click', (ev) ->
-						context.save context.new_article
+						context.save context.new_article.data.value
 
 		nxt.Element 'ul',
 			nxt.Class 'articles-list', true
