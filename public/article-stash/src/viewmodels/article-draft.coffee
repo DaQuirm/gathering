@@ -13,6 +13,7 @@ class ArticleDraft
 
 		@tags = new nx.Collection
 		@data.bind @tags, '<->', new nx.Mapping 'tags':'_'
+		do @reset
 
 	reset: ->
 		@title.value = ''

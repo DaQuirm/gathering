@@ -21,7 +21,7 @@ ArticleStash.views.Articles = (context) ->
 					back_converter: (string) ->
 						string.split(/,\s*/)
 				nxt.Element 'Button',
-					nxt.Text 'Create'
+					nxt.Text 'Save'
 					nxt.Event 'click', (ev) ->
 						context.save context.new_article.data.value
 
@@ -50,6 +50,5 @@ ArticleStash.views.Articles = (context) ->
 						nxt.Element 'li',
 								nxt.Class 'remove'
 								nxt.Event 'click', (ev) ->
-									# context.articles.items.remove article
 									article.remove ->
 										context.articles.items.remove article
