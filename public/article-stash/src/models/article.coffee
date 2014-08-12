@@ -1,4 +1,3 @@
-
 class Article extends nx.RestDocument
 	constructor: (options) ->
 		super
@@ -18,4 +17,4 @@ class Article extends nx.RestDocument
 		@tags = new nx.Collection
 		@data.bind @tags, '<->', new nx.Mapping 'tags':'_'
 
-ArticleStash.models.Article = Article
+module.exports = Article

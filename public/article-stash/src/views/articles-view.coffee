@@ -1,4 +1,4 @@
-ArticleStash.views.Articles = (context) ->
+module.exports = (context) ->
 
 	nxt.Element 'div',
 		nxt.Class 'block-left', true

@@ -21,4 +21,4 @@ class ArticleDraft
 		@description.value = ''
 		@tags.items = []
 
-ArticleStash.viewmodels.ArticleDraft = ArticleDraft
+module.exports = ArticleDraft

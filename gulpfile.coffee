@@ -1,11 +1,12 @@
-gulp   = require 'gulp'
-rimraf = require 'gulp-rimraf'
-concat = require 'gulp-concat'
-rename = require 'gulp-rename'
-stylus = require 'gulp-stylus'
-notify = require 'gulp-notify'
-nib    = require 'nib'
-coffee = require 'gulp-coffee'
+gulp    = require 'gulp'
+rimraf  = require 'gulp-rimraf'
+concat  = require 'gulp-concat'
+rename  = require 'gulp-rename'
+stylus  = require 'gulp-stylus'
+notify  = require 'gulp-notify'
+nib     = require 'nib'
+coffee  = require 'gulp-coffee'
+webpack = require 'gulp-webpack'
 
 # Main tasks
 
@@ -72,6 +73,16 @@ gulp.task 'article_stash.coffee', ->
 		.pipe concat 'article-stash.js'
 		.pipe gulp.dest './public/build-dev/article-stash'
 		return
+
+gulp.task 'article-stash', ->
+	gulp.src './public/article-stash/src/app.coffee'
+		.pipe webpack
+			module:
+				loaders: [
+					test: /\.coffee$/, loader: 'coffee-loader'
+				]
+		.pipe rename 'article-stash.js'
+		.pipe gulp.dest './public/build-dev/'
 
 
 # Grouping tasks

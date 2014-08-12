@@ -1,6 +1,3 @@
-window.ArticleStash or=
-	models: {}
-	viewmodels: {}
-	views: {}
-	create: ->
-		new @viewmodels.AppViewModel
+AppViewModel = require './viewmodels/app-viewmodel.coffee'
+
+window.ArticleStashApp = new AppViewModel
