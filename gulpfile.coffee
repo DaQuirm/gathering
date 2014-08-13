@@ -79,10 +79,13 @@ gulp.task 'article-stash', ->
 		.pipe webpack
 			module:
 				loaders: [
-					test: /\.coffee$/, loader: 'coffee-loader'
+					{ test: /\.coffee$/, loader: 'coffee-loader' }
+					{ test: /\.css$/, loader: 'css-loader' }
+					{ test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
 				]
+			devtool: 'inline-source-map'
 		.pipe rename 'article-stash.js'
-		.pipe gulp.dest './public/build-dev/'
+		.pipe gulp.dest './public/build-dev/article-stash'
 
 
 # Grouping tasks
