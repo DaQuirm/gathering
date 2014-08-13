@@ -6,7 +6,8 @@ stylus  = require 'gulp-stylus'
 notify  = require 'gulp-notify'
 nib     = require 'nib'
 coffee  = require 'gulp-coffee'
-webpack = require 'gulp-webpack'
+webpack = require 'webpack'
+util    = require 'gulp-util'
 
 # Main tasks
 
@@ -74,19 +75,30 @@ gulp.task 'article_stash.coffee', ->
 		.pipe gulp.dest './public/build-dev/article-stash'
 		return
 
-gulp.task 'article-stash', ->
-	gulp.src './public/article-stash/src/app.coffee'
-		.pipe webpack
-			module:
-				loaders: [
-					{ test: /\.coffee$/, loader: 'coffee-loader' }
-					{ test: /\.css$/, loader: 'css-loader' }
-					{ test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
-				]
-			devtool: 'inline-source-map'
-		.pipe rename 'article-stash.js'
-		.pipe gulp.dest './public/build-dev/article-stash'
-
+gulp.task 'article-stash', (done) ->
+	webpack
+		entry:
+			'./public/article-stash/app.coffee'
+		output:
+			path: "#{__dirname}/public/build-dev/article-stash"
+		module:
+			loaders: [
+				{ test: /\.css$/,    loader: 'css-loader' }
+				{ test: /\.coffee$/, loader: 'coffee-loader' }
+				{ test: /\.styl$/,   loader: 'style-loader!css-loader!stylus-loader' }
+				# Fonts
+				{ test: /\.woff$/,   loader: 'file-loader' }
+				{ test: /\.ttf$/,    loader: 'file-loader' }
+				{ test: /\.eot$/,    loader: 'file-loader' }
+				{ test: /\.svg$/,    loader: 'file-loader' }
+			]
+		resolve:
+			extensions: ['', '.coffee', '.styl']
+		devtool: 'source-map'
+		(err, stats) ->
+        if err then throw new util.PluginError 'webpack', err
+        util.log '[webpack]', stats.toString {}
+        do done
 
 # Grouping tasks
 

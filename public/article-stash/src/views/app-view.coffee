@@ -1,5 +1,5 @@
-ArticlesView = require './articles-view.coffee'
-DigestView   = require './digest-view.coffee'
+ArticlesView = require './articles-view'
+DigestView   = require './digest-view'
 
 module.exports = (app) ->
 	nxt.Element 'div',

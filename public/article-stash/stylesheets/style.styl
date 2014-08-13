@@ -1,0 +1,85 @@
+body
+	display flex
+	@media screen and (max-width 800px)
+		flex-direction column
+
+.block-left
+	border-edge(right)
+	flex-grow 1
+	@media screen and (max-width 800px)
+		border 0
+
+.block-right
+	flex-grow 1
+
+.form
+	border-edge(bottom)
+
+.action-menu
+	absolute top right
+	opacity 0
+	transition .3s
+
+	> li
+		display block
+		cursor pointer
+		font-scale(1)
+		width type-scale(1)
+		height type-scale(1)
+		padding 10px
+		transition .2s
+		float right
+		position relative
+
+		&::before
+			width type-scale(1)
+			height type-scale(1)
+			position absolute
+			margin auto
+			display block
+			text-align center
+			font-family 'FontAwesome'
+		&::after
+			content ''
+			absolute top 100% left
+			display block
+			border-left type-scale(1) solid transparent
+			border-right type-scale(1) solid transparent
+			border-bottom 0 solid transparent
+			border-top: 10px solid transparent
+			transition .2s
+
+	.remove
+		action-button("\f00d", terrible-red)
+	.approve
+		action-button("\f164", pure-grass)
+	.disapprove
+		action-button("\f165", terrible-red)
+	.edit
+		action-button("\f040")
+
+
+.articles-list
+	> li
+		border-edge(bottom)
+		position relative
+		padding type-scale(1)
+
+		&:hover .action-menu
+			opacity 1
+
+		.title
+			display inline-block
+			margin-right 120px
+			color primary-type-color
+			text-decoration none
+			font-scale(0)
+
+			&:hover
+				text-decoration underline
+
+		.description
+			font-scale(-1)
+			line-height type-scale(0)
+			color secondary-type-color
+			margin type-scale(1) 0

@@ -1,4 +1,4 @@
-Article = require './article.coffee'
+Article = require './article'
 
 class ArticleCollection extends nx.RestCollection
 	constructor: ->

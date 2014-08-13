@@ -1,5 +1,5 @@
-ArticlesViewModel = require './articles-viewmodel.coffee'
-AppView           = require '../views/app-view.coffee'
+ArticlesViewModel = require './articles-viewmodel'
+AppView           = require '../views/app-view'
 
 class AppViewModel
 

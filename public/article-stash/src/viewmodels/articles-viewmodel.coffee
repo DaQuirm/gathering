@@ -1,6 +1,6 @@
-ArticleCollection = require '../models/article-collection.coffee'
-Article           = require '../models/article.coffee'
-ArticleDraft      = require './article-draft.coffee'
+ArticleCollection = require '../models/article-collection'
+Article           = require '../models/article'
+ArticleDraft      = require './article-draft'
 
 class ArticlesViewModel
 
