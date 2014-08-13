@@ -97,7 +97,7 @@ gulp.task 'article-stash', (done) ->
 		devtool: 'source-map'
 		(err, stats) ->
         if err then throw new util.PluginError 'webpack', err
-        util.log '[webpack]', stats.toString {}
+        util.log '[webpack]', stats.toString colors:yes
         do done
 
 # Grouping tasks
