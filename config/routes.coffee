@@ -10,7 +10,7 @@ module.exports = (app, passport) ->
 		req.session.app_name = req.params.app_name
 		do next
 
-	app.use '/apps/', express.static "#{__dirname}/../public"
+	app.use '/apps/', express.static "#{__dirname}/../public/build-dev"
 
 	app.post '/auth/local', auth.login 'local'
 

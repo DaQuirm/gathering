@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
-	<script src="../build-dev/article-stash/bundle.js"></script>
+	<title>{%=o.htmlWebpackPlugin.options.data.name%}</title>
+	<script src="./bundle.js"></script>
 	<script>
 		window.onload = function() {
-			var app = new Gathering.ArticleStashApp;
+			var app = new Gathering.{%=o.htmlWebpackPlugin.options.data.app_class%};
 			app.render(document.body);
 		}
 	</script>
 </head>
 <body>
-
 </body>
 </html>

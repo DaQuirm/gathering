@@ -2,8 +2,11 @@ gulp    = require 'gulp'
 util    = require 'gulp-util'
 webpack = require 'webpack'
 
+# Plugins
+HtmlWebpackPlugin = require 'html-webpack-plugin'
+
 # Creates a standard application bundling task
-module.exports = (name, {entry, output}) ->
+module.exports = (name, {entry, output, app_class}) ->
 	gulp.task name, (done) ->
 		config =
 			entry: entry
@@ -23,6 +26,13 @@ module.exports = (name, {entry, output}) ->
 			resolve:
 				extensions: ['', '.coffee', '.styl']
 			devtool: 'source-map'
+			plugins: [
+				new HtmlWebpackPlugin
+					template: './public/common/app-index-template.html'
+					data:
+						name: name
+						app_class: app_class
+			]
 
 		compiler = webpack config
 		compiler.run (err, stats) ->

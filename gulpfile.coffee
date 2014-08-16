@@ -15,8 +15,9 @@ gulp.task 'clean-dev', ->
 
 apps = [
 	app 'article-stash',
-		entry:  './public/article-stash/app.coffee'
-		output: "#{__dirname}/public/build-dev/article-stash"
+		entry:     './public/article-stash/app.coffee'
+		output:    "#{__dirname}/public/build-dev/article-stash"
+		app_class: 'ArticleStashApp'
 ]
 
 pre_watch = apps

@@ -51,6 +51,7 @@
     "gulp-rimraf": "^0.1.0",
     "gulp-stylus": "^1.0.5",
     "gulp-util": "^3.0.0",
+    "html-webpack-plugin": "^1.1.0",
     "nib": "^1.0.3",
     "sinon": "^1.10.2",
     "sinon-chai": "^2.5.0",
