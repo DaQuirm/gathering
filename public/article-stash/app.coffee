@@ -1,5 +1,4 @@
 # Stylesheets
-require '../common/global.styl'
 require './stylesheets/style.styl'
 
 # Libs
