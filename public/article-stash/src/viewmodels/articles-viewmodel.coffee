@@ -1,5 +1,6 @@
-{ArticleCollection, Article} = ArticleStash.models
-{ArticleDraft} = ArticleStash.viewmodels
+ArticleCollection = require '../models/article-collection'
+Article           = require '../models/article'
+ArticleDraft      = require './article-draft'
 
 class ArticlesViewModel
 
@@ -19,4 +20,4 @@ class ArticlesViewModel
 		@articles.create article
 		do @new_article.reset
 
-ArticleStash.viewmodels.ArticlesViewModel = ArticlesViewModel
+module.exports = ArticlesViewModel

@@ -1,4 +1,4 @@
-{Article} = ArticleStash.models
+Article = require './article'
 
 class ArticleCollection extends nx.RestCollection
 	constructor: ->
@@ -6,4 +6,4 @@ class ArticleCollection extends nx.RestCollection
 			url: '/api/articles'
 			item: Article
 
-ArticleStash.models.ArticleCollection = ArticleCollection
+module.exports = ArticleCollection

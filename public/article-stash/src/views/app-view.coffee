@@ -1,7 +1,8 @@
+ArticlesView = require './articles-view'
+DigestView   = require './digest-view'
 
-ArticleStash.views.AppView = (app) ->
-
+module.exports = (app) ->
 	nxt.Element 'div',
 		nxt.Attr 'style', 'display: flex; flex-grow: 1'
-		ArticleStash.views.Articles app.articles
-		ArticleStash.views.Digest app.digest
+		ArticlesView app.articles
+		DigestView app.digest

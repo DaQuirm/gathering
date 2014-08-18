@@ -1,5 +1,4 @@
-ArticleStash.views.Digest = (context) ->
-
+module.exports = (context) ->
 	nxt.Element 'div',
 			nxt.Class 'block-right'
 			nxt.Element 'div',

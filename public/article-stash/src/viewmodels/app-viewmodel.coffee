@@ -1,4 +1,5 @@
-{ArticlesViewModel} = ArticleStash.viewmodels
+ArticlesViewModel = require './articles-viewmodel'
+AppView           = require '../views/app-view'
 
 class AppViewModel
 
@@ -6,6 +7,6 @@ class AppViewModel
 		@articles = new ArticlesViewModel
 
 	render: (node) ->
-		node.appendChild (ArticleStash.views.AppView @).data.node
+		node.appendChild (AppView @).data.node
 
-ArticleStash.viewmodels.AppViewModel = AppViewModel
+module.exports = AppViewModel
