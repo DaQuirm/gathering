@@ -27,7 +27,7 @@ module.exports = (context) ->
 
 		nxt.Element 'ul',
 			nxt.Class 'articles-list', true
-			nxt.Collection context.articles.items, (article) ->
+			nxt.Collection context.articles.items, ((article) ->
 				nxt.Element 'li',
 					nxt.Element 'a',
 						nxt.Class 'title', true
@@ -51,4 +51,9 @@ module.exports = (context) ->
 								nxt.Class 'remove'
 								nxt.Event 'click', (ev) ->
 									article.remove ->
-										context.articles.items.remove article
+										context.articles.items.remove article),
+				nxt.ItemEvent 'click',
+						'li.remove': (evt, article) ->
+							article.remove ->
+								context.articles.items.remove article
+
