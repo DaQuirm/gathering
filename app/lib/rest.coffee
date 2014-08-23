@@ -3,13 +3,15 @@ BaseCRUDCtrl = require './base-crud.coffee'
 success = (res) ->
 	(content) ->
 		if content
-			res.send 200, content
+			res
+				.status 200
+				.send content
 		else
-			res.send 404
+			res.status 404
 
 failure = (res) ->
 	(err) ->
-		res.send 500
+		res.status 500
 
 module.exports = class RestCtrl extends BaseCRUDCtrl
 	constructor: (model) ->
@@ -23,9 +25,11 @@ module.exports = class RestCtrl extends BaseCRUDCtrl
 	read: (req, res) ->
 		found = (content) ->
 			if content and content.length > 0
-				res.send 200, content
+				res
+					.status 200
+					.send content
 			else
-				res.send 204
+				res.status 204
 
 		super()
 			.then found, failure(res)

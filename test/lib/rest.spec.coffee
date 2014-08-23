@@ -22,31 +22,34 @@ describe 'RestCtrl', ->
 			req =
 				body: mock.talk
 			res =
+				status: -> @
 				send: ->
-					spy.should.have.been.calledOnce
+					status_spy.should.have.been.calledOnce
+					send_spy.should.have.been.calledOnce
 					Talk.find().exec()
 						.then (found) ->
 							found.should.exist
-							spy.should.have.been.calledWith 200
-							spy.args[0][1].should.exist
+							status_spy.should.have.been.calledWith 200
+							send_spy.args[0][0].should.exist
 							do done
 
-			spy = sinon.spy res, 'send'
+			status_spy = sinon.spy res, 'status'
+			send_spy = sinon.spy res, 'send'
 			rest.create req, res
 
 		it 'sends 500 if document to create is invalid', (done) ->
 			req =
 				body: mock.invalid_talk
 			res =
-				send: ->
-					spy.should.have.been.calledOnce
+				status: ->
+					status_spy.should.have.been.calledOnce
 					Talk.find().exec()
 						.then (found) ->
 							found.length.should.equal 0
-							spy.should.have.been.calledWith 500
+							status_spy.should.have.been.calledWith 500
 							do done
 
-			spy = sinon.spy res, 'send'
+			status_spy = sinon.spy res, 'status'
 			rest.create req, res
 
 	describe '#read', ->
@@ -56,27 +59,30 @@ describe 'RestCtrl', ->
 			mock.talks 10, (mocked) ->
 				req = {}
 				res =
+					status: -> @
 					send: ->
-						spy.should.have.been.calledOnce
+						status_spy.should.have.been.calledOnce
+						send_spy.should.have.been.calledOnce
 						Talk.find().exec()
 							.then (found) ->
 								found.should.exist
-								spy.should.have.been.calledWith 200
-								spy.args[0][1].length.should.equal mocked.length
+								status_spy.should.have.been.calledWith 200
+								send_spy.args[0][0].length.should.equal mocked.length
 								do done
 
-				spy = sinon.spy res, 'send'
+				status_spy = sinon.spy res, 'status'
+				send_spy = sinon.spy res, 'send'
 				rest.read req, res
 
 		it 'sends 204 if collection is empty', (done) ->
 			req = {}
 			res =
-				send: ->
-					spy.should.have.been.calledOnce
-					spy.should.have.been.calledWith 204
+				status: ->
+					status_spy.should.have.been.calledOnce
+					status_spy.should.have.been.calledWith 204
 					do done
 
-			spy = sinon.spy res, 'send'
+			status_spy = sinon.spy res, 'status'
 			rest.read req, res
 
 	describe '#get_by_id', ->
@@ -87,13 +93,16 @@ describe 'RestCtrl', ->
 					params:
 						id: id
 				res =
+					status: -> @
 					send: ->
-						spy.should.have.been.calledOnce
-						spy.should.have.been.calledWith 200
-						spy.args[0][1].should.exist
+						status_spy.should.have.been.calledOnce
+						send_spy.should.have.been.calledOnce
+						status_spy.should.have.been.calledWith 200
+						send_spy.args[0][0].should.exist
 						do done
 
-				spy = sinon.spy res, 'send'
+				status_spy = sinon.spy res, 'status'
+				send_spy = sinon.spy res, 'send'
 				rest.get_by_id req, res
 
 		it 'sends 404 if document not found', (done) ->
@@ -102,12 +111,12 @@ describe 'RestCtrl', ->
 				params:
 					id: id
 			res =
-				send: ->
-					spy.should.have.been.calledOnce
-					spy.should.have.been.calledWith 404
+				status: ->
+					status_spy.should.have.been.calledOnce
+					status_spy.should.have.been.calledWith 404
 					do done
 
-			spy = sinon.spy res, 'send'
+			status_spy = sinon.spy res, 'status'
 			rest.get_by_id req, res
 
 	describe '#update', ->
@@ -121,13 +130,16 @@ describe 'RestCtrl', ->
 					body: update
 
 				res =
+					status: -> @
 					send: ->
-						spy.should.have.been.calledOnce
-						spy.should.have.been.calledWith 200
-						spy.args[0][1].should.exist
+						status_spy.should.have.been.calledOnce
+						send_spy.should.have.been.calledOnce
+						status_spy.should.have.been.calledWith 200
+						send_spy.args[0][0].should.exist
 						do done
 
-				spy = sinon.spy res, 'send'
+				status_spy = sinon.spy res, 'status'
+				send_spy = sinon.spy res, 'send'
 				rest.update req, res
 
 		it 'sends 404 if document to update is not found', (done) ->
@@ -139,12 +151,12 @@ describe 'RestCtrl', ->
 				body: update
 
 			res =
-				send: ->
-					spy.should.have.been.calledOnce
-					spy.should.have.been.calledWith 404
+				status: ->
+					status_spy.should.have.been.calledOnce
+					status_spy.should.have.been.calledWith 404
 					do done
 
-			spy = sinon.spy res, 'send'
+			status_spy = sinon.spy res, 'status'
 			rest.update req, res
 
 	describe '#delete', ->
@@ -155,16 +167,19 @@ describe 'RestCtrl', ->
 					params:
 						id: id
 				res =
+					status: -> @
 					send: ->
 						Talk.findById(id).exec()
 							.then (found) ->
-								spy.should.have.been.calledOnce
-								spy.should.have.been.calledWith 200
-								spy.args[0][1].should.exist
+								status_spy.should.have.been.calledOnce
+								send_spy.should.have.been.calledOnce
+								status_spy.should.have.been.calledWith 200
+								send_spy.args[0][0].should.exist
 								should.not.exist found
 								do done
 
-				spy = sinon.spy res, 'send'
+				status_spy = sinon.spy res, 'status'
+				send_spy = sinon.spy res, 'send'
 				rest.delete req, res
 
 		it 'sends 404 if document to delete not found', (done) ->
@@ -173,11 +188,11 @@ describe 'RestCtrl', ->
 				params:
 					id: id
 			res =
-				send: ->
-					spy.should.have.been.calledOnce
-					spy.should.have.been.calledWith 404
+				status: ->
+					status_spy.should.have.been.calledOnce
+					status_spy.should.have.been.calledWith 404
 					do done
 
-			spy = sinon.spy res, 'send'
+			status_spy = sinon.spy res, 'status'
 			rest.delete req, res
 
