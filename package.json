@@ -4,7 +4,7 @@
   "description": "A social event management platform",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register test/*.spec.coffee --reporter spec",
+    "test": "mocha --compilers coffee:coffee-script/register --recursive --reporter spec",
     "start": "coffee service.coffee"
   },
   "repository": {
