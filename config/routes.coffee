@@ -1,5 +1,6 @@
 passport = require 'passport'
 express  = require 'express'
+Articles = require '../app/controllers/article.coffee'
 auth     = require '../app/controllers/auth.coffee'
 
 module.exports = (app, passport) ->
@@ -12,7 +13,7 @@ module.exports = (app, passport) ->
 		req.session.app_name = req.params.app_name
 		do next
 
-	app.use '/apps/', express.static "#{__dirname}/../public"
+	app.use '/apps/', express.static "#{__dirname}/../public/build-dev"
 
 	app.post '/auth/local', auth.login 'local'
 
@@ -34,3 +35,7 @@ module.exports = (app, passport) ->
 	app.get '/logout', (req, res) ->
 		do req.logout
 		res.redirect "/apps/#{req.session.app_name}"
+
+	app.get '/api/articles', Articles.read.bind Articles
+	app.post '/api/articles', Articles.create.bind Articles
+	app.delete '/api/articles/:id', Articles.delete.bind Articles

@@ -1,4 +1,3 @@
-@import 'mixins'
 
 gray(lightness)
 	hsl(0, 0%, lightness)
@@ -42,7 +41,7 @@ action-button(content, color = secondary-type-color)
 		&::after
 			border-top-color alpha(color, .2)
 	&:active
-		background hsla(h, s, l, .5)
+		background alpha(color, .5)
 		color white
 		&::after
 			border-top-color alpha(color, .5)

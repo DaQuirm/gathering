@@ -91,7 +91,6 @@ describe 'CRUD', ->
 					do done
 
 				failure = (err)->
-					console.log err
 					do done
 
 				CRUDCtrl.update id, updated_talk
@@ -118,7 +117,7 @@ describe 'CRUD', ->
 		it 'returns promise and resolves it with deleted document', (done) ->
 
 			mock.talks 10, (mocked) ->
-				
+
 				id = mocked[2]._id
 
 				success = (deleted) ->
