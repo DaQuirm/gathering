@@ -16,12 +16,40 @@
 
 global-reset()
 
+html, body
+	height 100%
+
 body, input, textarea, button
 	font-family Roboto, Ubuntu, Segoe UI, sans-serif
 	font-scale(0)
 
 body
 	color primary-type-color
+	overflow-x hidden
+	display flex
+	flex-direction column
+
+
+
+.wrapper
+	display flex
+	overflow-x hidden
+	flex 1
+
+	> section
+		transition .3s
+		box-sizing border-box
+		overflow-x hidden
+		border-edge(left)
+		flex-basis 480px
+		flex-grow 1
+
+	@media screen and (max-width: 800px)
+		> section
+			flex-shrink 0
+			flex-basis 100%
+
+
 
 // Forms and inputs
 
@@ -131,23 +159,6 @@ button
 	overflow hidden
 	box-shadow 0px 2px 5px alpha(black, .2)
 
-.header
-	display flex
-	background lighten(secondary-type-color, 80%)
-	padding type-scale(1)
-	text-transform none
-	font-scale(0)
-	position relative
-	margin 0
-
-.header:first-child
-	display flex
-	background evening-sky
-	color white
-	padding type-scale(1)
-	text-transform uppercase
-	font-scale(0)
-	position relative
 
 
 
@@ -259,42 +270,68 @@ label
 
 // checkbox
 
-.header.tabs
-	padding 0
-	user-select none
 
-	ul
-		display flex
-		overflow-x hidden
+ul.tabs
+	display flex
+	overflow-x hidden
+	width 100%
 
 	li
 		padding type-scale(1)
 		flex-shrink 0
 		opacity .7
 		cursor pointer
+		position relative
+		box-sizing border-box
+		text-align center
+		@media screen and (max-width: 800px)
+			width (100%/3)
+		@media screen and (max-width: 480px)
+			width (100%/2)
+
+		&::after
+			content ''
+			border-bottom 0px solid alpha(gray(100%), .5)
+			transition border-width .3s
+			absolute left 0 bottom 0
+			width 100%
 
 		&.active
 			cursor default
 			opacity 1
-			position relative
 
 			&::after
-				content ''
-				bottom 0
-				left 0
-				border-edge(bottom, alpha(gray(100%), .5), 4px)
-				position absolute
-				width: 100%
+				border-bottom-width 4px
 
-	.tabs-next,
-	.tabs-prev
+		&:hover
+					background alpha(gray(100%), .1)
+
+.header
+	display flex
+	background evening-sky
+	color white
+	text-transform uppercase
+	font-scale(0)
+	position relative
+	margin 0
+
+	div
 		cursor pointer
-		//min-width 3rem
 		flex-shrink 0
 		padding type-scale(1)
 		box-sizing border-box
 		text-align center
-		font-family FontAwesome
+
+	.tabs-next,
+	.tabs-prev,
+	.hamburger,
+	.back
+		font-family 'FontAwesome'
+		width 4rem
+
+		&:hover
+			background alpha(gray(100%), .1)
+
 
 	.tabs-next
 		&::before
@@ -304,8 +341,29 @@ label
 		&::before
 			content "\f053"
 
-	.tabs-next,
-	.tabs-prev,
+	.hamburger
+		&::before
+			content "\f0c9"
+
+	.back
+		&::before
+			content "\f060"
+
+
+.sidebar
+	absolute top 0 right 100% bottom 0
+	background form-bckg
+	box-shadow 2px 0 2px alpha(black, .2)
+	transition transform .3s
+	min-width 200px
+
+	&.opened
+		transform translateX(100%)
+
 	li
-		&:hover
-			background alpha(gray(100%), .1)
+		padding type-scale(1)
+
+.overlay
+	background alpha(gray(0%), .5)
+	absolute top 0 left 0 right 0 bottom 0
+	display none
