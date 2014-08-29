@@ -1,0 +1,108 @@
+@import 'nib'
+@import '../../../common/variables'
+@import '../../../common/mixins'
+
+body
+	display flex
+	justify-content center
+	align-items center
+	align-content center
+	height 100vh
+
+.frame
+	max-width 400px
+	width 100%
+	border-radius 2px
+	overflow hidden
+	box-shadow 0px 2px 5px alpha(black, .2)
+
+.header
+	display flex
+	background evening-sky
+	color white
+	padding type-scale(1) type-scale(1)
+	text-transform uppercase
+
+	// li
+	// 	user-select none
+	// 	font-scale 0
+	// 	padding type-scale(1) type-scale(1)
+	// 	text-transform uppercase
+	// 	box-sizing border-box
+	// 	cursor pointer
+	// 	color alpha(white, .6)
+
+	// 	&.active
+	// 		border-edge(bottom, lighten(evening-sky, 60%), 4px)
+	// 		padding-bottom 11px
+
+	// 	&:hover, &.active
+	// 		color white
+
+.form
+	//border 0
+	//border-edge('!top')
+
+// .title
+// 	border-edge(bottom)
+// 	padding 10px 0
+// 	margin type-scale(1) 0
+// 	color evening-sky
+
+	.buttons-list
+		display flex
+		justify-content flex-end
+		flex-wrap wrap
+
+		li:last-child
+			button(evening-sky)
+		li
+			button-sec()
+
+.action-menu
+	display flex
+	justify-content center
+	flex-wrap wrap
+	margin -1*type-scale(1)
+	margin-bottom type-scale(1)
+	border-edge(bottom, , , dashed)
+
+	> li
+		position relative
+		width type-scale(1)
+		height type-scale(1)
+		padding (type-scale(1)/2)
+		border-radius 100%
+		text-align center
+		cursor pointer
+		transition color .2s, background .2s
+		margin type-scale(0)
+
+		&::before
+			font-family FontAwesome
+			font-scale(1)
+			width type-scale(1)
+			height type-scale(1)
+			position absolute
+			margin auto
+			display block
+
+	.github
+		action-button("\f113")
+
+	.google
+		action-button("\f1a0")
+
+	.facebook
+		action-button("\f09a")
+
+	.twitter
+		action-button("\f099")
+
+.userpic
+	width 100px
+	height 100px
+	margin 0 auto type-scale(0)
+	background gray(100%)
+	border-radius 100%
+	overflow hidden

@@ -7,7 +7,7 @@ notify  = require 'gulp-notify'
 nib     = require 'nib'
 coffee  = require 'gulp-coffee'
 
-app = require './lib-build/app-task'
+# Main tasks
 
 gulp.task 'clean-dev', ->
 	gulp.src './public/build-dev'

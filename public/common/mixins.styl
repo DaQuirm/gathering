@@ -26,8 +26,6 @@ border-edge(sides = all, color = edge-color, size = 1px, style = solid)
 
 inverse-on-action(color)
 	color color
-	&::before
-		content content
 	&:hover
 		background alpha(color, .2)
 	&:active
@@ -35,9 +33,11 @@ inverse-on-action(color)
 		color white
 
 action-button(content, color = secondary-type-color)
+	&::before
+		content content
 	inverse-on-action(color)
 	&:hover
-		background hsla(h, s, l, .2)
+		background alpha(color, .2)
 		&::after
 			border-top-color alpha(color, .2)
 	&:active

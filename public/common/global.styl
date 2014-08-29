@@ -159,10 +159,27 @@ button
 	overflow hidden
 	box-shadow 0px 2px 5px alpha(black, .2)
 
+.header
+	display flex
+	background lighten(secondary-type-color, 80%)
+	padding type-scale(1)
+	text-transform none
+	font-scale(0)
+	position relative
+	margin 0
+
+.header:first-child
+	display flex
+	background evening-sky
+	color white
+	padding type-scale(1)
+	text-transform uppercase
+	font-scale(0)
+	position relative
 
 
 
-// checkbox
+// HOLY SHIT!!! IS THAT CHECKBOX??
 
 label
 	// &:hover
@@ -267,103 +284,3 @@ label
 			absolute top 0 bottom 0 left 0 right 0
 			margin auto
 			transition background .3s ease-in, border-color .3s ease-in
-
-// checkbox
-
-
-ul.tabs
-	display flex
-	overflow-x hidden
-	width 100%
-
-	li
-		padding type-scale(1)
-		flex-shrink 0
-		opacity .7
-		cursor pointer
-		position relative
-		box-sizing border-box
-		text-align center
-		@media screen and (max-width: 800px)
-			width (100%/3)
-		@media screen and (max-width: 480px)
-			width (100%/2)
-
-		&::after
-			content ''
-			border-bottom 0px solid alpha(gray(100%), .5)
-			transition border-width .3s
-			absolute left 0 bottom 0
-			width 100%
-
-		&.active
-			cursor default
-			opacity 1
-
-			&::after
-				border-bottom-width 4px
-
-		&:hover
-					background alpha(gray(100%), .1)
-
-.header
-	display flex
-	background evening-sky
-	color white
-	text-transform uppercase
-	font-scale(0)
-	position relative
-	margin 0
-
-	div
-		cursor pointer
-		flex-shrink 0
-		padding type-scale(1)
-		box-sizing border-box
-		text-align center
-
-	.tabs-next,
-	.tabs-prev,
-	.hamburger,
-	.back
-		font-family 'FontAwesome'
-		width 4rem
-
-		&:hover
-			background alpha(gray(100%), .1)
-
-
-	.tabs-next
-		&::before
-			content "\f054"
-
-	.tabs-prev
-		&::before
-			content "\f053"
-
-	.hamburger
-		&::before
-			content "\f0c9"
-
-	.back
-		&::before
-			content "\f060"
-
-
-.sidebar
-	absolute top 0 right 100% bottom 0
-	background form-bckg
-	box-shadow 2px 0 2px alpha(black, .2)
-	transition transform .3s
-	min-width 200px
-
-	&.opened
-		transform translateX(100%)
-
-	li
-		padding type-scale(1)
-
-.overlay
-	background alpha(gray(0%), .5)
-	absolute top 0 left 0 right 0 bottom 0
-	display none
