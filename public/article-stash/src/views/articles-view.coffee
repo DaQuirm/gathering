@@ -4,22 +4,26 @@ module.exports = (context) ->
 		nxt.Class 'block-left', true
 		nxt.Element 'div',
 			nxt.Class 'form', true
-				nxt.Input
-					cell: context.new_article.link
-					content: [nxt.Attr 'placeholder', 'link']
-				nxt.Input
-					cell: context.new_article.title
-					content: [nxt.Attr 'placeholder', 'title']
-				nxt.Input
-					cell: context.new_article.description
-					content: [nxt.Attr 'placeholder', 'description']
-				nxt.Input
-					cell: context.new_article.tags
-					content: [nxt.Attr 'placeholder', 'tags']
-					converter: (tags) ->
-						tags.join ', ' if tags
-					back_converter: (string) ->
-						string.split(/,\s*/)
+				nxt.Element 'label',
+					nxt.Input
+						cell: context.new_article.link
+						content: [nxt.Attr 'placeholder', 'link']
+				nxt.Element 'label',
+					nxt.Input
+						cell: context.new_article.title
+						content: [nxt.Attr 'placeholder', 'title']
+				nxt.Element 'label',
+					nxt.Input
+						cell: context.new_article.description
+						content: [nxt.Attr 'placeholder', 'description']
+				nxt.Element 'label',
+					nxt.Input
+						cell: context.new_article.tags
+						content: [nxt.Attr 'placeholder', 'tags']
+						converter: (tags) ->
+							tags.join ', ' if tags
+						back_converter: (string) ->
+							string.split(/,\s*/)
 				nxt.Element 'Button',
 					nxt.Text 'Save'
 					nxt.Event 'click', (ev) ->
