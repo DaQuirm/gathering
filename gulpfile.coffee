@@ -2,10 +2,10 @@ gulp    = require 'gulp'
 rimraf  = require 'gulp-rimraf'
 concat  = require 'gulp-concat'
 rename  = require 'gulp-rename'
-stylus  = require 'gulp-stylus'
 notify  = require 'gulp-notify'
 nib     = require 'nib'
-coffee  = require 'gulp-coffee'
+
+app = require './lib-build/app-task.coffee'
 
 # Main tasks
 
