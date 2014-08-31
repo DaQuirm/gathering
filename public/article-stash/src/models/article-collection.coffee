@@ -1,9 +1,9 @@
 Article = require './article'
 
 class ArticleCollection extends nx.RestCollection
-	constructor: ->
+	constructor: (options) ->
 		super
 			url: '/api/articles'
-			item: Article
+			item: options.item or Article
 
 module.exports = ArticleCollection

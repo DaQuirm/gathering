@@ -1,58 +1,25 @@
+ArticleFormView = require './article-form-view'
+ArticleView     = require './article-view'
+ArticleEditView = require './article-edit-view'
+
 module.exports = (context) ->
 
 	nxt.Element 'div',
 		nxt.Class 'block-left', true
-		nxt.Element 'div',
-			nxt.Class 'form', true
-				nxt.Element 'label',
-					nxt.Input
-						cell: context.new_article.link
-						content: [nxt.Attr 'placeholder', 'link']
-				nxt.Element 'label',
-					nxt.Input
-						cell: context.new_article.title
-						content: [nxt.Attr 'placeholder', 'title']
-				nxt.Element 'label',
-					nxt.Input
-						cell: context.new_article.description
-						content: [nxt.Attr 'placeholder', 'description']
-				nxt.Element 'label',
-					nxt.Input
-						cell: context.new_article.tags
-						content: [nxt.Attr 'placeholder', 'tags']
-						converter: (tags) ->
-							tags.join ', ' if tags
-						back_converter: (string) ->
-							string.split(/,\s*/)
-				nxt.Element 'Button',
-					nxt.Text 'Save'
-					nxt.Event 'click', (ev) ->
-						context.save context.new_article.data.value
+			ArticleFormView context, context.article_form
 
 		nxt.Element 'ul',
-			nxt.Class 'articles-list', true
-			nxt.Collection context.articles, ((article) ->
+			nxt.Class 'articles-list'
+			nxt.Collection context.articles, (article) ->
 				nxt.Element 'li',
-					nxt.Element 'a',
-						nxt.Class 'title', true
-						nxt.Attr 'href', article.link.value
-						nxt.Text article.title.value
-					nxt.Element 'p',
-						nxt.Class 'description', true
-						nxt.Text article.description.value
-					nxt.Element 'ul',
-						nxt.Collection article.tags, (tag) ->
-							nxt.Element 'li',
-								nxt.Text tag
-						nxt.Class 'tags'
-					nxt.Element 'ul',
-						nxt.Class 'action-menu'
-						nxt.Element 'li',
-								nxt.Class 'approve'
-						nxt.Element 'li',
-								nxt.Class 'edit'
-						nxt.Element 'li',
-								nxt.Class 'remove'),
-				nxt.ItemEvent 'click',
-					'li.remove': (evt, article) ->
-						context.articles.remove article
+					nxt.Binding article.view, (view) ->
+						switch view
+							when 'item'
+								ArticleView article
+							when 'edit'
+								ArticleEditView article
+					nxt.Event 'click', ({target}) ->
+						if target.matches 'li.remove'
+							context.articles.remove article
+						else if target.matches 'li.edit'
+							context.edit article

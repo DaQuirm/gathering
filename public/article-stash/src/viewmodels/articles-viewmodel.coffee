@@ -1,23 +1,27 @@
 ArticleCollection = require '../models/article-collection'
-Article           = require '../models/article'
-ArticleDraft      = require './article-draft'
+ArticleViewModel  = require './article-viewmodel'
 
 class ArticlesViewModel
 
 	constructor: ->
-		@articles = new ArticleCollection
+		@articles = new ArticleCollection item:ArticleViewModel
 		do @articles.retrieve
 
-		@new_article = new ArticleDraft
+		@article_form =  new nx.Cell value:new ArticleViewModel
+		@form_collapsed = new nx.Cell value:yes
 
-	save: (article_data) ->
-		article = new Article data:article_data
+	save: ->
+		article = @article_form.value
 		[first] = @articles.items
-		if first
+		if first?
 			@articles.insertBefore first, article
 		else
 			@articles.append article
 		@articles.create article
-		do @new_article.reset
+		@article_form = new ArticleViewModel
+		@form_collapsed.value = yes
+
+	edit: (article) ->
+		article.view.value = 'edit'
 
 module.exports = ArticlesViewModel

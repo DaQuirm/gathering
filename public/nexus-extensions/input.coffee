@@ -11,10 +11,10 @@ nxt.Input = ({cell, content, converter, back_converter}) ->
 					input.data.node.value
 
 	cell.onvalue.add (value) ->
-		input.data.node.value =
-			if converter?
-				converter value
-			else
-				value
+		if converter?
+			value = converter value
+		input.data.node.value = value or ''
+
+	cell.value = cell.value
 
 	input
