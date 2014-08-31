@@ -12,11 +12,11 @@ class ArticlesViewModel
 
 	save: (article_data) ->
 		article = new Article data:article_data
-		[first] = @articles.items.items
+		[first] = @articles.items
 		if first
-			@articles.items.insertBefore first, article
+			@articles.insertBefore first, article
 		else
-			@articles.items.append article
+			@articles.append article
 		@articles.create article
 		do @new_article.reset
 
