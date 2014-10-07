@@ -1,16 +1,18 @@
 mongoose = require 'mongoose'
 
 UserSchema = mongoose.Schema
+	name:
+		type: String
 	first_name:
 		type: String
-		required: yes
 	last_name:
 		type: String
-		required: yes
 	email:
 		type: String
+		required: yes
 
 publicify = ->
+	name: @name
 	first_name: @first_name
 	last_name: @last_name
 	email: @email

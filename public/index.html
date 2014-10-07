@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<a href="/login">Login</a>
+	<script>
+	$.ajax({
+		url: '/user',
+		method: 'POST'
+	})
+	.done(function (res) {
+		console.log(res);
+	})
+	</script>
+</body>
+</html>

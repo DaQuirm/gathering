@@ -4,12 +4,7 @@ auth     = require '../app/controllers/auth.coffee'
 
 module.exports = (app, passport) ->
 
-
-	app.get '/apps/:app_name', (req, res, next) ->
-		req.session.app_name = req.params.app_name
-		do next
-
-	app.use '/apps/', express.static "#{__dirname}/../public"
+	app.use '/', express.static "#{__dirname}/../public"
 
 	app.post '/auth/local', auth.login 'local'
 
@@ -25,9 +20,18 @@ module.exports = (app, passport) ->
 	app.get '/auth/twitter', passport.authenticate 'twitter'
 	app.get '/auth/twitter/callback', auth.login 'twitter'
 
-	app.get '/user', (req, res) ->
-		res.send req.user
+	app.post '/user', (req, res) ->
+		authenticated = do req.isAuthenticated
+		if not authenticated
+			return res.json
+				error: 'Not authenticated'
+		res.json req.user
 
 	app.get '/logout', (req, res) ->
 		do req.logout
-		res.redirect "/apps/#{req.session.app_name}"
+		res.redirect '/'
+
+	app.get '/login', (req, res) ->
+		res.render 'login.jade', login_error: req.flash 'error'
+
+	app.post '/register', auth.register

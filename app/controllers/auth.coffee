@@ -10,28 +10,21 @@ oauth_login = (strategy_name) ->
 		passport.authenticate(strategy_name, (err, user, info) ->
 			if err
 				req.session.auth_error = err
-				return res.redirect "/apps/#{req.session.app_name}"
+				return res.redirect '/'
 			unless user
 				req.session.auth_error = message:'user not found'
-				return res.redirect "/apps/#{req.session.app_name}"
+				return res.redirect '/'
 			req.logIn user, (err) ->
 				req.session.auth_error = err if err
-				res.redirect "/apps/#{req.session.app_name}"
+				res.redirect '/'
 		) req, res, next
 
 
 login_action =
-	local: (req, res, next) ->
-		passport.authenticate('local', (err, user, info) ->
-			if err
-				res.json error:err
-			return res.json error:'Invalid login or password' unless user
-			req.logIn user, (err) ->
-				res.json error:err if err
-				res.json
-					user: do user.publicify
-					error: null
-		) req, res, next
+	local: passport.authenticate 'local',
+			successRedirect: '/'
+			failureRedirect: '/login'
+			failureFlash: 'Invalid email or password'
 
 	github: oauth_login 'github'
 	google: oauth_login 'google'
@@ -40,18 +33,30 @@ login_action =
 
 exports.login = (strategy_name) -> login_action[strategy_name]
 exports.register = (req, res) ->
-	{email, password} = req.body
-	User.create(email:email).exec (err, created) ->
-		if err or not created
-			return res.json error:true
-		LocalAccount.create
-			email: email
-			password: password
-			user: created._id,
-			(err, created) ->
-				if err or not created
-					return res.json error:true
-				res.json
-					user: user
-					error: null
+	{email, password, name} = req.body
+	LocalAccount.findOne email: email
+		.exec()
+		.then (found) ->
+
+			if found
+				req.flash 'error', 'User exists'
+				return res.render 'login.jade', error: req.flash 'error'
+
+			create = User.create
+				email:email
+				name: name
+
+			create.then (created) ->
+
+				if not created
+					res.json error:true
+
+				LocalAccount.create
+					email: email
+					password: password
+					user: created._id,
+					(err, created) ->
+						if err or not created
+							return res.json error:true
+						res.redirect '/login'
 
