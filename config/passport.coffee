@@ -88,11 +88,14 @@ module.exports = (passport) ->
 		(email, password, done) ->
 			LocalAccount.findOne email:email, (err, account) ->
 				return done err if err or not account
-				if not account.match_password password
-					done null, false
-				else
-					User.populate account, path:'user', (err, populated) ->
-						if err
-							done err
-						if populated
-							done null, populated.user
+				account.match_password password, (err, ok) ->
+					if err
+						return done err
+					if not ok
+						done null, false
+					else
+						User.populate account, path:'user', (err, populated) ->
+							if err
+								done err
+							if populated
+								done null, populated.user
