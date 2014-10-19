@@ -1,0 +1,6 @@
+# nodejitsu environment settings
+
+{
+	service:
+		port: 80
+}

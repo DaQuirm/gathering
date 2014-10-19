@@ -1,0 +1,9 @@
+# local development environment settings
+
+{
+	mongodb:
+		connection_string: 'mongodb://localhost/gathering'
+
+	service:
+		port: 3000
+}
