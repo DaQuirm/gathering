@@ -5,8 +5,8 @@ chai = require 'chai'
 should = do chai.should
 chai.use sinon_chai
 
-BaseCRUD = require '../../app/lib/base-crud.coffee'
-Talk = require '../../app/models/talk.coffee'
+BaseCRUD = require '../../service/lib/base-crud.coffee'
+Talk = require '../../service/models/talk.coffee'
 
 CRUDCtrl = new BaseCRUD Talk
 
@@ -118,7 +118,7 @@ describe 'CRUD', ->
 		it 'returns promise and resolves it with deleted document', (done) ->
 
 			mock.talks 10, (mocked) ->
-				
+
 				id = mocked[2]._id
 
 				success = (deleted) ->

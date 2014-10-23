@@ -5,8 +5,8 @@ chai = require 'chai'
 should = do chai.should
 chai.use sinon_chai
 
-RestCtrl = require '../../app/lib/rest.coffee'
-Talk = require '../../app/models/talk.coffee'
+RestCtrl = require '../../service/lib/rest.coffee'
+Talk = require '../../service/models/talk.coffee'
 
 rest = new RestCtrl Talk
 
