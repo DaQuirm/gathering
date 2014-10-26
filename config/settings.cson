@@ -1,0 +1,9 @@
+# environment-independent settings
+
+{
+	gathering:
+		session:
+			secret: 'keyboard cat'
+			saveUninitialized: true
+			resave: true
+}

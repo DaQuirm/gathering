@@ -5,8 +5,8 @@ chai = require 'chai'
 should = do chai.should
 chai.use sinon_chai
 
-Events = require '../app/controllers/event.coffee'
-Event = require '../app/models/event.coffee'
+Events = require '../service/controllers/event.coffee'
+Event = require '../service/models/event.coffee'
 
 mock = require './mock.coffee'
 

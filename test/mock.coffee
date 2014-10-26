@@ -1,5 +1,5 @@
 mongoose = require 'mongoose'
-models = require './../app/models/'
+models = require './../service/models/'
 
 {ObjectId} = require('mongoose').Types
 

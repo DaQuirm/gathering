@@ -1,0 +1,46 @@
+doctype html
+html(lang='en')
+head
+		meta(charset='UTF-8')
+		title Login
+	body
+		form(action='/auth/local', method='POST')
+			p
+				| Sign In
+			p
+				label(for='email') Email
+				input#email(type='email', name='email', placeholder='Email')
+			p
+				label(for='password') Password
+				input#password(type='password', name='password', placeholder='password')
+			p
+				input(type='submit')
+			p.error
+				| #{login_error}
+
+		p
+			a(href='auth/github')
+				| Github
+			a(href='auth/facebook')
+				| Facebook
+			a(href='auth/twitter')
+				| Twitter
+			a(href='auth/google')
+				| Google
+
+		p
+			| Sign up
+			form(action='/register', method='POST')
+				p
+					label(for='email') Email
+					input#email(type='email', name='email', placeholder='Email')
+				p
+					label(for='password') Password
+					input#password(type='password', name='password', placeholder='password')
+				p
+					label(for='name') Name
+					input#name(type='text', name='name', placeholder='Name')
+				p
+					input(type='submit')
+				p.error
+					| #{error}

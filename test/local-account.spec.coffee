@@ -6,7 +6,7 @@ bcrypt = require 'bcrypt'
 should = do chai.should
 chai.use sinon_chai
 
-LocalAccount = require '../app/models/local-account.coffee'
+LocalAccount = require '../service/models/local-account.coffee'
 
 mock = require './mock.coffee'
 
