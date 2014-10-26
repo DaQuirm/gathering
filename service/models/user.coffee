@@ -9,7 +9,6 @@ UserSchema = mongoose.Schema
 		type: String
 	email:
 		type: String
-		required: yes
 
 publicify = ->
 	name: @name
