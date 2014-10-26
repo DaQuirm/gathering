@@ -4,8 +4,6 @@ auth     = require '../controllers/auth.coffee'
 
 module.exports = (app, passport) ->
 
-	app.use '/', express.static "#{__dirname}/../public"
-
 	app.post '/auth/local', auth.login 'local'
 
 	app.get '/auth/github', passport.authenticate 'github'
