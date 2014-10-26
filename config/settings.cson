@@ -1,3 +1,5 @@
 # environment-independent settings
 
-{}
+{
+	gathering: {}
+}

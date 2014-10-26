@@ -1,0 +1,5 @@
+{
+	gathering:
+		mongodb:
+			connection_string: 'mongodb://localhost/gathering'
+}

@@ -1,6 +1,6 @@
 passport = require 'passport'
 express  = require 'express'
-auth     = require '../app/controllers/auth.coffee'
+auth     = require '../controllers/auth.coffee'
 
 module.exports = (app, passport) ->
 

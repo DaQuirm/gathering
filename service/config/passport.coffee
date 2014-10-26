@@ -3,10 +3,10 @@ TwitterStrategy  = require('passport-twitter').Strategy
 GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 GitHubStrategy   = require('passport-github').Strategy
 LocalStrategy    = require('passport-local').Strategy
-LocalAccount     = require '../app/models/local-account'
+LocalAccount     = require '../models/local-account'
 mongoose         = require 'mongoose'
-Account          = require '../app/models/account.coffee'
-User             = require '../app/models/user.coffee'
+Account          = require '../models/account.coffee'
+User             = require '../models/user.coffee'
 
 parse_profile = (profile) ->
 	account =

@@ -13,10 +13,13 @@ do nconf.env
 
 env = nconf.get 'NODE_ENV' # default or from env
 
-nconf.file 'environment',
-	file: path.join __dirname, 'envs', "#{env}.cson"
-	format: cson_format
+module.exports =
 
-nconf.file 'settings',
-	file: path.join __dirname, 'settings.cson'
-	format: cson_format
+	use_dir: (directory) ->
+		nconf.file 'environment',
+			file: path.join directory, 'envs', "#{env}.cson"
+			format: cson_format
+
+		nconf.file 'settings',
+			file: path.join directory, 'settings.cson'
+			format: cson_format
